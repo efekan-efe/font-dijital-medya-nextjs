@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import UpperHeader from "@/components/layout/UpperHeader";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <UpperHeader />
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,5 +1,3 @@
-import { Rocket } from "lucide-react";
-
 const Badge = ({ icon: Icon, children, className }) => {
   return (
     <div className={`w-fit flex items-center gap-x-2 rounded-full border-2 border-secondaryColor bg-white px-3 py-1 ${className}`}>

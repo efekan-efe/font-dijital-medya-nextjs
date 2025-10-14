@@ -24,7 +24,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto flex flex-col gap-8 px-2">
+    <div className="max-w-7xl mx-auto flex flex-col gap-8 px-2 font-inter">
       <div className="w-full flex flex-col justify-center items-center gap-1">
         <TitleBadge>
           <p className="text-primaryBlack w-full font-medium">
