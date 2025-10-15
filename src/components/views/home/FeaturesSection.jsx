@@ -31,8 +31,8 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <div className="max-w-7xl w-full mx-auto flex justify-center items-center gap-8 font-inter px-2">
-      <div className="w-full max-w-xl h-full">
+    <div className="max-w-7xl w-full mx-auto flex justify-center items-center gap-8 font-inter px-2 max-[900px]:flex-col">
+      <div className="w-full max-w-xl h-full max-[900px]:max-w-md max-[900px]:order-2">
         <Image className="w-full h-full" src={videoFallbackImage} alt="Video" />
       </div>
       <div className="w-full flex flex-col gap-3">
@@ -43,7 +43,7 @@ const FeaturesSection = () => {
               Bizi Tercih Etmelisiniz
             </p>
           </TitleBadge>
-          <h1 className="text-4xl font-bold text-primaryBlack">
+          <h1 className="text-4xl font-bold text-primaryBlack max-[1040px]:text-3xl">
             Dijitalde <span className="text-primaryColor">Müşteri Kazanmaya</span> Bugün Başlayın
           </h1>
         </div>

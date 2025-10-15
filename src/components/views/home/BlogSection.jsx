@@ -12,7 +12,7 @@ const BlogSection = () => {
             Trendlerini Kaçırmayın
           </p>
         </TitleBadge>
-        <h1 className="text-4xl font-bold text-primaryBlack">
+        <h1 className="text-4xl font-bold text-primaryBlack max-md:text-center">
           <span className="text-primaryColor">Dijital Pazarlama</span> Rehberleri
         </h1>
       </div>

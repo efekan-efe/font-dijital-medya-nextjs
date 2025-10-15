@@ -1,10 +1,13 @@
-// data/footer-data.js
-import { Zap, Hand, MessageSquare, Phone, Mail, MapPin } from "lucide-react";
+import hizmetlerimiz from "@/assets/footerIcons/footer_hizmetlerimiz.svg";
+import hizliErisim from "@/assets/footerIcons/footer_hizli_erisim.svg";
+import iletisim from "@/assets/footerIcons/footer_iletisim.svg";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 export const footerColumns = [
   {
-    icon: Zap,
+    icon: hizmetlerimiz,
     title: "Hizmetlerimiz",
+    color: "#F44336",
     items: [
       { text: "Web Hizmetleri", href: "/hizmetler/web" },
       { text: "Tasarım", href: "/hizmetler/tasarim" },
@@ -14,8 +17,9 @@ export const footerColumns = [
     ],
   },
   {
-    icon: Hand,
+    icon: hizliErisim,
     title: "Hızlı Erişim",
+    color: "#FFC107",
     items: [
       { text: "Ana sayfa", href: "/" },
       { text: "Hakkımızda", href: "/hakkimizda" },
@@ -26,8 +30,9 @@ export const footerColumns = [
     ],
   },
   {
-    icon: MessageSquare,
+    icon: iletisim,
     title: "İletişim",
+    color: "#43A047",
     items: [
       { text: "+90 532 389 16 58", href: "tel:+905323891658", icon: Phone },
       { text: "info@fontdijitalmedya.com", href: "mailto:info@fontdijitalmedya.com", icon: Mail },

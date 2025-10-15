@@ -33,12 +33,12 @@ const ProcessSection = () => {
             Başarıya Ulaştırıyoruz?
           </p>
         </TitleBadge>
-        <h1 className="text-4xl font-bold text-primaryBlack">
+        <h1 className="text-4xl font-bold text-primaryBlack max-md:text-center">
           4 Adımda <span className="text-primaryColor">Dijital Başarıya</span> Ulaşın
         </h1>
       </div>
 
-      <div className="flex justify-center items-start gap-2">
+      <div className="flex justify-center gap-2 flex-wrap">
         {processData.map((item, index) => (
           <ProcessCard title={item.title} description={item.description} image={item.image} index={index} key={index} />
         ))}

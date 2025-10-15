@@ -19,7 +19,7 @@ const UpperHeader = () => {
     <div className="bg-secondaryColor text-white py-2 font-inter">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Sol Taraf: İletişim Bilgileri */}
-        <div className="flex items-center gap-x-6">
+        <div className="flex items-center gap-x-6 max-md:hidden">
           <ContactItem icon={Mail} fill="#fff">
             <a href="mailto:info@fontdijitalmedya.com">info@fontdijitalmedya.com</a>
           </ContactItem>

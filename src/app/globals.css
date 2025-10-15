@@ -4,23 +4,20 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-.swiper {
-  width: 100%;
-  height: 100%;
+.splide__arrows {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  width: 120px;
 }
-
-.swiper-slide {
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.splide__arrows button {
+  background-color: #5c45fd;
+  opacity: 1;
 }
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.splide__arrows button svg {
+  fill: white;
 }
 @theme {
   --color-primaryColor: #5c45fd;

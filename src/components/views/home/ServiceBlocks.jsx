@@ -48,8 +48,8 @@ const features = [
 
 const ServiceBlocks = () => {
   return (
-    <section className="container mx-auto px-4 py-20">
-      <div className="flex flex-col gap-y-24">
+    <section className="container mx-auto px-4 py-20 max-md:py-0">
+      <div className="flex flex-col gap-y-24 max-md:gap-y-6">
         {features.map((feature, index) => (
           <ServiceBlock
             key={index}
