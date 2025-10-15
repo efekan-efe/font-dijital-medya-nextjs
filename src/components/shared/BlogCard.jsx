@@ -1,6 +1,5 @@
 import Image from "next/image";
 import PostCategoryBadge from "../ui/PostCategoryBadge";
-import blogCard_1 from "@/assets/homepage/images/blogCard_1.png";
 import PostMetaData from "../ui/PostMetaData";
 import Link from "next/link";
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Search } from "lucide-react";
 import logo from "@/assets/icons/font_digital_media_logo.svg";
+import FontLogo from "../icons/FontLogo";
 
 const Header = () => {
   const navLinks = [
@@ -16,10 +17,10 @@ const Header = () => {
 
   return (
     <header className="bg-white border-b border-gray-200 font-inter">
-      <nav className="max-w-7xl mx-auto px-4 flex justify-between items-center py-2">
+      <nav className="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
         <div>
           <Link href="/" className="text-2xl font-bold text-gray-800">
-            <Image src={logo} alt="Font Dijital Medya Logosu" width={150} height={54} priority />
+            <FontLogo className="max-w-[150px] h-auto" />
           </Link>
         </div>
 
