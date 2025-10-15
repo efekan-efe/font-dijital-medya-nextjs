@@ -1,15 +1,72 @@
 "use client";
 
-import SparkleIcon from "../icons/SparkleIcon";
-import { Button } from "../ui/Button";
-import TitleBadge from "../ui/TitleBadge";
+import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
+import { Button } from "../ui/Button";
+import TitleBadge from "../ui/TitleBadge";
+import SparkleIcon from "../icons/SparkleIcon";
 import bildem from "@/assets/aboutUs/images/referans_slider_bildem.png";
-import Image from "next/image";
+import dentilion from "@/assets/aboutUs/images/slider_dentilion.webp";
+import gano from "@/assets/aboutUs/images/slider_gano.webp";
+import greengap from "@/assets/aboutUs/images/slider_greengap.webp";
+import istasyapi from "@/assets/aboutUs/images/slider_istasyapi.webp";
+import itavista from "@/assets/aboutUs/images/slider_itavista.webp";
+import mertmode from "@/assets/aboutUs/images/slider_mertmode.webp";
+import psikologasena from "@/assets/aboutUs/images/slider_psikologasena.webp";
+import ziel from "@/assets/aboutUs/images/slider_ziel.webp";
+import Link from "next/link";
 
 const ReferanceSlider = () => {
+  const sliderData = [
+    {
+      link: "https://bilisimdestekmerkezi.com/",
+      image: bildem,
+      alt: "Bildem Referans Görseli",
+    },
+    {
+      link: "https://canakkaledis.net/",
+      image: dentilion,
+      alt: "Dentilion Referans Görseli",
+    },
+    {
+      link: "https://ganoucretsizkayit.com/",
+      image: gano,
+      alt: "Gano Excel Referans Görseli",
+    },
+    {
+      link: "https://greengap.com.tr/",
+      image: greengap,
+      alt: "Greengap Referans Görseli",
+    },
+    {
+      link: "https://istasyapimarket.com/",
+      image: istasyapi,
+      alt: "İştaş Yapı Referans Görseli",
+    },
+    {
+      link: "https://itavista.com/",
+      image: itavista,
+      alt: "İtavista Referans Görseli",
+    },
+    {
+      link: "https://mertmodemedikalgiyim.com/",
+      image: mertmode,
+      alt: "MertModeMedikal Referans Görseli",
+    },
+    {
+      link: "https://psikologasenakusmus.com/",
+      image: psikologasena,
+      alt: "Psikolog Asena Küsmüş Referans Görseli",
+    },
+    {
+      link: "https://zielpmglobal.com/",
+      image: ziel,
+      alt: "Ziel PM Referans Görseli",
+    },
+  ];
+
   return (
     <div
       style={{
@@ -53,33 +110,13 @@ const ReferanceSlider = () => {
         aria-label="Referance"
         className="w-full"
       >
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
-        <SplideSlide className="!w-fit max-w-[570px] mx-auto">
-          <Image src={bildem} alt="Referans Görseli" />
-        </SplideSlide>
+        {sliderData.map((slider, index) => (
+          <SplideSlide key={index} className="!w-fit max-w-[570px] mx-auto">
+            <Link href={slider.link}>
+              <Image src={slider.image} alt={slider.alt} />
+            </Link>
+          </SplideSlide>
+        ))}
       </Splide>
     </div>
   );
