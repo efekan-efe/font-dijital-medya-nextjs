@@ -11,7 +11,7 @@ import "@splidejs/react-splide/css";
 
 const GoogleReviews = () => {
   return (
-    <div className="flex flex-col gap-8 px-2 font-inter relative mb-20">
+    <div className="flex flex-col gap-8 px-2 font-inter relative mb-20 max-sm:items-center">
       <div className="w-full flex flex-col justify-center items-center gap-1">
         <TitleBadge>
           <p className="text-primaryBlack w-full font-medium">
@@ -34,6 +34,7 @@ const GoogleReviews = () => {
           breakpoints: {
             1280: { perPage: 2, gap: "1rem", width: 800 },
             850: { perPage: 1, width: 400 },
+            400: { width: "90vw" },
           },
         }}
         aria-label="Google Reviews"

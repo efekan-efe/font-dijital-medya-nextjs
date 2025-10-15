@@ -7,7 +7,7 @@ const FooterLinkColumn = ({ icon, title, color, items }) => {
   return (
     <div>
       <div className="flex items-center gap-x-1.5">
-        <Image src={icon} className="h-6 w-6" />
+        <Image src={icon} className="h-6 w-6" alt="Başlık İkonu" />
         <div>
           <h3 className="font-bold text-2xl">{title}</h3>
           <div style={{ backgroundColor: color }} className="w-full h-0.5 block"></div>
