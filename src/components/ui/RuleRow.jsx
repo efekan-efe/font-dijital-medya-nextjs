@@ -1,0 +1,15 @@
+const RuleRow = ({ icon: Icon, title, description }) => {
+  return (
+    <div className="flex justify-start items-start gap-3 max-w-[400px]">
+      <div className="bg-softPink p-3 rounded-full">
+        <Icon className="w-7 h-7 stroke-primaryColor stroke-[1.5px]" />
+      </div>
+      <div className="text-left">
+        <p className="text-xl font-bold border-b-[3px] border-primaryColor/30 mr-9">{title}</p>
+        <p className="text-[#12141D]/70 pt-0.5">{description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default RuleRow;

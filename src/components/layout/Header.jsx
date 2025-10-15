@@ -24,7 +24,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex items-center gap-x-8">
+        <div className="flex items-center gap-x-8 max-lg:hidden">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="text-black font-medium hover:text-primaryColor transition-colors">
               {link.label}
