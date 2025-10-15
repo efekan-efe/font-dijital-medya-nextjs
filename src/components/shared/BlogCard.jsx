@@ -8,7 +8,7 @@ const BlogCard = ({ slug, image, categories, title, description, authorImg, auth
   return (
     <Link href={`/${slug}`} className="w-full max-w-[372px] flex flex-col gap-2 p-1 rounded-2xl border border-[#E9E9E9] font-inter">
       <div className="w-full h-full rounded-t-2xl overflow-hidden">
-        <Image className="w-auto h-auto" src={image} alt={title} />
+        <Image className="w-full h-full" src={image} alt={title} />
       </div>
 
       <div className="p-3 pt-2 flex flex-col gap-3">
