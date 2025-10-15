@@ -15,12 +15,12 @@ const sizes = {
 const Button = ({ children, className, rightComponent, leftComponent, variant = "header", size = "md", iconLeft: IconLeft, iconRight: IconRight, imageLeft: imageLeft, imageRight: imageRight }) => {
   return (
     <button className={twMerge("w-fit flex justify-center items-center gap-2 cursor-pointer whitespace-nowrap font-medium", variants[variant], sizes[size], className)}>
-      {imageLeft && <Image src={imageLeft} className="mr-2 w-5 h-5" />}
-      {IconLeft && <IconLeft className="mr-2 w-5 h-5" />}
+      {imageLeft && <Image src={imageLeft} className="w-5 h-5" />}
+      {IconLeft && <IconLeft className="w-5 h-5" />}
       {rightComponent && rightComponent}
       {children}
-      {imageRight && <Image src={imageRight} className="mr-2 w-5 h-5" />}
-      {IconRight && <IconRight className="ml-2 w-5 h-5" />}
+      {imageRight && <Image src={imageRight} className="w-5 h-5" />}
+      {IconRight && <IconRight className="w-5 h-5" />}
       {leftComponent && leftComponent}
     </button>
   );

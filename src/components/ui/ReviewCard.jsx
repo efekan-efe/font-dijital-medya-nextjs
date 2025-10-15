@@ -14,8 +14,11 @@ const ReviewCard = ({ name, image, rating, date, comment }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between gap-3 min-h-[220px] py-6 px-4 bg-white relative border border-secondaryColor/20 rounded-xl">
-      <div className="absolute right-0 bottom-0 max-w-32 w-full opacity-25">
+    <div
+      className="flex flex-col justify-between gap-3 min-h-[220px] py-6 px-4 bg-white relative border border-secondaryColor/20 rounded-xl
+    max-sm:w-full max-sm:min-w-0"
+    >
+      <div className="absolute right-0 bottom-0 max-w-24 w-full opacity-25">
         <Image className="w-full h-full" src={googleLogo} alt="Google İkonu" />
       </div>
       <div className="flex flex-col gap-2">

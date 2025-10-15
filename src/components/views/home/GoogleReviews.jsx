@@ -36,7 +36,7 @@ const GoogleReviews = () => {
             850: { perPage: 1, width: 400 },
           },
         }}
-        aria-label="My Favorite Images"
+        aria-label="Google Reviews"
       >
         {dummyReviews.map((review, index) => (
           <SplideSlide key={review.id}>

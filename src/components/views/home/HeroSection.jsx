@@ -17,7 +17,7 @@ const HeroSection = () => {
           <p className="text-primaryBlack max-md:text-center">
             Bisasoft Dijital Reklam Ajansı olarak, <strong>KOBİ'nizin</strong> dijitalde <strong>görünür olmasını</strong> ve <strong>doğru müşterilere</strong> ulaşmasını sağlıyoruz.
           </p>
-          <div className="flex items-center gap-x-4 mt-4">
+          <div className="flex items-center gap-4 mt-4 max-sm:flex-col ">
             <Button size="lg" variant="filledButton" iconLeft={Search}>
               Ücretsiz Analiz
             </Button>
