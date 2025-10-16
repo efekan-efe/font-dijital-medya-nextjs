@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const variants = {
   header: "bg-secondaryColor rounded-full text-white", // Header && Tek renk
-  filledButton: "bg-gradient-to-r from-primaryColor to-secondaryColor text-white rounded-full", // Dolu Hero Butonu
-  emptyButton: "bg-transparent text-primaryColor border border-primaryColor rounded-full",
+  filledButton: "bg-gradient-to-r from-primaryColor to-secondaryColor text-white rounded-full text-lg", // Dolu Hero Butonu
+  emptyButton: "bg-transparent text-primaryColor border-2 border-primaryColor rounded-full text-lg",
 };
 
 const sizes = {
