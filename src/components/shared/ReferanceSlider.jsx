@@ -75,19 +75,17 @@ const ReferanceSlider = () => {
       className="w-full text-white font-inter flex flex-col items-center gap-8 pt-8"
     >
       <div className="flex flex-col items-center gap-4">
-        <div className="w-full flex flex-col justify-center items-center gap-2">
+        <div className="w-full flex flex-col justify-center items-center gap-1">
           <TitleBadge>
-            <p className="text-primaryBlack w-full font-medium">
-              <span className="text-primaryColor px-1">Dijital Dünya</span>
-              Trendlerini Kaçırmayın
+            <p className="text-primaryBlack w-full font-medium max-sm:text-sm">
+              <span className="text-primaryColor px-1">Neden</span>
+              Bizi Tercih Etmelisiniz
             </p>
           </TitleBadge>
-          <h1 className="w-full text-4xl font-bold text-white text-center max-w-xl">
-            <span className="text-primaryColor mx-1">100% Müşteri Memnuiyeti</span> Sağlayan <span className="text-primaryColor mx-1">İlkelerimiz</span>
-          </h1>
+          <h1 className="w-full text-4xl font-bold text-white text-center max-md:text-3xl max-sm:text-2xl">Dijitalde Müşteri Kazanmaya Bugün Başlayın</h1>
         </div>
 
-        <Button className={"text-lg border border-white/50"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
+        <Button className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
           Tümünü İncele
         </Button>
       </div>

@@ -18,19 +18,19 @@ const ServiceInfo = () => {
   ];
 
   return (
-    <div className="w-full flex justify-center items-center gap-2 max-w-7xl mx-auto font-inter">
-      <div className="w-full">
+    <div className="w-full flex justify-center items-center px-2 gap-2 max-w-7xl mx-auto max-md:flex-col">
+      <div className="w-full max-md:max-w-sm max-md:mr-auto">
         <Image width={546} src={hizmetYanGorsel} alt="hizmet" />
       </div>
       <div className="w-full flex flex-col gap-4">
-        <div className="w-full flex flex-col justify-center items-start gap-1 max-[960px]:items-center">
+        <div className="w-full flex flex-col justify-center items-start gap-1">
           <TitleBadge>
             <p className="text-primaryBlack w-full font-medium">
               <span className="text-primaryColor px-1">Neden</span>
               Bizi Tercih Etmelisiniz
             </p>
           </TitleBadge>
-          <h1 className="w-full text-4xl font-bold text-primaryBlack max-md:text-center">
+          <h1 className="w-full text-4xl font-bold text-primaryBlack max-md:text-3xl">
             Dijitalde
             <span className="text-primaryColor mx-1">Müşteri Kazanmaya</span> Bugün Başlayın
           </h1>
@@ -38,16 +38,16 @@ const ServiceInfo = () => {
 
         <p className="text-[#12141D]/70">Bilişim ve yazılım sektörünü her alanıyla tanımak ve sektöre yönelik Ticaret Bakanlığı desteklerinde uzmanlaşmak. Kamu ve şirketler arasında köprü olmayı başarabilmek.</p>
 
-        <ul className="list-none grid grid-cols-2 gap-2">
+        <ul className="list-none grid grid-cols-2 gap-2 max-sm:grid-cols-1">
           {serviceList.map((service, index) => (
             <li key={index} className="flex justify-start items-center gap-1">
-              <Image src={serviceTick} />
+              <Image src={serviceTick} alt="Hizmet Maddeleri" />
               <p className="text-primaryBlack">{service}</p>
             </li>
           ))}
         </ul>
 
-        <Button className={"text-lg border border-white/50"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
+        <Button className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
           Bizimle Yükselenler
         </Button>
       </div>
