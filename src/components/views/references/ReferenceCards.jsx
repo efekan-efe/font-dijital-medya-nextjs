@@ -1,6 +1,6 @@
 import TitleBadge from "@/components/ui/TitleBadge";
 import ReferenceCard from "@/components/shared/ReferenceCard";
-import { referenceData } from "../../../../data/referance-data";
+import { referenceData } from "../../../../data/reference-data";
 
 const ReferenceCards = () => {
   return (
