@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/shared/Breadcrumb";
 import ServiceInfo from "@/components/ui/ServiceInfo";
 import ServiceSolutions from "@/components/views/service/ServiceSolutions";
 import PriceCards from "@/components/views/service/PriceCards";
-import ReferanceSlider from "@/components/shared/ReferanceSlider";
+import ReferenceSlider from "@/components/shared/ReferenceSlider";
 
 export default function Hizmetler() {
   const badgeContent = (
@@ -97,7 +97,7 @@ export default function Hizmetler() {
       <ServiceInfo />
       <ServiceSolutions solutionData={solutionData} />
       <PriceCards priceCardData={priceCardData} />
-      <ReferanceSlider />
+      <ReferenceSlider />
     </main>
   );
 }

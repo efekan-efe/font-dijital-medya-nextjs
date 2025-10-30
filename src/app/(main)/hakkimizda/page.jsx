@@ -1,4 +1,4 @@
-import ReferanceSlider from "@/components/shared/ReferanceSlider";
+import ReferenceSlider from "@/components/shared/ReferenceSlider";
 import InfoSection from "@/components/views/about/InfoSection";
 import WorkRules from "@/components/views/about/WorkRules";
 import GoogleReviews from "@/components/views/home/GoogleReviews";
@@ -9,7 +9,7 @@ export default function Hakkimizda() {
       <InfoSection />
       <WorkRules />
       <GoogleReviews />
-      <ReferanceSlider />
+      <ReferenceSlider />
     </main>
   );
 }

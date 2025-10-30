@@ -18,7 +18,7 @@ import psikologasena from "@/assets/aboutUs/images/slider_psikologasena.webp";
 import ziel from "@/assets/aboutUs/images/slider_ziel.webp";
 import Link from "next/link";
 
-const ReferanceSlider = () => {
+const ReferenceSlider = () => {
   const sliderData = [
     {
       link: "https://bilisimdestekmerkezi.com/",
@@ -105,7 +105,7 @@ const ReferanceSlider = () => {
             pauseOnHover: true,
           },
         }}
-        aria-label="Referance"
+        aria-label="Reference"
         className="w-full"
       >
         {sliderData.map((slider, index) => (
@@ -120,4 +120,4 @@ const ReferanceSlider = () => {
   );
 };
 
-export default ReferanceSlider;
+export default ReferenceSlider;
