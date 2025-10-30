@@ -8,7 +8,6 @@ import FontLogo from "../icons/FontLogo";
 const Header = () => {
   const navLinks = [
     { href: "/hizmetler", label: "Hizmetler" },
-    { href: "/paketler", label: "Paketler" },
     { href: "/referanslar", label: "Referanslar" },
     { href: "/blog", label: "Dijital Rehber" },
     { href: "/hakkimizda", label: "Kurumsal" },
