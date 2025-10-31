@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/react-splide/css";
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/CustomButton";
 import TitleBadge from "../ui/TitleBadge";
 import SparkleIcon from "../icons/SparkleIcon";
 import bildem from "@/assets/aboutUs/images/referans_slider_bildem.png";
@@ -85,9 +85,9 @@ const ReferenceSlider = () => {
           <h1 className="w-full text-4xl font-bold text-white text-center max-md:text-3xl max-sm:text-2xl">Dijitalde Müşteri Kazanmaya Bugün Başlayın</h1>
         </div>
 
-        <Button className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
+        <CustomButton className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
           Tümünü İncele
-        </Button>
+        </CustomButton>
       </div>
 
       <Splide

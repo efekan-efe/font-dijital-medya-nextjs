@@ -3,7 +3,7 @@ import TitleBadge from "@/components/ui/TitleBadge";
 import videoFallbackImage from "@/assets/homepage/images/video_fallback_image.png";
 import { FileText, Code, Sparkle } from "lucide-react";
 import FeatureItem from "@/components/ui/FeatureItem";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/CustomButton";
 import SparkleIcon from "@/components/icons/SparkleIcon";
 
 const FeaturesSection = () => {
@@ -58,9 +58,9 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        <Button className="mt-4" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
+        <CustomButton className="mt-4" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
           Bizimle Yükselenler
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

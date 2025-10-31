@@ -1,6 +1,6 @@
 import breadcrumbImg from "@/assets/images/breadcrumb_background.webp";
 import TitleBadge from "../ui/TitleBadge";
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/CustomButton";
 import { Phone, Search } from "lucide-react";
 
 const Breadcrumb = ({ badgeContent, titleContent, search, searchTerm, onSearchChange }) => {
@@ -21,12 +21,12 @@ const Breadcrumb = ({ badgeContent, titleContent, search, searchTerm, onSearchCh
       )}
 
       <div className="flex justify-center items-center gap-4 mt-4 max-sm:flex-col max-sm:gap-2">
-        <Button size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
+        <CustomButton size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
           Ücretsiz Analiz
-        </Button>
-        <Button size="lg" variant="emptyButton" iconLeft={Phone} className="bg-white max-md:text-sm py-2">
+        </CustomButton>
+        <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="bg-white max-md:text-sm py-2">
           Hemen Görüş
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import ReviewCard from "@/components/ui/ReviewCard";
 import TitleBadge from "@/components/ui/TitleBadge";
 import { dummyReviews } from "../../../../data/dummy-reviews";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/CustomButton";
 import SparkleIcon from "@/components/icons/SparkleIcon";
 import Link from "next/link";
 import "@splidejs/react-splide/css";
@@ -47,9 +47,9 @@ const GoogleReviews = () => {
       </Splide>
 
       <Link href="https://www.google.com/search?sa=X&sca_esv=552fb68e3d08662a&tbm=lcl&sxsrf=AE3TifPo8VdCvRpR_oGV91lrQDssXi84Lw:1760513944946&q=Font+Dijital+Medya+Reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDCzMDEzNjKyNDWyMDI3MzY2MdrAyPiKUcotP69EwSUzK7MkMUfBNzWlMlEhKLUsM7W8eBErHkkAG4qsyFUAAAA&rldimm=10684632295282763342&hl=en-TR&ved=2ahUKEwiU8L3C2aWQAxXVRPEDHcKtHysQ9fQKegQIWRAF&cshid=1760513956874236&biw=1920&bih=945&dpr=1#lkt=LocalPoiReviews">
-        <Button className="mt-8 mx-auto" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
+        <CustomButton className="mt-8 mx-auto" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
           Bizimle Yükselenler
-        </Button>
+        </CustomButton>
       </Link>
     </div>
   );

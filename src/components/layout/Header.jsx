@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/CustomButton";
 import { Search } from "lucide-react";
 import logo from "@/assets/icons/font_digital_media_logo.svg";
 import FontLogo from "../icons/FontLogo";
@@ -11,6 +11,7 @@ const Header = () => {
     { href: "/referanslar", label: "Referanslar" },
     { href: "/blog", label: "Dijital Rehber" },
     { href: "/hakkimizda", label: "Kurumsal" },
+    { href: "/sikca-sorulan-sorular", label: "SSS" },
     { href: "/iletisim", label: "İletişim" },
   ];
 
@@ -33,9 +34,9 @@ const Header = () => {
 
         <div className="hidden md:flex">
           <Link href="/ucretsiz-analiz">
-            <Button variant="header" size="md" iconLeft={Search}>
+            <CustomButton variant="header" size="md" iconLeft={Search}>
               Ücretsiz Analiz
-            </Button>
+            </CustomButton>
           </Link>
         </div>
       </nav>

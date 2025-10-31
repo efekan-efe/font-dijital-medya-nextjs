@@ -1,6 +1,6 @@
 import Image from "next/image";
 import customerReviewIcon from "@/assets/references/icons/customerReviewIcon.svg";
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/CustomButton";
 import SparkleIcon from "../icons/SparkleIcon";
 
 const ReferenceCard = ({ image, title, description, customerReview, link }) => {
@@ -22,9 +22,9 @@ const ReferenceCard = ({ image, title, description, customerReview, link }) => {
         </div>
       </div>
 
-      <Button rightComponent={<SparkleIcon className="stroke-white" />} leftComponent={<SparkleIcon className="stroke-white" />} size="lg" variant="filledButton" className={"py-2 px-3 text-sm text-center w-fit rounded-full"}>
+      <CustomButton rightComponent={<SparkleIcon className="stroke-white" />} leftComponent={<SparkleIcon className="stroke-white" />} size="lg" variant="filledButton" className={"py-2 px-3 text-sm text-center w-fit rounded-full"}>
         Web Sitesini Ziyaret Et
-      </Button>
+      </CustomButton>
     </div>
   );
 };

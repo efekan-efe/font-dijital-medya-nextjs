@@ -2,7 +2,7 @@ import hizmetYanGorsel from "@/assets/images/hizmet_detay_yan_gorsel.webp";
 import Image from "next/image";
 import TitleBadge from "./TitleBadge";
 import serviceTick from "@/assets/icons/service_tick.svg";
-import { Button } from "./Button";
+import { CustomButton } from "./CustomButton";
 import SparkleIcon from "../icons/SparkleIcon";
 
 const ServiceInfo = () => {
@@ -47,9 +47,9 @@ const ServiceInfo = () => {
           ))}
         </ul>
 
-        <Button className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
+        <CustomButton className={"text-lg border border-white/50 max-md:text-sm"} leftComponent={<SparkleIcon className="fill-white" />} rightComponent={<SparkleIcon className="fill-white" />} variant="filledButton" sizes="lg">
           Bizimle Yükselenler
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

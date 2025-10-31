@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { CustomButton } from "@/components/ui/CustomButton";
 import Badge from "@/components/ui/Badge";
 import hero_gorseli from "@/assets/homepage/images/hero_gorseli.png";
 import { Search, Phone, Rocket, Users, TrendingUp } from "lucide-react";
@@ -18,12 +18,12 @@ const HeroSection = () => {
             Bisasoft Dijital Reklam Ajansı olarak, <strong>KOBİ'nizin</strong> dijitalde <strong>görünür olmasını</strong> ve <strong>doğru müşterilere</strong> ulaşmasını sağlıyoruz.
           </p>
           <div className="flex items-center gap-4 mt-4 max-sm:flex-col ">
-            <Button size="lg" variant="filledButton" iconLeft={Search}>
+            <CustomButton size="lg" variant="filledButton" iconLeft={Search}>
               Ücretsiz Analiz
-            </Button>
-            <Button size="lg" variant="emptyButton" iconLeft={Phone}>
+            </CustomButton>
+            <CustomButton size="lg" variant="emptyButton" iconLeft={Phone}>
               Hemen Görüş
-            </Button>
+            </CustomButton>
           </div>
         </div>
         {/* Sağ Sütun: Görsel ve İstatistikler */}

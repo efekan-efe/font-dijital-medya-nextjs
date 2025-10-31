@@ -1,14 +1,14 @@
 import Image from "next/image";
 import ServiceTick from "@/assets/icons/service_tick.svg";
-import { Button } from "../ui/Button";
+import { CustomButton } from "../ui/CustomButton";
 
 const PriceCard = ({ icon: Icon, colors, title, description, features, bestSeller }) => {
   return (
     <div className={`max-w-[300px] min-h-[425px] w-full h-full flex flex-col justify-between p-3 gap-4 shadow relative ${bestSeller ? "border-[3px] border-primaryColor" : "border border-primaryColor/25"}  rounded-2xl `}>
       {bestSeller && (
-        <Button size="lg" variant="filledButton" className={"absolute -top-[17px] left-1/2 translate-x-[-50%] py-1.5 text-center text-sm rounded-lg w-fit"}>
+        <CustomButton size="lg" variant="filledButton" className={"absolute -top-[17px] left-1/2 translate-x-[-50%] py-1.5 text-center text-sm rounded-lg w-fit"}>
           En Popüler
-        </Button>
+        </CustomButton>
       )}
       <div style={{ background: `linear-gradient(${colors[0]}, ${colors[1]})` }} className="p-2 rounded-full w-12 h-12 min-w-12 min-h-12">
         <Icon className="w-full h-full fill-none stroke-white" />
@@ -27,9 +27,9 @@ const PriceCard = ({ icon: Icon, colors, title, description, features, bestSelle
         ))}
       </ul>
 
-      <Button size="lg" variant="filledButton" className={"py-1.5 text-center text-sm w-full rounded-lg mt-5"}>
+      <CustomButton size="lg" variant="filledButton" className={"py-1.5 text-center text-sm w-full rounded-lg mt-5"}>
         Teklif Alın
-      </Button>
+      </CustomButton>
     </div>
   );
 };
