@@ -27,8 +27,7 @@ function PaginationLink({ className, isActive, size = "icon", ...props }) {
           variant: isActive ? "outline" : "ghost",
           size,
         }),
-        className,
-        "rounded-full"
+        className
       )}
       {...props}
     />
