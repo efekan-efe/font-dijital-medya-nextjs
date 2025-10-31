@@ -6,8 +6,8 @@ import bizeUlasin from "@/assets/footerIcons/footer_bize_ulasin.svg";
 import whatsapp from "@/assets/footerIcons/footer_whatsapp.svg";
 import instagram from "@/assets/footerIcons/footer_instagram.svg";
 import facebook from "@/assets/footerIcons/footer_facebook.svg";
-import tiktok from "@/assets/footerIcons/footer_tiktok.svg";
 import mail from "@/assets/footerIcons/footer_mail.svg";
+import tiktok from "@/assets/footerIcons/footer_tiktok.svg";
 import FooterLinkColumn from "../ui/FooterLinkColumn";
 import { footerColumns } from "../../../data/footer-data";
 
