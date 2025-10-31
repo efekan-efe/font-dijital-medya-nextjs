@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", // Bu satır önemli olabilir
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"] // Bu satır en önemlisi
     }
   }
 }
