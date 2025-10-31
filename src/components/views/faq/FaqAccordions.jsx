@@ -1,6 +1,10 @@
-import { CircleQuestionMark } from "lucide-react";
+// FaqAccordions.jsx
+
+// 1. Adım: 'lucide-react' ikonlarını (ChevronLeft, ChevronRight) import edin
+import { CircleQuestionMark, ChevronLeft, ChevronRight } from "lucide-react";
 import FaqAccordion from "@/components/ui/FaqAccordion";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+// 2. Adım: shadcn/ui pagination import'unu SİLİN
+// import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { useState, useEffect } from "react";
 
 const FaqAccordions = ({ filteredFaqs }) => {
@@ -34,35 +38,76 @@ const FaqAccordions = ({ filteredFaqs }) => {
       <div className="flex flex-col gap-5">
         {faqsToDisplay.length > 0 ? faqsToDisplay.map((faq, index) => <FaqAccordion faq={faq} key={index} />) : <p className="text-primaryColor text-center">Arama kriterlerinize uygun sonuç bulunamadı.</p>}
 
+        {/* 3. Adım: shadcn/ui bileşenlerini HTML ve Tailwind ile değiştirin */}
         {totalPages > 1 && (
-          <Pagination className="justify-start">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious onClick={handlePrevious} disabled={currentPage === 1} style={{ cursor: currentPage === 1 ? "not-allowed" : "pointer" }} />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive={currentPage === 1} onClick={() => setCurrentPage(1)}>
+          <nav aria-label="pagination" className="flex justify-start">
+            <ul className="flex items-center gap-2">
+              {/* Önceki Butonu */}
+              <li>
+                <button
+                  type="button"
+                  onClick={handlePrevious}
+                  disabled={currentPage === 1}
+                  className="inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 bg-white text-primaryColor transition-colors hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="sr-only">Önceki sayfa</span>
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+              </li>
+
+              {/* Sayfa 1 */}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage(1)}
+                  className={`inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 text-sm font-medium transition-colors ${
+                    currentPage === 1
+                      ? "bg-primaryColor text-white" // Aktif stil
+                      : "bg-white text-primaryColor hover:bg-gray-100" // Aktif olmayan stil
+                  }`}
+                >
                   1
-                </PaginationLink>
-              </PaginationItem>
+                </button>
+              </li>
+
+              {/* Üç nokta (...) */}
               {totalPages > 2 && (
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-              )}
-              {totalPages > 1 && (
-                <PaginationItem>
-                  <PaginationLink href="#" isActive={currentPage === totalPages} onClick={() => setCurrentPage(totalPages)}>
-                    {totalPages}
-                  </PaginationLink>
-                </PaginationItem>
+                <li>
+                  <span className="flex h-9 w-9 items-center justify-center text-primaryColor/50">...</span>
+                </li>
               )}
 
-              <PaginationItem>
-                <PaginationNext onClick={handleNext} disabled={currentPage === totalPages} style={{ cursor: currentPage === totalPages ? "not-allowed" : "pointer" }} />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+              {/* Son Sayfa */}
+              {totalPages > 1 && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage(totalPages)}
+                    className={`inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 text-sm font-medium transition-colors ${
+                      currentPage === totalPages
+                        ? "bg-primaryColor text-white" // Aktif stil
+                        : "bg-white text-primaryColor hover:bg-gray-100" // Aktif olmayan stil
+                    }`}
+                  >
+                    {totalPages}
+                  </button>
+                </li>
+              )}
+
+              {/* Sonraki Butonu */}
+              <li>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={currentPage === totalPages}
+                  className="inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 bg-white text-primaryColor transition-colors hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="sr-only">Sonraki sayfa</span>
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </li>
+            </ul>
+          </nav>
         )}
       </div>
     </div>
