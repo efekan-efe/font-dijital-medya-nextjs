@@ -3,6 +3,7 @@ import UpperHeader from "@/components/layout/UpperHeader";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import MobileHeader from "@/components/layout/MobileHeader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,9 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${inter.variable}`}>
-      <body>
+      <body className="overflow-x-hidden">
         <UpperHeader />
         <Header />
+        <MobileHeader />
         <main>{children}</main>
         <Footer />
       </body>

@@ -1,8 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { CustomButton } from "@/components/ui/CustomButton";
 import { Search } from "lucide-react";
-import logo from "@/assets/icons/font_digital_media_logo.svg";
 import FontLogo from "../icons/FontLogo";
 
 const Header = () => {
@@ -16,15 +14,13 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white border-b border-gray-200 font-inter">
+    <header className="bg-white border-b border-gray-200 font-inter max-lg:hidden">
       <nav className="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
-        <div>
-          <Link href="/" className="text-2xl font-bold text-gray-800">
-            <FontLogo className="max-w-[150px] h-auto" />
-          </Link>
-        </div>
+        <Link href="/" className="w-full max-w-[150px]">
+          <FontLogo className="w-full h-auto" />
+        </Link>
 
-        <div className="flex items-center gap-x-8 max-lg:hidden">
+        <div className="flex items-center gap-x-8 ">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="text-black font-medium hover:text-primaryColor transition-colors">
               {link.label}
