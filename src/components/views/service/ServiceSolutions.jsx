@@ -17,9 +17,9 @@ const ServiceSolutions = ({ solutionData }) => {
         </h1>
       </div>
 
-      <div className="flex justify-center items-start flex-wrap gap-3 gap-y-4">
+      <div className="w-full flex justify-start items-start flex-wrap gap-3 gap-y-4">
         {solutionData.map((solution, index) => (
-          <RuleRow className="min-w-[400px] max-[450px]:min-w-0" key={index} icon={solution.icon} title={solution.title} description={solution.description} iconClassName="stroke-0" />
+          <RuleRow className="min-w-[400px] w-full max-[450px]:min-w-0" key={index} icon={solution.icon} title={solution.title} description={solution.description} iconClassName="stroke-0" />
         ))}
       </div>
     </div>

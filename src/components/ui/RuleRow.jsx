@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 const RuleRow = ({ icon: Icon, title, description, iconClassName }) => {
   return (
-    <div className="flex justify-start items-start gap-3 max-w-[400px]">
+    <div className="w-full flex justify-start items-start gap-3 max-w-[400px]">
       <div className="bg-softPink p-3 rounded-full">
         <Icon className={twMerge(`w-7 h-7 stroke-primaryColor stroke-[1.5px]`, iconClassName)} />
       </div>

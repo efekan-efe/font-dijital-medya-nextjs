@@ -30,80 +30,59 @@ const ServiceTemplate = ({ data }) => {
   );
 
   // Başlığı ACF'den alıyoruz
-  const titleContent = <span dangerouslySetInnerHTML={{ __html: displayTitle }} className="text-primaryBlack" />;
+  const titleContent = <span dangerouslySetInnerHTML={{ __html: pageTitle }} className="text-primaryBlack" />;
 
-  const solutionData = [
-    {
-      icon: SingleSparkle,
-      title: "Daha Düşük Maliyetler",
-      description: "Optimizasyon teknikleriyle tıklama başına maliyetlerinizi %30-50 düşürüyoruz.",
-    },
-    {
-      icon: SingleSparkle,
-      title: "Ölçülebilir Sonuçlar",
-      description: "Her kuruşun hesabını verir, yatırımınızın geri dönüşünü net olarak gösteririz.",
-    },
-    {
-      icon: SingleSparkle,
-      title: "Uzman Destek",
-      description: "Google ve Facebook sertifikalı uzmanlarımız kampanyalarınızı yönetir.",
-    },
-    {
-      icon: SingleSparkle,
-      title: "Daha Yüksek Dönüşüm Oranları",
-      description: "Dönüşüm oranlarınızı artırarak satışlarınızı maksimize ediyoruz.",
-    },
-    {
-      icon: SingleSparkle,
-      title: "Zaman Tasarrufu",
-      description: "Siz işinize odaklanın, biz dijital pazarlama süreçlerinizi yönetelim.",
-    },
-    {
-      icon: SingleSparkle,
-      title: "Şeffaf Raporlama",
-      description: "Aylık detaylı raporlarla neler yaptığımızı ve sonuçları paylaşırız.",
-    },
-  ];
-
-  const priceCardData = [
-    {
-      icon: RocketIcon,
-      colors: ["#448AFF", "#0947A5"],
-      title: "Başlangıç Paketi",
-      description: "Dijital dünyaya ilk adımınızı güvenle atın.",
-      features: ["Ücretsiz Domain", "Ücretsiz Hosting", "Mobil Uyumlu Tasarım", "7/24 Destek"],
-      bestSeller: false,
-    },
-    {
-      icon: GrowthIcon,
-      colors: ["#43A047", "#29A71A"],
-      title: "İşletme Paketi",
-      description: "Organik büyüme ve içerik odaklı pazarlama.",
-      features: ["2 Dil Desteği", "30 Sayfa", "SEO Eğitimi", "Google Business"],
-      bestSeller: true,
-    },
-    {
-      icon: MuscleIcon,
-      colors: ["#F44336", "#B42E2A"],
-      title: "Kurumsal Paket",
-      description: "İleri teknoloji ile maksimum performans.",
-      features: ["3 Dil Desteği", "Özel Tema", "50 E-posta", "Adwords Eğitimi"],
-      bestSeller: false,
-    },
-    {
-      icon: CrownIcon,
-      colors: ["#FFC107", "#E1A325"],
-      title: "Profesyonel Paket",
-      description: "Tam kapsamlı e-ticaret ve dijital dönüşüm.",
-      features: ["Sınırsız Dil", "Blog Modülü", "100 E-posta", "E-ticaret İndirimi"],
-      bestSeller: false,
-    },
-  ];
+  // --- ÇÖZÜM KARTLARI (Yeni "Ayıraçlı" Yöntem) ---
+  // Format: Başlık | Açıklama
+  const solutionData = acf.cozum_listesi
+    ? acf.cozum_listesi
+        .split(/\r\n|\r|\n/) // Satırlara böl
+        .filter((row) => row.includes("|")) // İçinde "|" işareti olmayan satırları atla
+        .map((row) => {
+          const [title, desc] = row.split("|"); // "|" işaretinden ikiye ayır
+          return {
+            icon: SingleSparkle, // Şimdilik hepsine aynı ikon (veya rastgele atanabilir)
+            title: title.trim(), // Boşlukları temizle
+            description: desc ? desc.trim() : "",
+          };
+        })
+    : [];
 
   // 3. Liste Yönetimi (TEXT AREA ÇÖZÜMÜ)
   // ACF'den gelen metni "yeni satır" karakterine (\n) göre bölüp diziye çeviriyoruz.
   // filter(item => item.trim() !== "") ile boş satırları temizliyoruz.
   const serviceListItems = acf.hizmet_maddeleri ? acf.hizmet_maddeleri.split(/\r\n|\r|\n/).filter((item) => item.trim() !== "") : [];
+
+  // --- FİYAT PAKETLERİ (Sabit Alan Yöntemi) ---
+  // Tasarımındaki renk ve ikon setleri (Sırasıyla 1., 2., 3., 4. pakete atanır)
+  const packageStyles = [
+    { icon: RocketIcon, colors: ["#448AFF", "#0947A5"] }, // Mavi
+    { icon: GrowthIcon, colors: ["#43A047", "#29A71A"] }, // Yeşil
+    { icon: MuscleIcon, colors: ["#F44336", "#B42E2A"] }, // Kırmızı
+    { icon: CrownIcon, colors: ["#FFC107", "#E1A325"] }, // Sarı
+  ];
+
+  const priceCardData = [];
+
+  // 4 Adet potansiyel paketi kontrol edelim
+  for (let i = 1; i <= 4; i++) {
+    const baslik = acf[`paket_${i}_baslik`]; // Örn: acf.paket_1_baslik
+
+    // Eğer başlık girilmişse bu paketi listeye ekle
+    if (baslik) {
+      const style = packageStyles[i - 1] || packageStyles[0]; // Stil seçimi
+
+      priceCardData.push({
+        icon: style.icon,
+        colors: style.colors,
+        title: baslik,
+        description: acf[`paket_${i}_aciklama`] || "",
+        // Özellikler Text Area'sını satırlara böl
+        features: acf[`paket_${i}_ozellikler`] ? acf[`paket_${i}_ozellikler`].split(/\r\n|\r|\n/).filter((f) => f.trim() !== "") : [],
+        bestSeller: acf[`paket_${i}_oneri`] ? true : false, // True/False kontrolü
+      });
+    }
+  }
 
   return (
     <main className="flex flex-col items-center justify-center gap-10 w-full font-inter">
@@ -112,8 +91,10 @@ const ServiceTemplate = ({ data }) => {
 
       <ServiceInfo title={displayTitle} description={acf.hizmet_aciklamasi} image={acf.hizmet_gorseli} listItems={serviceListItems} />
 
-      <ServiceSolutions solutionData={solutionData} />
-      <PriceCards priceCardData={priceCardData} />
+      {/* Eğer çözüm listesi girilmişse göster, girilmemişse bileşeni gizle */}
+      {solutionData.length > 0 && <ServiceSolutions solutionData={solutionData} />}
+      {/* Eğer en az 1 paket girilmişse bileşeni göster */}
+      {priceCardData.length > 0 && <PriceCards priceCardData={priceCardData} />}
       <ReferenceSlider />
     </main>
   );

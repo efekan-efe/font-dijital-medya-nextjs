@@ -64,7 +64,7 @@ export default function Blog() {
     const fetchPosts = async () => {
       try {
         // Optimize edilmiş sorgu: Sadece gerekli alanları ve son 100 yazıyı çeker.
-        const res = await fetch("https://fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=100&_fields=id,title,excerpt,slug,date,content,_links,_embedded");
+        const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=100&_fields=id,title,excerpt,slug,date,content,_links,_embedded");
 
         const data = await res.json();
         setPosts(data);

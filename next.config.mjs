@@ -16,7 +16,14 @@ const nextConfig = {
         port: "",
         pathname: "/wp-content/uploads/**",
       },
-      // 3. Localhost (Geliştirme sırasında yerel resimler için)
+      // 3. 'www' ile başlayan versiyon (Garanti olsun diye ekliyoruz)
+      {
+        protocol: "https",
+        hostname: "portal.fontdijitalmedya.com",
+        port: "",
+        pathname: "/wp-content/uploads/**",
+      },
+      // 4. Localhost (Geliştirme sırasında yerel resimler için)
       {
         protocol: "http",
         hostname: "localhost",

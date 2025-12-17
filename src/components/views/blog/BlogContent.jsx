@@ -1,6 +1,5 @@
 import Image from "next/image";
 import PostCategoryBadge from "@/components/ui/PostCategoryBadge";
-// import { Check } from "lucide-react"; // Bu ikon içerik metninde otomatik gelmez, WP editörden eklenmeli.
 
 const BlogContent = ({ title, content, featuredImage, categories, date, author }) => {
   return (
