@@ -1,29 +1,30 @@
 import { BookOpen, Clock, Shapes, UserRoundPen } from "lucide-react";
 
-const BlogInfoCard = () => {
+const BlogInfoCard = ({ author, date, category, readingTime }) => {
+  // Gelen verileri array yapısına eşleştiriyoruz
   const infoCardData = [
     {
       icon: <Shapes className="stroke-primaryColor" />,
       title: "Kategori",
-      value: "Dijital Pazarlama",
+      value: category || "Genel", // Veri yoksa 'Genel' yazsın
       border: true,
     },
     {
       icon: <Clock className="stroke-primaryColor" />,
       title: "Yayınlanma Tarihi",
-      value: "20 Temmuz 2025",
+      value: date,
       border: true,
     },
     {
       icon: <UserRoundPen className="stroke-primaryColor" />,
       title: "Yazar",
-      value: "Dijital Pazarlama",
+      value: author || "Editör",
       border: true,
     },
     {
       icon: <BookOpen className="stroke-primaryColor" />,
       title: "Okuma Süresi",
-      value: "3 Dakika",
+      value: readingTime || "1 dk",
       border: false,
     },
   ];
@@ -43,7 +44,7 @@ const BlogInfoCard = () => {
                 {card.icon}
                 <p className="text-primaryColor font-medium">{card.title}:</p>
               </div>
-              <span>{card.value}</span>
+              <span className="text-sm font-medium">{card.value}</span>
             </div>
           </div>
         ))}

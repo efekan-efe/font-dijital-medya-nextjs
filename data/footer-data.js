@@ -24,7 +24,7 @@ export const footerColumns = [
       { text: "Ana sayfa", href: "/" },
       { text: "Hakkımızda", href: "/hakkimizda" },
       { text: "Yazılarımız", href: "/blog" },
-      { text: "Sıkça Sorulan Sorular", href: "/sss" },
+      { text: "Sıkça Sorulan Sorular", href: "/sikca-sorulan-sorular" },
       { text: "Referanslar", href: "/referanslar" },
       { text: "İletişim", href: "/iletisim" },
     ],

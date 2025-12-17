@@ -1,36 +1,8 @@
 import Link from "next/link";
 
-const PostTags = () => {
-  const tags = [
-    {
-      text: "Dijital",
-      link: "/blog",
-    },
-    {
-      text: "Pazarlama",
-      link: "/blog",
-    },
-    {
-      text: "Websitesi",
-      link: "/blog",
-    },
-    {
-      text: "SSL",
-      link: "/blog",
-    },
-    {
-      text: "Hosting",
-      link: "/blog",
-    },
-    {
-      text: "Adana",
-      link: "/blog",
-    },
-    {
-      text: "Reklam",
-      link: "/blog",
-    },
-  ];
+const PostTags = ({ tags }) => {
+  // Eğer etiket gelmediyse veya boşsa bu bloğu hiç gösterme
+  if (!tags || tags.length === 0) return null;
 
   return (
     <div className="w-full flex flex-col gap-6 font-inter">
@@ -41,9 +13,14 @@ const PostTags = () => {
 
       <div className="p-6 bg-[#DBD4F5]/25 rounded-xl border-1 border-primaryColor gap-2">
         <div className="flex flex-wrap gap-2.5">
-          {tags.map((tag, index) => (
-            <Link key={index} href={tag.link} className="px-3 py-1 border border-primaryColor/50 rounded-sm text-primaryColor text-sm font-medium leading-5">
-              #{tag.text}
+          {tags.map((tag) => (
+            <Link
+              key={tag.id}
+              // Etiket linki henüz yapılmadıysa geçici olarak /blog'a atar
+              href={`/blog`}
+              className="px-3 py-1 border border-primaryColor/50 rounded-sm text-primaryColor text-sm font-medium leading-5 hover:bg-primaryColor hover:text-white transition-colors"
+            >
+              #{tag.name}
             </Link>
           ))}
         </div>
