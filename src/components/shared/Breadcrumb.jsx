@@ -21,10 +21,10 @@ const Breadcrumb = ({ badgeContent, titleContent, search, searchTerm, onSearchCh
       )}
 
       <div className="flex justify-center items-center gap-4 mt-4 max-sm:flex-col max-sm:gap-2">
-        <CustomButton size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
+        <CustomButton href="/ucretsiz-analiz" size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
           Ücretsiz Analiz
         </CustomButton>
-        <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="bg-white max-md:text-sm py-2">
+        <CustomButton href="https://wa.me/+905323891658" size="lg" variant="emptyButton" iconLeft={Phone} className="bg-white max-md:text-sm py-2">
           Hemen Görüş
         </CustomButton>
       </div>
