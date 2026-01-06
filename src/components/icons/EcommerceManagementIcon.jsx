@@ -1,0 +1,11 @@
+const EcommerceManagementIcon = ({ className }) => {
+  return (
+    <svg className={`${className}`} viewBox="0 0 28 25" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M2.8 22.2222H5.6V11.1111H22.4V22.2222H25.2V7.43056L14 2.98611L2.8 7.43056V22.2222ZM0 25V5.55556L14 0L28 5.55556V25H19.6V13.8889H8.4V25H0ZM9.8 25V22.2222H12.6V25H9.8ZM12.6 20.8333V18.0556H15.4V20.8333H12.6ZM15.4 25V22.2222H18.2V25H15.4Z"
+        fill="#5C45FD"
+      />
+    </svg>
+  );
+};
+export default EcommerceManagementIcon;
