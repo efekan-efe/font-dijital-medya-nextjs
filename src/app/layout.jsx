@@ -3,7 +3,7 @@ import UpperHeader from "@/components/layout/UpperHeader";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import MobileHeader from "@/components/layout/MobileHeader";
+import MobileHeader from "@/components/layout/MobileHeader"; // Import edilmiş, süper.
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,17 +19,24 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${inter.variable}`}>
-      {/* overflow-x-hidden body'de kalsın, html'den silebiliriz */}
       <body className="overflow-x-hidden">
+        {/* --- DESKTOP HEADER GRUBU --- */}
+        {/* max-lg:hidden ekledik. Böylece mobilde bu alan tamamen yok olur, çakışma yapmaz. */}
         <div className="absolute top-0 w-full z-50">
           <UpperHeader />
-          <Header />
+          <span className="max-lg:hidden">
+            <Header />
+          </span>
         </div>
+
+        {/* --- MOBİL HEADER --- */}
+        {/* Sahneye aldık! Kendi içinde lg:hidden olduğu için desktopta görünmez. */}
+        <MobileHeader />
 
         {/* Main içeriği */}
         <main>{children}</main>
 
-        {/* KRİTİK NOKTA: Footer'ı bir div ile sarmalayıp ona snap özelliği veriyoruz */}
+        {/* Footer */}
         <div className="snap-footer-wrapper">
           <Footer />
         </div>

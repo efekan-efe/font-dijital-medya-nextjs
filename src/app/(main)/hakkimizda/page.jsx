@@ -5,7 +5,7 @@ import GoogleReviews from "@/components/views/home/GoogleReviews";
 
 export default function Hakkimizda() {
   return (
-    <main className="flex flex-col items-center justify-center gap-10 pt-10 max-[960px]:pt-3">
+    <main className="flex flex-col items-center justify-center gap-10">
       <InfoSection />
       <WorkRules />
       <GoogleReviews />
