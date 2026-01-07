@@ -111,7 +111,7 @@ const Footer = () => {
       className="text-white pt-16 pb-6 font-inter max-md:pt-8"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-4 gap-12 max-[1150px]:grid-cols-3 max-[1150px]:gap-6 max-md:grid-cols-1 max-md:gap-3">
+        <div className="grid grid-cols-4 gap-12 max-[1150px]:grid-cols-3 max-[1150px]:gap-6 max-md:grid-cols-1">
           {/* Logo ve Hakkımızda (Sol Sütun) */}
           <div className="footer-left-col text-white flex flex-col gap-6 max-md:gap-3">
             <Image src={fontLogo} alt="Font Dijital Medya Logo" width={150} height={50} />
@@ -140,7 +140,7 @@ const Footer = () => {
 
         {/* Copyright ve Hukuki Linkler (Alt Bar) */}
         {/* GSAP için 'footer-bottom-bar' sınıfını ekledik */}
-        <div className="footer-bottom-bar mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        <div className="footer-bottom-bar mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 max-md:mt-4">
           <p>&copy; {new Date().getFullYear()} Font Dijital Medya. Tüm hakları saklıdır.</p>
           <div className="flex gap-x-4 mt-4 md:mt-0">
             <Link href="/gizlilik-politikasi" className="hover:text-white transition-colors">
