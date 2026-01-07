@@ -1,7 +1,6 @@
-import TitleBadge from "@/components/ui/TitleBadge";
-import BlogSlider from "./BlogSlider"; // Yeni oluşturduğumuz bileşeni çağırıyoruz
+import BlogSlider from "./BlogSlider";
 
-// --- YARDIMCI FONKSİYONLAR (Server tarafında çalışır) ---
+// --- YARDIMCI FONKSİYONLAR ---
 const stripHtml = (html) => {
   return html.replace(/<[^>]*>?/gm, "");
 };
@@ -15,7 +14,6 @@ const calculateReadingTime = (content) => {
 };
 
 async function getAllPosts() {
-  // WordPress API'den veriyi çekiyoruz
   const res = await fetch("https://fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=3", {
     next: { revalidate: 3600 },
   });
@@ -30,8 +28,6 @@ async function getAllPosts() {
 export default async function BlogSection() {
   const rawPosts = await getAllPosts();
 
-  // Veriyi burada işleyip temiz bir nesne haline getiriyoruz (Map işlemi)
-  // Böylece Client Component'e (BlogSlider) tertemiz veri gidiyor.
   const formattedPosts = rawPosts.map((post) => {
     const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/placeholder-image.jpg";
     const authorName = post._embedded?.["author"]?.[0]?.name || "Admin";
@@ -52,25 +48,7 @@ export default async function BlogSection() {
     };
   });
 
-  return (
-    <section className="max-w-7xl mx-auto flex flex-col gap-8 px-2 font-inter w-full h-full justify-center">
-      {/* Başlık Alanı */}
-      <div className="w-full flex flex-col justify-center items-center gap-1 shrink-0">
-        <TitleBadge>
-          <p className="text-primaryBlack w-full font-medium">
-            <span className="text-primaryColor px-1">Dijital Dünya</span>
-            Trendlerini Kaçırmayın
-          </p>
-        </TitleBadge>
-        <h1 className="text-3xl md:text-4xl font-bold text-primaryBlack text-center">
-          <span className="text-primaryColor">Dijital Pazarlama</span> Rehberleri
-        </h1>
-      </div>
-
-      {/* İçerik Alanı (Slider veya Grid kararını BlogSlider verecek) */}
-      <div className="w-full">
-        <BlogSlider posts={formattedPosts} />
-      </div>
-    </section>
-  );
+  // Section ve Başlık yapılarını BlogSlider'a taşıdığımız için
+  // Burası sadece Component'i döndürüyor.
+  return <BlogSlider posts={formattedPosts} />;
 }

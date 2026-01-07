@@ -1,5 +1,6 @@
-"use client";
+"use client"; // GSAP için zorunlu
 
+import { useLayoutEffect, useRef } from "react";
 import TitleBadge from "@/components/ui/TitleBadge";
 import chatGorseli from "@/assets/homepage/images/chat_gorseli.png";
 import tasarimGorseli from "@/assets/homepage/images/tasarim_gorseli.png";
@@ -9,7 +10,13 @@ import ProcessCard from "@/components/ui/ProcessCard";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
+// GSAP Importları
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 const ProcessSection = () => {
+  const container = useRef(null);
+
   const processData = [
     {
       title: "İletişim Süreci",
@@ -28,10 +35,58 @@ const ProcessSection = () => {
     },
   ];
 
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 60%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // 1. Başlık Alanı (Hafifçe yukarıdan iner)
+      tl.from(".process-header", {
+        y: -30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+        // 2. Masaüstü Kartları (Sırayla gelir - Stagger)
+        .from(
+          ".process-card-desktop",
+          {
+            y: 50, // Aşağıdan yukarı
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2, // Kartlar arası 0.2sn bekleme
+            ease: "back.out(1.7)", // "Pop" efekti (hafif yaylanma)
+          },
+          "-=0.4"
+        )
+        // 3. Mobil Slider (Bütün olarak belirir)
+        .from(
+          ".process-slider-mobile",
+          {
+            scale: 0.9, // Hafif küçükten büyüyerek gelsin
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "<"
+        ); // Masaüstü animasyonuyla aynı zaman diliminde başlasın (zaten biri gizli olacak)
+    }, container);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="max-w-7xl mx-auto flex flex-col justify-center gap-8 px-2 font-inter w-full h-full">
+    <section ref={container} className="max-w-7xl mx-auto flex flex-col justify-center gap-8 px-2 font-inter w-full h-full">
       {/* Başlık Alanı */}
-      <div className="w-full flex flex-col justify-center items-center gap-1 shrink-0">
+      {/* GSAP için 'process-header' sınıfını ekledik */}
+      <div className="process-header w-full flex flex-col justify-center items-center gap-1 shrink-0">
         <TitleBadge>
           <p className="text-primaryBlack w-full font-medium">
             Sizi
@@ -45,29 +100,33 @@ const ProcessSection = () => {
       </div>
 
       {/* --- MOBİL VE TABLET GÖRÜNÜMÜ (SLIDER) --- */}
-      <div className="block lg:hidden w-full">
+      {/* GSAP için 'process-slider-mobile' sınıfını ekledik */}
+      <div className="process-slider-mobile block lg:hidden w-full">
         <Splide
           options={{
-            perPage: 1, // Ekranda 1 kart görünsün
-            gap: "1rem", // Kartlar arası boşluk
-            arrows: false, // Okları gizle (mobilde swipe yeterli)
-            pagination: true, // Alttaki noktalar açık olsun
-            padding: "1rem", // Kenarlardan hafif boşluk
+            perPage: 1,
+            gap: "1rem",
+            arrows: false,
+            pagination: true,
+            padding: "1rem",
           }}
         >
           {processData.map((item, index) => (
             <SplideSlide key={index} className="flex justify-center pb-10">
-              {/* pb-10: Pagination noktaları için alttan yer açtık */}
               <ProcessCard title={item.title} description={item.description} image={item.image} index={index} />
             </SplideSlide>
           ))}
         </Splide>
       </div>
 
-      {/* --- DESKTOP GÖRÜNÜMÜ (ESKİ HALİ) --- */}
+      {/* --- DESKTOP GÖRÜNÜMÜ --- */}
       <div className="hidden lg:flex justify-center gap-2 flex-wrap">
         {processData.map((item, index) => (
-          <ProcessCard title={item.title} description={item.description} image={item.image} index={index} key={index} />
+          // Her kartı bir div içine aldık ve 'process-card-desktop' sınıfını verdik
+          // Böylece GSAP bu divleri yakalayıp tek tek animasyonlayacak
+          <div key={index} className="process-card-desktop">
+            <ProcessCard title={item.title} description={item.description} image={item.image} index={index} />
+          </div>
         ))}
       </div>
     </section>
