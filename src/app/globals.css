@@ -33,6 +33,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow-x: hidden !important;
 }
 
 /* 3. MASAÜSTÜ (DESKTOP) AYARLARI */
