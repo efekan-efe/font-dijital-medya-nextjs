@@ -123,7 +123,7 @@ const FeaturesSection = () => {
     // Ref'i ekledik
     <section ref={container} className="max-w-7xl w-full mx-auto flex justify-center items-center gap-2 md:gap-8 font-inter px-2 max-[900px]:flex-col h-full">
       {/* Sol Resim Alanı */}
-      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-[900px]:max-w-md max-[900px]:order-2">
+      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-[1024px]:hidden max-[900px]:max-w-md max-[900px]:order-2">
         <Image className="w-full h-fit max-[1024px]:hidden" src={videoFallbackImage} alt="Video" />
       </div>
 
