@@ -1,6 +1,72 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* 1. TÜM SAYFAYI KAPLAYAN YAPI (STANDART) */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+/* SADECE ANA SAYFADA SNAP ÖZELLİĞİNİ AÇ */
+html:has(.homepageMain) {
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  height: 100%;
+  overflow-y: auto;
+
+  /* --- YENİ EKLENEN KISIM (MOBİL İÇİN) --- */
+  /* Eğer sayfada .homepageMain YOKSA (yani diğer sayfalardaysak) 48px boşluk ver */
+  &:not(:has(.homepageMain)) {
+    padding-top: 48px;
+  }
+}
+
+/* 2. ANA SAYFA İÇERİK YAPISI (HOMEPAGE) */
+.homepageMain section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* 3. MASAÜSTÜ (DESKTOP) AYARLARI */
+@media (min-width: 1024px) {
+  /* --- YENİ EKLENEN KISIM (DESKTOP İÇİN) --- */
+  /* Masaüstünde diğer sayfaların üst boşluğunu artır */
+  body:not(:has(.homepageMain)) {
+    padding-top: 128px;
+  }
+
+  /* Ana sayfada Footer kilitlensin */
+  html:has(.homepageMain) .snap-footer-wrapper {
+    scroll-snap-align: start;
+  }
+}
+
+/* --- DİĞER AYARLAR (DEĞİŞMEDİ) --- */
+.snap-footer-wrapper {
+  scroll-snap-align: start;
+}
+
+.noScroll::-webkit-scrollbar {
+  display: none;
+}
+.noScroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.splide__track {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 .splide__arrows {
   position: absolute;

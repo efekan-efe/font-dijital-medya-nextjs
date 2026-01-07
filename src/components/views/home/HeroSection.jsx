@@ -11,7 +11,7 @@ const HeroSection = () => {
         {/* Sol Sütun: Metin ve Butonlar */}
         <div className="flex flex-col gap-y-2 max-md:items-center">
           <Badge icon={Rocket}>500+ KOBİ Bizi Tercih Etti</Badge>
-          <h1 className="text-6xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-lg:text-5xl max-md:text-center">
+          <h1 className="text-6xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-lg:text-5xl max-md:text-center max-md:text-2xl">
             Dijitalde <span className="text-primaryColor">Müşteri Kazanmaya</span> Bugün Başlayın
           </h1>
           <p className="text-primaryBlack max-md:text-center">

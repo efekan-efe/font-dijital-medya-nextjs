@@ -7,9 +7,9 @@ const FooterLinkColumn = ({ icon, title, color, items }) => {
   return (
     <div>
       <div className="flex items-center gap-x-1.5">
-        <Image src={icon} className="h-6 w-6" alt="Başlık İkonu" />
+        <Image src={icon} className="h-6 w-6 max-md:w-5" alt="Başlık İkonu" />
         <div>
-          <h3 className="font-bold text-2xl">{title}</h3>
+          <h3 className="font-bold text-2xl max-md:text-lg">{title}</h3>
           <div style={{ backgroundColor: color }} className="w-full h-0.5 block"></div>
         </div>
       </div>
@@ -18,14 +18,14 @@ const FooterLinkColumn = ({ icon, title, color, items }) => {
           <li key={item.text} className="flex items-center text-white ">
             {item.icon ? (
               <>
-                <item.icon style={{ stroke: color }} className="w-5 mr-2" />
+                <item.icon style={{ stroke: color }} className="w-5 mr-2 max-md:w-4" />
                 <a className="font-normal" href={item.href}>
                   {item.text}
                 </a>
               </>
             ) : (
               <>
-                <ChevronRight style={{ stroke: color }} />
+                <ChevronRight className="max-md:w-4" style={{ stroke: color }} />
                 <Link className="font-normal" href={item.href}>
                   {item.text}
                 </Link>

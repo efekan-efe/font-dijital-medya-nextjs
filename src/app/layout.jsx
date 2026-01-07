@@ -8,7 +8,7 @@ import MobileHeader from "@/components/layout/MobileHeader";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter", // Bu değişkeni Tailwind'de kullanacağız
+  variable: "--font-inter",
 });
 
 export const metadata = {
@@ -18,13 +18,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="tr" className={`${inter.variable} overflow-x-hidden`}>
+    <html lang="tr" className={`${inter.variable}`}>
+      {/* overflow-x-hidden body'de kalsın, html'den silebiliriz */}
       <body className="overflow-x-hidden">
-        <UpperHeader />
-        <Header />
-        <MobileHeader />
+        <div className="absolute top-0 w-full z-50">
+          <UpperHeader />
+          <Header />
+        </div>
+
+        {/* Main içeriği */}
         <main>{children}</main>
-        <Footer />
+
+        {/* KRİTİK NOKTA: Footer'ı bir div ile sarmalayıp ona snap özelliği veriyoruz */}
+        <div className="snap-footer-wrapper">
+          <Footer />
+        </div>
       </body>
     </html>
   );

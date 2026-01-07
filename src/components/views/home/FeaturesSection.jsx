@@ -31,9 +31,9 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <div className="max-w-7xl w-full mx-auto flex justify-center items-center gap-8 font-inter px-2 max-[900px]:flex-col">
-      <div className="w-full max-w-xl h-full max-[900px]:max-w-md max-[900px]:order-2">
-        <Image className="w-full h-full" src={videoFallbackImage} alt="Video" />
+    <section className="max-w-7xl w-full mx-auto flex justify-center items-center gap-8 font-inter px-2 max-[900px]:flex-col">
+      <div className="flex justify-center items-center w-full max-w-xl h-full max-[1024px]:hidden max-[900px]:max-w-md max-[900px]:order-2">
+        <Image className="w-full h-fit" src={videoFallbackImage} alt="Video" />
       </div>
       <div className="w-full flex flex-col gap-3">
         <div className="w-full flex flex-col gap-1">
@@ -62,7 +62,7 @@ const FeaturesSection = () => {
           Bizimle Yükselenler
         </CustomButton>
       </div>
-    </div>
+    </section>
   );
 };
 

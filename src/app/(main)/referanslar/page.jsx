@@ -15,7 +15,7 @@ export default function Referanslar() {
     </>
   );
   return (
-    <div className="flex flex-col items-center justify-center gap-10 pt-10 max-[960px]:pt-3">
+    <div className="flex flex-col items-center justify-center gap-10">
       <Breadcrumb badgeContent={badgeContent} titleContent={titleContent} />
       <ReferenceCards />
     </div>

@@ -50,7 +50,7 @@ const Footer = () => {
       style={{
         background: "linear-gradient(108deg, #000, #2E2483)",
       }}
-      className="text-white pt-16 pb-6 font-inter"
+      className="text-white pt-16 pb-6 font-inter max-md:pt-3"
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-4 gap-12 max-[1150px]:grid-cols-3 max-[1150px]:gap-6 max-md:grid-cols-1">
@@ -73,14 +73,18 @@ const Footer = () => {
 
           {/* Hizmetlerimiz, Hızlı Erişim ve İletişim */}
           {footerColumns.map((column) => (
-            <FooterLinkColumn key={column.title} icon={column.icon} color={column.color} title={column.title} items={column.items} />
+            // BURADA DEĞİŞİKLİK YAPTIK:
+            // Her kolonu bir div içine aldık ve "Hizmetlerimiz" ise mobilde gizle dedik.
+            <div key={column.title} className={column.title === "Hizmetlerimiz" ? "max-md:hidden" : ""}>
+              <FooterLinkColumn icon={column.icon} color={column.color} title={column.title} items={column.items} />
+            </div>
           ))}
         </div>
 
         {/* Copyright ve Hukuki Linkler */}
-        <div className="mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        <div className="mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 max-md:pt-2 max-md:mt-4">
           <p>&copy; {new Date().getFullYear()} Font Dijital Medya. Tüm hakları saklıdır.</p>
-          <div className="flex gap-x-4 mt-4 md:mt-0">
+          <div className="flex gap-x-4 mt-4 md:mt-0 max-md:text-center max-md:gap-x-2">
             <Link href="/gizlilik-politikasi" className="hover:text-white">
               Gizlilik Politikası
             </Link>
