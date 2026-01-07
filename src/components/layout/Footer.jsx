@@ -108,13 +108,12 @@ const Footer = () => {
       style={{
         background: "linear-gradient(108deg, #000, #2E2483)",
       }}
-      className="text-white pt-16 pb-6 font-inter max-md:pt-8" // max-md:pt-3 biraz dardı, 8 yaptım
+      className="text-white pt-16 pb-6 font-inter max-md:pt-8"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-4 gap-12 max-[1150px]:grid-cols-3 max-[1150px]:gap-6 max-md:grid-cols-1">
+        <div className="grid grid-cols-4 gap-12 max-[1150px]:grid-cols-3 max-[1150px]:gap-6 max-md:grid-cols-1 max-md:gap-3">
           {/* Logo ve Hakkımızda (Sol Sütun) */}
-          {/* GSAP için 'footer-left-col' sınıfını ekledik */}
-          <div className="footer-left-col text-white flex flex-col gap-6">
+          <div className="footer-left-col text-white flex flex-col gap-6 max-md:gap-3">
             <Image src={fontLogo} alt="Font Dijital Medya Logo" width={150} height={50} />
             <div>
               <p className="font-bold">Dijitalin Yeni Fontu</p>
@@ -122,7 +121,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <div className="flex justify-start items-center gap-2">
+              <div className="flex justify-start items-center gap-2 max-md:hidden">
                 <Image className="w-full h-full max-w-7" src={bizeUlasin} alt="Bize Ulaşın İkonu" />
                 <h3 className="text-white font-bold text-2xl border-b-2 border-primaryColor">Bize Ulaşın</h3>
               </div>
