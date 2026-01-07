@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const BlogCard = ({ slug, image, categories, title, description, authorImg, authorName, readingTime, publishDate }) => {
   return (
-    <Link href={`/${slug}`} className="w-full max-w-[372px] flex flex-col gap-2 p-1 rounded-2xl border border-[#E9E9E9] font-inter">
+    <Link href={`/${slug}`} className="w-full max-w-[372px] h-full flex flex-col justify-around gap-2 p-1 rounded-2xl border border-[#E9E9E9] font-inter">
       <div className="w-full rounded-t-2xl overflow-hidden relative h-[242px]">
         {/* DÜZELTME 1: localhost prefix'i kaldırıldı. Artık direkt 'image' değişkenini kullanıyoruz. */}
         {/* Güvenlik önlemi: image boş gelirse placeholder göster */}
