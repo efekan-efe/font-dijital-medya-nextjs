@@ -24,7 +24,7 @@ const BlogCard = ({ slug, image, categories, title, description, authorImg, auth
           <p className="leading-[25px] line-clamp-3">{description}</p>
         </div>
       </div>
-      <div className="p-3 pt-2">
+      <div className="p-3 pt-2 mt-auto">
         <PostMetaData authorImg={authorImg} authorName={authorName} readingTime={readingTime} publishDate={publishDate} />
       </div>
     </Link>
