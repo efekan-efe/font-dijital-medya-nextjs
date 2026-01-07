@@ -84,7 +84,7 @@ const HeroSection = () => {
 
   return (
     // Ref'i en dış katmana veriyoruz
-    <section ref={container} className="max-w-7xl mx-auto px-2 py-8 font-inter max-md:pb-0 max-md:pt-10 h-full flex items-center">
+    <section ref={container} className="max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-10 h-full flex items-center">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center w-full max-md:gap-4">
         {/* Sol Sütun */}
         <div className="flex flex-col gap-y-2 max-md:items-center">
