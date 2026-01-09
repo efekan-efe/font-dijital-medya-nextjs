@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { CustomButton } from "@/components/ui/CustomButton";
 import Badge from "@/components/ui/Badge";
-import hero_mor_arkaplan from "@/assets/homepage/images/hero_mor_arkaplan.png";
+import hero_image_pattern from "@/assets/homepage/images/hero_image_pattern.png";
 import is_adami from "@/assets/homepage/images/is_adami.png";
 import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2 } from "lucide-react";
 
@@ -79,14 +79,14 @@ const HeroSection = () => {
 
   return (
     <section ref={container} className="max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-24 h-full flex items-center">
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center w-full max-md:gap-6">
+      <div className="grid h-full gap-12 grid-cols-5 items-center w-full max-xl:gap-5 max-lg:gap-8 max-md:px-5 max-lg:flex max-lg:flex-col">
         {/* Sol Sütun */}
-        <div className="flex flex-col gap-y-2 max-md:items-center">
+        <div className="col-span-2 flex flex-col gap-y-2 max-md:items-center max-lg:col-span-full max-lg:w-full max-sm:order-1">
           <div className="hero-badge">
-            <Badge icon={Rocket}>500+ KOBİ Bizi Tercih Etti</Badge>
+            <Badge icon={Rocket}>50+ KOBİ Bizi Tercih Etti</Badge>
           </div>
 
-          <h1 className="hero-title text-6xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-lg:text-5xl max-md:text-center max-md:text-2xl">
+          <h1 className="hero-title text-5xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-2xl">
             Web Siteniz <span className="text-primaryColor">Müşteri</span> Getirmiyor mu?
           </h1>
 
@@ -94,18 +94,20 @@ const HeroSection = () => {
             Adana'nın en çok tercih edilen dijital ajansı olarak, <strong>KOBİ'niz için ayda ortalama %127 daha fazla müşteri kazandırıyoruz.</strong>
           </p>
 
-          <div className="hero-btns flex items-center gap-4 mt-4 max-sm:flex-col">
+          <div className="hero-btns flex items-center gap-4 mt-4 max-sm:gap-1">
             <div className="relative">
-              <CustomButton size="lg" variant="filledButton" iconLeft={Search}>
+              <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-2">
                 Ücretsiz Analiz
               </CustomButton>
-              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1.5 px-2">2 dakika • Ücret yok</div>
+              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1.5 px-2 max-sm:p-1 max-sm:hidden">
+                2 dakika • Ücret yok
+              </div>
             </div>
             <div className="relative">
-              <CustomButton size="lg" variant="emptyButton" iconLeft={Phone}>
+              <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-2">
                 Hemen Görüş
               </CustomButton>
-              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-gradient-to-r from-primaryColor to-secondaryColor text-white border border-primaryColor font-semibold rounded-full py-1.5 px-2">
+              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-gradient-to-r from-primaryColor to-secondaryColor text-white border border-primaryColor font-semibold rounded-full py-1.5 px-2 max-sm:hidden">
                 7/24 Anında Cevap
               </div>
             </div>
@@ -113,16 +115,12 @@ const HeroSection = () => {
         </div>
 
         {/* Sağ Sütun */}
-        <div className="relative min-h-[500px] flex items-center justify-center lg:justify-end">
+        <div className="col-span-3 h-full max-h-[570px] relative flex items-center justify-center lg:justify-end max-xl:max-h-[500px] max-lg:col-span-full max-lg:w-full max-lg:max-w-[600px] max-sm:max-h-fit">
           {/* Arka Plan Görselleri Grubu (GSAP için sınıf: hero-bg-images) */}
-          <div className="hero-bg-images absolute inset-0 z-0 max-[550px]:hidden">
-            <Image src={hero_mor_arkaplan} alt="Arkaplan Efekti" fill className="object-contain object-right" priority />
-            <Image src={is_adami} alt="İş Adamı" width={463} height={370} className="max-w-[390px] w-full h-auto absolute bottom-5 left-0" priority />
+          <div className="max-sm:hidden w-full h-full ">
+            <Image src={hero_image_pattern} alt="Arkaplan Efekti" fill className="flex w-full h-full" />
           </div>
-
-          {/* İletişim Formu (GSAP için sınıf: hero-form) */}
-          {/* Form artık sunucu aksiyonuna bağlı */}
-          <form onSubmit={handleSubmit} className="hero-form mb-20 flex flex-col relative z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-[550px]:mr-0">
+          <form onSubmit={handleSubmit} className="hero-form absolute top-0 right-0 flex flex-col z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-sm:w-full max-sm:relative">
             {formStatus === "success" ? (
               <div className="flex flex-col items-center justify-center h-64 text-center gap-3 animate-in fade-in zoom-in">
                 <CheckCircle2 className="w-16 h-16 text-green-500" />
