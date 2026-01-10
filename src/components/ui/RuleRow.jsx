@@ -1,8 +1,8 @@
-const RuleRow = ({ number, title, description }) => {
+const RuleRow = ({ title, description, index }) => {
   return (
     <div className="w-full flex justify-start items-start gap-3 max-w-[400px]">
       <div className="bg-softPink border-3 border-[#5C45FD] rounded-full w-12 h-12 flex justify-center items-center flex-shrink-0">
-        <span className="text-primaryColor text-lg font-bold">{number}</span>
+        <span className="text-primaryColor text-lg font-bold">{index + 1}</span>
       </div>
 
       <div className="text-left">

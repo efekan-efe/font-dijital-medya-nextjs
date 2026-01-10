@@ -8,12 +8,12 @@ const aboutData = [
   {
     icon: RocketIcon,
     title: "Vizyonumuz",
-    description: "Bilişim ve yazılım sektörünü her alanıyla tanımak ve sektöre yönelik Ticaret Bakanlığı desteklerinde uzmanlaşmak. Kamu ve şirketler arasında köprü olmayı başarabilmek.",
+    description: "Markaların dijital dünyada güvenilir, güçlü ve sürdürülebilir bir konuma ulaşmasını sağlamak; dijital çözümlerle uzun vadeli değer üretmek.",
   },
   {
     icon: WebIcon,
     title: "Misyonumuz",
-    description: "Sektörün ihtiyaçlarını doğru analiz etmek, firmaya özel destek stratejileri oluşturmak, ülkemizin sektörde dünyada öncü rol almasına katkı sağlamak.",
+    description: "Her markaya özel stratejiler geliştirerek, dijital kanalları ölçülebilir performans ve müşteri kazanımı sağlayan yapılara dönüştürmek.",
   },
 ];
 
@@ -37,10 +37,8 @@ const InfoSection = () => {
           </h1>
         </div>
 
-        <p className="text-[#12141D]/70">
-          Bilişim ve yazılım sektörünü her alanıyla tanımak ve sektöre yönelik Ticaret Bakanlığı desteklerinde uzmanlaşmak. Kamu ve şirketler arasında köprü olmayı başarabilmek.Sektörün ihtiyaçlarını doğru analiz etmek, firmaya özel destek
-          stratejileri oluşturmak, ülkemizin sektörde dünyada öncü rol almasına katkı sağlamak.
-        </p>
+        <p className="text-[#12141D]/70">Dijital kanallarda kalıcı başarı, stratejik planlama ve profesyonel yönetim anlayışıyla mümkündür.</p>
+        <p className="text-[#12141D]/70">Markaların dijital varlıklarını; kurumsal hedeflerle uyumlu, performansı ölçülebilir ve uzun vadede sürdürülebilir müşteri kazanımı sağlayan bütüncül dijital yapılara dönüştürüyoruz.</p>
 
         {aboutData.map((about, index) => (
           <div key={index} className="flex justify-start items-start gap-2">

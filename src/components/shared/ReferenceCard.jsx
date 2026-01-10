@@ -16,13 +16,15 @@ const ReferenceCard = ({ image, title, description, customerReview, link }) => {
         <div className="flex flex-col gap-1.5 bg-[#43A047]/25 rounded-sm p-1.5">
           <div className="flex justify-start items-center gap-1">
             <Image src={customerReviewIcon} alt="Müşteri Yorumu" />
-            <h4 className="text-sm font-medium leading-[120%] text-[#43A047]">Müşteri Yorumu</h4>
+            <h4 className="text-sm font-medium leading-[120%] text-[#43A047]">
+              Müşteri Adı Soyadı <span className="w-2 h-2 bg-primaryColor rounded-full"></span> Konumu
+            </h4>
           </div>
-          <p className="text-[#202220] text-sm leading-[130%] tracking-[-2%] italic">{customerReview}</p>
+          <p className="text-[#202220] text-sm leading-[130%] tracking-[-2%]">{customerReview}</p>
         </div>
       </div>
 
-      <CustomButton rightComponent={<SparkleIcon className="stroke-white" />} leftComponent={<SparkleIcon className="stroke-white" />} size="lg" variant="filledButton" className={"py-2 px-3 text-sm text-center w-fit rounded-full"}>
+      <CustomButton href={link} rightComponent={<SparkleIcon className="stroke-white" />} leftComponent={<SparkleIcon className="stroke-white" />} size="lg" variant="filledButton" className={"py-2 px-3 text-sm text-center w-fit rounded-full"}>
         Web Sitesini Ziyaret Et
       </CustomButton>
     </div>

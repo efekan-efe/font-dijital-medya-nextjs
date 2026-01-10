@@ -44,7 +44,6 @@ const SocialLinks = () => (
   <div className="flex items-center gap-x-2 mt-3">
     {socialMediaData.map((social, index) => (
       <Link key={index} href={social.link} className="bg-primaryColor rounded-full w-10 h-10 flex justify-center items-center hover:scale-110 transition-transform duration-300">
-        {" "}
         {/* Ufak bir hover efekti de ekledim :) */}
         <Image src={social.icon} alt="sosyal medya ikonları" />
       </Link>

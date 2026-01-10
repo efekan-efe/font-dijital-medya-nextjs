@@ -18,24 +18,20 @@ const FeaturesSection = () => {
 
   const featureItemData = [
     {
-      icon: FileText,
-      title: "Simply Copy & Paste",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Stratejik Yaklaşım",
+      description: "Her projeye hazır kalıplarla değil, markanın hedeflerine özel geliştirilen stratejik planlamayla başlıyoruz.",
     },
     {
-      icon: Code,
-      title: "Easy to Customize",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Sonuç Odaklı Çözümler",
+      description: "Görünürlükten ziyade ölçülebilir performans ve gerçek ticari sonuçlara odaklanıyoruz.",
     },
     {
-      icon: Sparkle,
-      title: "Made with TailwindCSS",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Şeffaf Süreç Yönetimi",
+      description: "Tüm çalışmaları açık, anlaşılır ve raporlanabilir bir süreçle yönetiyoruz.",
     },
     {
-      icon: FileText,
-      title: "Simply Copy & Paste",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Sürdürülebilir Yapılar",
+      description: "Kısa vadeli kazanımlar yerine, markanın uzun vadeli dijital başarısını destekleyen altyapılar oluşturuyoruz.",
     },
   ];
 
@@ -145,7 +141,7 @@ const FeaturesSection = () => {
         </div>
 
         <p className="feature-desc text-primaryBlack text-sm md:text-base">
-          Bisasoft Dijital Reklam Ajansı olarak, <strong>KOBİ'nizin</strong> dijitalde <strong>görünür olmasını</strong> ve <strong>doğru müşterilere</strong> ulaşmasını sağlıyoruz.
+          Dijitalde kalıcı başarı, <strong>doğru planlama ve güçlü uygulama</strong> ile mümkündür. Markalar için <strong>müşteri kazandıran</strong>, ölçülebilir ve sürdürülebilir dijital yapılar oluşturuyoruz.
         </p>
 
         {/* Liste Elemanları */}
@@ -153,7 +149,7 @@ const FeaturesSection = () => {
           {featureItemData.map((item, index) => (
             // FeatureItem'ı bir div ile sarmalayıp sınıfı ona verdik ki GSAP yakalayabilsin
             <div key={index} className="feature-item">
-              <FeatureItem icon={item.icon} title={item.title} description={item.description} index={index} />
+              <FeatureItem title={item.title} description={item.description} index={index} />
             </div>
           ))}
         </div>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CustomButton } from "@/components/ui/CustomButton";
 import Badge from "@/components/ui/Badge";
 import hero_image_pattern from "@/assets/homepage/images/hero_image_pattern.png";
-import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2, Zap, TrendingUp } from "lucide-react";
+import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2, Zap, TrendingUp, ThumbsUp } from "lucide-react";
 
 // Splide Importları
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -23,16 +23,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const heroSlides = [
   {
     id: 1,
-    badgeText: "50+ KOBİ Bizi Tercih Etti",
+    badgeText: "50+ İşletme Bizi Tercih Etti",
     badgeIcon: Rocket,
     title: (
       <>
-        Web Siteniz <span className="text-primaryColor">Müşteri</span> Getirmiyor mu?
+        Ziyaretçileriniz Neden <span className="text-primaryColor">Müşteriye</span> Dönüşmüyor?
       </>
     ),
     desc: (
       <>
-        Adana'nın en çok tercih edilen dijital ajansı olarak, <strong>KOBİ'niz için ayda ortalama %127 daha fazla müşteri kazandırıyoruz.</strong>
+        Bölgenin en çok tercih edilen dijital ajanslarından biri olarak, <strong>markalar için dönüşüm odaklı dijital stratejiler geliştiriyor, kalıcı başarılar inşa ediyoruz.</strong>
       </>
     ),
     btn1: "Ücretsiz Analiz",
@@ -40,16 +40,16 @@ const heroSlides = [
   },
   {
     id: 2,
-    badgeText: "SEO Uyumlu Altyapı",
+    badgeText: "Dönüşüm Odaklı Dijital Stratejiler",
     badgeIcon: TrendingUp,
     title: (
       <>
-        Google'da <span className="text-primaryColor">İlk Sırada</span> Yer Alın!
+        Takipçileriniz <span className="text-primaryColor">Müşteriniz</span> Olmuyor mu?
       </>
     ),
     desc: (
       <>
-        Rakiplerinizin önüne geçmek ister misiniz? <strong>SEO uyumlu yazılım ve içerik stratejilerimizle</strong> organik trafiğinizi ikiye katlayın.
+        Sosyal medyadaki etkileşimi, <strong>doğru strateji ve veriye dayalı optimizasyonlarla</strong> sürdürülebilir müşteri kazanımına dönüştürüyoruz.
       </>
     ),
     btn1: "SEO Teklifi Al",
@@ -57,16 +57,33 @@ const heroSlides = [
   },
   {
     id: 3,
-    badgeText: "Hızlı ve Güvenli",
+    badgeText: "Ticari Değer Üreten Dijital Sistemler",
     badgeIcon: Zap,
     title: (
       <>
-        Yavaş Siteler <span className="text-primaryColor">Satış</span> Kaybettirir.
+        Siteniz Var Ama <span className="text-primaryColor">Sipariş</span> Gelmiyor mu?
       </>
     ),
     desc: (
       <>
-        Kullanıcıların %40'ı yavaş açılan siteleri terk ediyor. <strong>Modern Next.js altyapımızla</strong> ışık hızında web siteleri tasarlıyoruz.
+        Sitenizi sadece yayında tutmakla kalmıyor, <strong>dönüşüm odaklı optimizasyonlarla</strong> satış üreten bir yapıya dönüştürüyoruz.
+      </>
+    ),
+    btn1: "Hız Testi Yap",
+    btn2: "Detaylı Bilgi",
+  },
+  {
+    id: 4,
+    badgeText: "Dijitalde Güçlü İlk İzlenim",
+    badgeIcon: ThumbsUp,
+    title: (
+      <>
+        Web Siteniz <span className="text-primaryColor">Prestij</span> Kaybettiriyor Olabilir mi?
+      </>
+    ),
+    desc: (
+      <>
+        Kurumsal imajınızı destekleyen, <strong>kullanıcıya güven veren ve markanızı doğru temsil eden</strong> web deneyimleri oluşturuyoruz.
       </>
     ),
     btn1: "Hız Testi Yap",
@@ -156,14 +173,14 @@ const HeroSection = () => {
           <Splide options={splideOptions} className="w-full">
             {heroSlides.map((slide) => (
               <SplideSlide key={slide.id} className="pb-8 flex justify-center">
-                <div className="flex flex-col gap-y-2 items-center justify-center max-md:items-center py-2 px-1 max-sm:gap-y-1 ">
+                <div className="flex flex-col gap-y-2 items-start justify-center max-md:items-center py-2 px-1 max-sm:gap-y-1 ">
                   {/* Badge */}
                   <div className="hero-badge">
                     <Badge icon={slide.badgeIcon}>{slide.badgeText}</Badge>
                   </div>
 
                   {/* Title */}
-                  <h1 className="hero-title mt-2 text-5xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl">{slide.title}</h1>
+                  <h1 className="hero-title mt-2 text-[40px] max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl">{slide.title}</h1>
 
                   {/* Description */}
                   <p className="hero-desc mt-2 text-primaryBlack max-md:text-center max-sm:text-sm text-lg leading-relaxed">{slide.desc}</p>

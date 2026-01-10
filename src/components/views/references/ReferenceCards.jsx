@@ -4,7 +4,7 @@ import { referenceData } from "../../../../data/reference-data";
 
 const ReferenceCards = () => {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-stretch gap-8 max-w-7xl mx-auto pb-5">
+    <div className="w-full h-full flex flex-col justify-center items-stretch gap-8 max-w-7xl mx-auto pb-5 font-inter">
       <div className="w-full flex flex-col justify-center items-center gap-1">
         <TitleBadge>
           <p className="text-primaryBlack w-full font-medium">

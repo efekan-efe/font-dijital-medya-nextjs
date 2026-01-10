@@ -9,11 +9,11 @@ export const footerColumns = [
     title: "Hizmetlerimiz",
     color: "#F44336",
     items: [
-      { text: "Web Hizmetleri", href: "/hizmetler/web" },
-      { text: "Tasarım", href: "/hizmetler/tasarim" },
-      { text: "Dijital Pazarlama", href: "/hizmetler/dijital-pazarlama" },
-      { text: "Sosyal Medya Yönetimi", href: "/hizmetler/sosyal-medya" },
-      { text: "Dijital Danışmanlık", href: "/hizmetler/danismanlik" },
+      { text: "E-Ticaret Sitesi Kurulumu", href: "/e-ticaret-web-sitesi-kurulumu/" },
+      { text: "Kurumsal Web Sitesi", href: "/kurumsal-web-sitesi/" },
+      { text: "Sosyal Medya Yönetimi", href: "/sosyal-medya-yonetimi/" },
+      { text: "Sosyal Medya Reklamları", href: "/sosyal-medya-reklamlari/" },
+      { text: "Arama Motoru Opt.", href: "/arama-motoru-optimizasyonu-seo/" },
     ],
   },
   {

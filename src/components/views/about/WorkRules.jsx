@@ -5,19 +5,16 @@ import { FileText, Code, Sparkle } from "lucide-react";
 const WorkRules = () => {
   const workData = [
     {
-      icon: FileText,
-      title: "Simply Copy & Paste",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Profesyonel Şeffaf ve Planlı Süreç Yönetimi",
+      description: "Dijital yolculuğumuzun her adımını kurguluyor, kısa, orta ve uzun vadeli harita oluşturuyor, tüm operasyonel süreci bu plana göre onayınız dahilinde  yönetiyoruz.",
     },
     {
-      icon: Code,
-      title: "Easy to Customize",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "Veri Odaklı ve Sonuç Bazlı Stratejiler",
+      description: "Verileri analiz ederek, dijital görünürlüğünüzü sadece tıklamaya değil, satışa dönüştürüyoruz. Tahmini değil, somut ve ölçülebilir sonuçlar üretiyoruz.",
     },
     {
-      icon: Sparkle,
-      title: "Made with TailwindCSS",
-      description: "Many desktop publishing packages and web page editors now use for them.",
+      title: "İş Ortağı Bilinciyle Sürekli Destek",
+      description: `Sizi uzun vadeli iş ortağımız olarak görüyoruz. Her an ulaşılabilir ekibimiz ve proaktif çözümlerimizle, büyüme sürecinizi kesintisiz destekliyoruz.`,
     },
   ];
 
@@ -35,9 +32,9 @@ const WorkRules = () => {
         </h1>
       </div>
 
-      <div className="flex justify-center items-center flex-wrap gap-8">
+      <div className="flex justify-center items-start flex-wrap gap-8">
         {workData.map((work, index) => (
-          <RuleRow key={index} icon={work.icon} title={work.title} description={work.description} />
+          <RuleRow key={index} index={index} title={work.title} description={work.description} />
         ))}
       </div>
     </div>
