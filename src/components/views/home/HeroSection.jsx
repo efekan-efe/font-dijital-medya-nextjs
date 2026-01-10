@@ -78,7 +78,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section ref={container} className="max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-24 h-full flex items-center">
+    <section ref={container} className="max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-24 h-full flex items-center max-sm:pt-20">
       <div className="grid h-full gap-12 grid-cols-5 items-center w-full max-xl:gap-5 max-lg:gap-8 max-md:px-5 max-lg:flex max-lg:flex-col">
         {/* Sol Sütun */}
         <div className="col-span-2 flex flex-col gap-y-2 max-md:items-center max-lg:col-span-full max-lg:w-full max-sm:order-1">
@@ -90,11 +90,11 @@ const HeroSection = () => {
             Web Siteniz <span className="text-primaryColor">Müşteri</span> Getirmiyor mu?
           </h1>
 
-          <p className="hero-desc text-primaryBlack max-md:text-center">
+          <p className="hero-desc text-primaryBlack max-md:text-center max-sm:text-sm">
             Adana'nın en çok tercih edilen dijital ajansı olarak, <strong>KOBİ'niz için ayda ortalama %127 daha fazla müşteri kazandırıyoruz.</strong>
           </p>
 
-          <div className="hero-btns flex items-center gap-4 mt-4 max-sm:gap-1">
+          <div className="hero-btns flex items-center gap-4 mt-4 max-sm:gap-1 max-sm:mt-0">
             <div className="relative">
               <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-2">
                 Ücretsiz Analiz
