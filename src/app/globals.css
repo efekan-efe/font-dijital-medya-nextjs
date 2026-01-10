@@ -63,6 +63,14 @@ body {
   scrollbar-width: none;
 }
 
+.heroSection .splide__pagination__page {
+  background-color: #5c45fd;
+}
+.heroSection .splide__pagination__page.is-active {
+  background-color: #5c45fd;
+  opacity: 1;
+}
+
 .splide__track {
   padding-right: 0 !important;
   padding-left: 0 !important;

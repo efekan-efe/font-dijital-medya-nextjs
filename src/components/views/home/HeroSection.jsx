@@ -5,8 +5,12 @@ import Image from "next/image";
 import { CustomButton } from "@/components/ui/CustomButton";
 import Badge from "@/components/ui/Badge";
 import hero_image_pattern from "@/assets/homepage/images/hero_image_pattern.png";
-import is_adami from "@/assets/homepage/images/is_adami.png";
-import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2 } from "lucide-react";
+import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2, Zap, TrendingUp } from "lucide-react";
+
+// Splide Importları
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
+// İstersen farklı temalar da kullanabilirsin: import '@splidejs/react-splide/css/skyblue';
 
 // Server Action
 import { sendAnalysis } from "@/actions/sendAnalysis";
@@ -15,10 +19,65 @@ import { sendAnalysis } from "@/actions/sendAnalysis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// SLIDER VERİSİ (İçerikleri buradan yönetebilirsin)
+const heroSlides = [
+  {
+    id: 1,
+    badgeText: "50+ KOBİ Bizi Tercih Etti",
+    badgeIcon: Rocket,
+    title: (
+      <>
+        Web Siteniz <span className="text-primaryColor">Müşteri</span> Getirmiyor mu?
+      </>
+    ),
+    desc: (
+      <>
+        Adana'nın en çok tercih edilen dijital ajansı olarak, <strong>KOBİ'niz için ayda ortalama %127 daha fazla müşteri kazandırıyoruz.</strong>
+      </>
+    ),
+    btn1: "Ücretsiz Analiz",
+    btn2: "Hemen Görüş",
+  },
+  {
+    id: 2,
+    badgeText: "SEO Uyumlu Altyapı",
+    badgeIcon: TrendingUp,
+    title: (
+      <>
+        Google'da <span className="text-primaryColor">İlk Sırada</span> Yer Alın!
+      </>
+    ),
+    desc: (
+      <>
+        Rakiplerinizin önüne geçmek ister misiniz? <strong>SEO uyumlu yazılım ve içerik stratejilerimizle</strong> organik trafiğinizi ikiye katlayın.
+      </>
+    ),
+    btn1: "SEO Teklifi Al",
+    btn2: "Referanslar",
+  },
+  {
+    id: 3,
+    badgeText: "Hızlı ve Güvenli",
+    badgeIcon: Zap,
+    title: (
+      <>
+        Yavaş Siteler <span className="text-primaryColor">Satış</span> Kaybettirir.
+      </>
+    ),
+    desc: (
+      <>
+        Kullanıcıların %40'ı yavaş açılan siteleri terk ediyor. <strong>Modern Next.js altyapımızla</strong> ışık hızında web siteleri tasarlıyoruz.
+      </>
+    ),
+    btn1: "Hız Testi Yap",
+    btn2: "Detaylı Bilgi",
+  },
+];
+
 const HeroSection = () => {
   const container = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formStatus, setFormStatus] = useState(null); // 'success' | 'error' | null
+  const [formStatus, setFormStatus] = useState(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -32,33 +91,31 @@ const HeroSection = () => {
         },
       });
 
-      // SOL SÜTUN ANİMASYONLARI
+      // SOL SÜTUN (Slider) ANİMASYONLARI
+      // Not: Slider içindeki elemanları seçmek için class'ları kullanıyoruz.
+      // İlk render'da GSAP bu elemanları yakalayıp giriş animasyonu yapacak.
       tl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.6, ease: "power3.out" })
         .from(".hero-title", { y: 50, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
         .from(".hero-desc", { y: 30, opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.6")
         .from(".hero-btns", { y: 20, opacity: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4");
 
-      // SAĞ SÜTUN ANİMASYONLARI (Form ve Resimler)
-      // Önce arka plan resmi ve adam gelsin
-      tl.from(".hero-bg-images", { x: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8")
-        // Sonra FORM "pop" diye belirsin (Dikkat çekici nokta)
-        .from(
-          ".hero-form",
-          {
-            scale: 0.8,
-            y: 30,
-            opacity: 0,
-            duration: 0.7,
-            ease: "elastic.out(1, 0.5)", // Yaylanma efekti
-          },
-          "-=0.6"
-        );
+      // SAĞ SÜTUN ANİMASYONLARI
+      tl.from(".hero-bg-images", { x: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8").from(
+        ".hero-form",
+        {
+          scale: 0.8,
+          y: 30,
+          opacity: 0,
+          duration: 0.7,
+          ease: "elastic.out(1, 0.5)",
+        },
+        "-=0.6"
+      );
     }, container);
 
     return () => ctx.revert();
   }, []);
 
-  // Form Gönderim Fonksiyonu
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -69,7 +126,7 @@ const HeroSection = () => {
 
     if (result.success) {
       setFormStatus("success");
-      event.target.reset(); // Formu temizle
+      event.target.reset();
     } else {
       setFormStatus("error");
       alert(result.message);
@@ -77,48 +134,65 @@ const HeroSection = () => {
     setIsSubmitting(false);
   };
 
+  // Splide Ayarları
+  const splideOptions = {
+    type: "loop",
+    arrows: false, // Oklu geçişi kapattım, daha temiz görünmesi için
+    pagination: true, // Alt kısımdaki noktalar açık
+    autoplay: true,
+    interval: 5000,
+    pauseOnHover: true,
+    direction: "ttb", // 'ttb' (top-to-bottom) dikey kaydırma veya 'ltr' yatay. Hero için genelde 'ltr' iyidir ama dikey istersen burayı aç.
+    // Ben yatay (varsayılan) bırakıyorum, height: 'auto' ile.
+    direction: "ltr",
+    gap: "1rem",
+  };
+
   return (
-    <section ref={container} className="max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-24 h-full flex items-center max-sm:pt-20">
-      <div className="grid h-full gap-12 grid-cols-5 items-center w-full max-xl:gap-5 max-lg:gap-8 max-md:px-5 max-lg:flex max-lg:flex-col">
-        {/* Sol Sütun */}
-        <div className="col-span-2 flex flex-col gap-y-2 max-md:items-center max-lg:col-span-full max-lg:w-full max-sm:order-1">
-          <div className="hero-badge">
-            <Badge icon={Rocket}>50+ KOBİ Bizi Tercih Etti</Badge>
-          </div>
+    <section ref={container} className="heroSection max-w-7xl mx-auto px-2 py-8 pt-32 font-inter max-md:pb-0 max-md:pt-24 h-full flex items-center max-sm:pt-20">
+      <div className="grid h-full gap-12 grid-cols-5 items-center w-full max-xl:gap-5 max-lg:gap-8 max-md:px-5 max-lg:flex max-lg:flex-col max-sm:gap-3">
+        {/* SOL SÜTUN - SPLIDE SLIDER */}
+        <div className="col-span-2 w-full max-lg:col-span-full max-sm:order-1">
+          <Splide options={splideOptions} className="w-full">
+            {heroSlides.map((slide) => (
+              <SplideSlide key={slide.id} className="pb-8">
+                <div className="flex flex-col gap-y-2 max-md:items-center py-2 px-1">
+                  {/* Badge */}
+                  <div className="hero-badge">
+                    <Badge icon={slide.badgeIcon}>{slide.badgeText}</Badge>
+                  </div>
 
-          <h1 className="hero-title text-5xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-2xl">
-            Web Siteniz <span className="text-primaryColor">Müşteri</span> Getirmiyor mu?
-          </h1>
+                  {/* Title */}
+                  <h1 className="hero-title mt-2 text-5xl max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl">{slide.title}</h1>
 
-          <p className="hero-desc text-primaryBlack max-md:text-center max-sm:text-sm">
-            Adana'nın en çok tercih edilen dijital ajansı olarak, <strong>KOBİ'niz için ayda ortalama %127 daha fazla müşteri kazandırıyoruz.</strong>
-          </p>
+                  {/* Description */}
+                  <p className="hero-desc mt-2 text-primaryBlack max-md:text-center max-sm:text-sm text-lg leading-relaxed">{slide.desc}</p>
 
-          <div className="hero-btns flex items-center gap-4 mt-4 max-sm:gap-1 max-sm:mt-0">
-            <div className="relative">
-              <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-2">
-                Ücretsiz Analiz
-              </CustomButton>
-              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1.5 px-2 max-sm:p-1 max-sm:hidden">
-                2 dakika • Ücret yok
-              </div>
-            </div>
-            <div className="relative">
-              <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-2">
-                Hemen Görüş
-              </CustomButton>
-              <div className="w-fit whitespace-nowrap text-xs absolute -bottom-5 left-1/2 translate-x-[-50%] bg-gradient-to-r from-primaryColor to-secondaryColor text-white border border-primaryColor font-semibold rounded-full py-1.5 px-2 max-sm:hidden">
-                7/24 Anında Cevap
-              </div>
-            </div>
-          </div>
+                  {/* Buttons */}
+                  <div className="hero-btns flex items-center mt-2 gap-4 max-sm:gap-2">
+                    <div className="relative">
+                      <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-3">
+                        {slide.btn1}
+                      </CustomButton>
+                      {/* Sadece ilk slaytta veya hepsinde bu etiketi göstermek isteyebilirsin */}
+                      <div className="w-fit whitespace-nowrap text-xs absolute -bottom-4 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1 px-2 max-sm:hidden">2 dakika • Ücret yok</div>
+                    </div>
+                    <div className="relative">
+                      <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-3">
+                        {slide.btn2}
+                      </CustomButton>
+                    </div>
+                  </div>
+                </div>
+              </SplideSlide>
+            ))}
+          </Splide>
         </div>
 
-        {/* Sağ Sütun */}
+        {/* SAĞ SÜTUN (Değişiklik yapılmadı, aynı kaldı) */}
         <div className="col-span-3 h-full max-h-[570px] relative flex items-center justify-center lg:justify-end max-xl:max-h-[500px] max-lg:col-span-full max-lg:w-full max-lg:max-w-[600px] max-sm:max-h-fit">
-          {/* Arka Plan Görselleri Grubu (GSAP için sınıf: hero-bg-images) */}
           <div className="max-sm:hidden w-full h-full ">
-            <Image src={hero_image_pattern} alt="Arkaplan Efekti" fill className="flex w-full h-full" />
+            <Image src={hero_image_pattern} alt="Arkaplan Efekti" fill className="hero-bg-images flex w-full h-full object-contain" />
           </div>
           <form onSubmit={handleSubmit} className="hero-form absolute top-0 right-0 flex flex-col z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-sm:w-full max-sm:relative">
             {formStatus === "success" ? (
