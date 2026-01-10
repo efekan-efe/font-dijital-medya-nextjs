@@ -155,8 +155,8 @@ const HeroSection = () => {
         <div className="col-span-2 w-full max-lg:col-span-full max-sm:order-1">
           <Splide options={splideOptions} className="w-full">
             {heroSlides.map((slide) => (
-              <SplideSlide key={slide.id} className="pb-8">
-                <div className="flex flex-col gap-y-2 max-md:items-center py-2 px-1">
+              <SplideSlide key={slide.id} className="pb-8 flex justify-center">
+                <div className="flex flex-col gap-y-2 items-center justify-center max-md:items-center py-2 px-1 max-sm:gap-y-1 ">
                   {/* Badge */}
                   <div className="hero-badge">
                     <Badge icon={slide.badgeIcon}>{slide.badgeText}</Badge>
