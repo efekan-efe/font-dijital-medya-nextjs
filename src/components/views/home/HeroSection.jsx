@@ -244,7 +244,7 @@ const HeroSection = () => {
                 <button
                   disabled={isSubmitting}
                   type="submit"
-                  className="bg-primaryColor hover:bg-secondaryColor transition-colors mt-5 mb-3 py-2.5 rounded-lg text-white text-center w-full font-semibold text-sm flex justify-center items-center gap-2 disabled:opacity-70"
+                  className="bg-primaryColor hover:bg-secondaryColor transition-colors mt-5 py-2.5 rounded-lg text-white text-center w-full font-semibold text-sm flex justify-center items-center gap-2 disabled:opacity-70"
                 >
                   {isSubmitting ? (
                     <>
@@ -254,11 +254,6 @@ const HeroSection = () => {
                     "Analizimi Başlat"
                   )}
                 </button>
-
-                <div className="flex flex-col items-center gap-1 opacity-80">
-                  <p className="text-green-600 text-[12px] font-medium flex items-center gap-1">✓ Kredi kartı gerekmez</p>
-                  <p className="text-green-600 text-[12px] font-medium flex items-center gap-1">✓ 2 dakikada hazır</p>
-                </div>
               </>
             )}
           </form>
