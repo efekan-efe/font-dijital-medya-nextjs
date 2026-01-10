@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useMemo } from "react";
 import AppointmentSystemIcon from "@/components/icons/AppointmentSystemIcon";
 import BrandIdentityIcon from "@/components/icons/BrandIdentityIcon";
 import EcommerceIcon from "@/components/icons/EcommerceIcon";
@@ -23,7 +23,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const OurServices = () => {
   const container = useRef(null);
 
-  // Veriler senin dosyanla birebir aynıdır
   const serviceData = [
     {
       icon: EcommerceIcon,
@@ -75,6 +74,18 @@ const OurServices = () => {
     },
   ];
 
+  // Helper fonksiyon: Array'i belirtilen boyutta parçalara böler (Burada 2'şerli)
+  const chunkArray = (arr, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunkedArr.push(arr.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
+
+  // Mobilde her slaytta 2 kart göstermek için veriyi işliyoruz
+  const mobileServicePairs = useMemo(() => chunkArray(serviceData, 2), [serviceData]);
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -82,31 +93,28 @@ const OurServices = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: "top 60%", // Section ekranın %60'ına gelince başla
+          start: "top 60%",
           toggleActions: "play none none reverse",
         },
       });
 
-      // 1. Başlık Animasyonu
       tl.from(".services-header", {
         y: -30,
         opacity: 0,
         duration: 0.8,
         ease: "power3.out",
       })
-        // 2. Desktop Kartları (Stagger ile sırayla gelir)
         .from(
           ".service-card-desktop",
           {
             y: 40,
             opacity: 0,
             duration: 0.6,
-            stagger: 0.1, // Kartlar arası 0.1sn bekleme
-            ease: "back.out(1.7)", // Hafif yaylanma efekti
+            stagger: 0.1,
+            ease: "back.out(1.7)",
           },
           "-=0.4"
         )
-        // 3. Mobil Slider (Bütün olarak belirir)
         .from(
           ".services-slider-mobile",
           {
@@ -116,7 +124,7 @@ const OurServices = () => {
             ease: "power2.out",
           },
           "<"
-        ); // Desktop ile aynı anda tetiklensin (biri gizli olduğu için sorun olmaz)
+        );
     }, container);
 
     return () => ctx.revert();
@@ -134,22 +142,29 @@ const OurServices = () => {
         </h1>
       </div>
 
-      {/* --- MOBİL SLIDER (LG Altı - Splide) --- */}
-      {/* 100vh problemini çözen kısım burası */}
-      <div className="services-slider-mobile block lg:hidden w-full max-w-md mx-auto">
+      {/* --- MOBİL SLIDER (LG Altı - Splide - 2'li Gösterim) --- */}
+      <div className="services-slider-mobile block lg:hidden w-full max-w-md mx-auto h-fit">
         <Splide
           options={{
-            perPage: 1, // Mobilde tek kart
+            perPage: 1,
             gap: "1rem",
             arrows: false,
             pagination: true,
-            padding: "1rem", // Yanlardan hafif boşluk
-            // breakpoints ile tablet ayarı da eklenebilir ama tek kart güvenlidir
+            padding: "0.5rem", // Kenarlardan hafif boşluk
+            drag: true,
           }}
+          className="h-full"
         >
-          {serviceData.map((card, index) => (
-            <SplideSlide key={index} className="flex justify-center pb-10">
-              <ServiceCard icon={card.icon} title={card.title} description={card.description} link={card.link} />
+          {mobileServicePairs.map((pair, index) => (
+            <SplideSlide key={index} className="pb-10 h-full flex justify-center">
+              {/* Flex Container: Kartları alt alta dizer */}
+              <div className="flex flex-col gap-4 h-full justify-center">
+                {pair.map((card, innerIndex) => (
+                  <div key={innerIndex} className="w-full">
+                    <ServiceCard icon={card.icon} title={card.title} description={card.description} link={card.link} />
+                  </div>
+                ))}
+              </div>
             </SplideSlide>
           ))}
         </Splide>
@@ -158,7 +173,6 @@ const OurServices = () => {
       {/* --- DESKTOP GRID (LG ve Üstü - Flex/Grid) --- */}
       <div className="hidden lg:flex max-w-7xl mx-auto flex-wrap justify-center items-start gap-5">
         {serviceData.map((card, index) => (
-          // GSAP için wrapper div ekledik
           <div key={index} className="service-card-desktop">
             <ServiceCard icon={card.icon} title={card.title} description={card.description} link={card.link} />
           </div>

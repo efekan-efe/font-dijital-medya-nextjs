@@ -121,10 +121,10 @@ const FeaturesSection = () => {
 
   return (
     // Ref'i ekledik
-    <section ref={container} className="max-w-7xl w-full mx-auto flex justify-center items-center gap-2 md:gap-8 font-inter px-2 max-[900px]:flex-col h-full">
+    <section ref={container} className="max-w-7xl w-full mx-auto flex justify-center items-center gap-2 md:gap-8 font-inter px-2 max-lg:flex-col h-full">
       {/* Sol Resim Alanı */}
-      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-[1024px]:hidden max-[900px]:max-w-md max-[900px]:order-2">
-        <Image className="w-full h-fit max-[1024px]:hidden" src={videoFallbackImage} alt="Video" />
+      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-lg:items-start max-lg:max-w-[300px] max-lg:max-h-[300px] max-lg:mr-auto max-lg:overflow-hidden max-lg:rounded-full">
+        <Image className="w-full h-fit" src={videoFallbackImage} alt="Video" />
       </div>
 
       {/* Sağ İçerik Alanı */}
@@ -153,14 +153,14 @@ const FeaturesSection = () => {
           {featureItemData.map((item, index) => (
             // FeatureItem'ı bir div ile sarmalayıp sınıfı ona verdik ki GSAP yakalayabilsin
             <div key={index} className="feature-item">
-              <FeatureItem icon={item.icon} title={item.title} description={item.description} />
+              <FeatureItem icon={item.icon} title={item.title} description={item.description} index={index} />
             </div>
           ))}
         </div>
 
         {/* Buton */}
         <div className="feature-btn mt-2 md:mt-4 w-full md:w-auto">
-          <CustomButton className="w-full md:w-auto" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
+          <CustomButton className="w-full md:w-auto max-lg:text-base max-lg:w-fit" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
             Bizimle Yükselenler
           </CustomButton>
         </div>
