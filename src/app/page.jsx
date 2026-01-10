@@ -3,7 +3,6 @@ import FeaturesSection from "@/components/views/home/FeaturesSection";
 import GoogleReviews from "@/components/views/home/GoogleReviews";
 import HeroSection from "@/components/views/home/HeroSection";
 import OurServices from "@/components/views/home/OurServices";
-import ProcessSection from "@/components/views/home/ProcessSection";
 
 export default function HomePage() {
   return (
@@ -11,11 +10,10 @@ export default function HomePage() {
     <main className="homepageMain flex flex-col">
       {/* Sectionların CSS'te zaten height: 100vh ve snap-align: start özelliği var */}
       <HeroSection />
+      <GoogleReviews />
       <OurServices />
       <FeaturesSection />
-      <ProcessSection />
       <BlogSection />
-      <GoogleReviews />
     </main>
   );
 }
