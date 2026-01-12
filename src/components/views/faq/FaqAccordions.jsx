@@ -1,13 +1,15 @@
-// FaqAccordions.jsx
+"use client";
 
-// 1. Adım: 'lucide-react' ikonlarını (ChevronLeft, ChevronRight) import edin
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import { CircleQuestionMark, ChevronLeft, ChevronRight } from "lucide-react";
 import FaqAccordion from "@/components/ui/FaqAccordion";
-// 2. Adım: shadcn/ui pagination import'unu SİLİN
-// import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { useState, useEffect } from "react";
+
+// GSAP
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const FaqAccordions = ({ filteredFaqs }) => {
+  const container = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -28,21 +30,50 @@ const FaqAccordions = ({ filteredFaqs }) => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
+  // GSAP: Liste her değiştiğinde (sayfa veya filtre) animasyon çalışsın
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      // Accordion itemları
+      gsap.fromTo(
+        ".faq-item-anim",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.1, // Sırayla gelme efekti
+          ease: "power2.out",
+          overwrite: "auto", // Önceki animasyonu ezerek yenisini başlatır
+        }
+      );
+    }, container);
+
+    return () => ctx.revert();
+  }, [faqsToDisplay]); // Bağımlılık: Gösterilen SSS'ler değiştiğinde çalışır
+
   return (
-    <div className="w-full border border-primaryColor rounded-t-2xl p-5 bg-[#DBD4F5]/25 flex flex-col gap-5">
+    <div ref={container} className="w-full border border-primaryColor rounded-t-2xl p-5 bg-[#DBD4F5]/25 flex flex-col gap-5">
       <div className="flex justify-start items-center gap-2">
         <CircleQuestionMark className="stroke-primaryColor" />
         <h3 className="font-semibold text-2xl leading-7 text-primaryColor">Sorular ve Cevaplar</h3>
       </div>
 
       <div className="flex flex-col gap-5">
-        {faqsToDisplay.length > 0 ? faqsToDisplay.map((faq, index) => <FaqAccordion faq={faq} key={index} />) : <p className="text-primaryColor text-center">Arama kriterlerinize uygun sonuç bulunamadı.</p>}
+        {faqsToDisplay.length > 0 ? (
+          faqsToDisplay.map((faq, index) => (
+            // Animasyon için wrapper div ekledik
+            <div key={index} className="faq-item-anim">
+              <FaqAccordion faq={faq} />
+            </div>
+          ))
+        ) : (
+          <p className="text-primaryColor text-center animate-in fade-in">Arama kriterlerinize uygun sonuç bulunamadı.</p>
+        )}
 
-        {/* 3. Adım: shadcn/ui bileşenlerini HTML ve Tailwind ile değiştirin */}
         {totalPages > 1 && (
-          <nav aria-label="pagination" className="flex justify-start">
+          <nav aria-label="pagination" className="flex justify-start pt-2">
             <ul className="flex items-center gap-2">
-              {/* Önceki Butonu */}
               <li>
                 <button
                   type="button"
@@ -55,38 +86,31 @@ const FaqAccordions = ({ filteredFaqs }) => {
                 </button>
               </li>
 
-              {/* Sayfa 1 */}
               <li>
                 <button
                   type="button"
                   onClick={() => setCurrentPage(1)}
                   className={`inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 text-sm font-medium transition-colors ${
-                    currentPage === 1
-                      ? "bg-primaryColor text-white" // Aktif stil
-                      : "bg-white text-primaryColor hover:bg-gray-100" // Aktif olmayan stil
+                    currentPage === 1 ? "bg-primaryColor text-white" : "bg-white text-primaryColor hover:bg-gray-100"
                   }`}
                 >
                   1
                 </button>
               </li>
 
-              {/* Üç nokta (...) */}
               {totalPages > 2 && (
                 <li>
                   <span className="flex h-9 w-9 items-center justify-center text-primaryColor/50">...</span>
                 </li>
               )}
 
-              {/* Son Sayfa */}
               {totalPages > 1 && (
                 <li>
                   <button
                     type="button"
                     onClick={() => setCurrentPage(totalPages)}
                     className={`inline-flex items-center justify-center rounded-full h-9 w-9 border border-primaryColor/50 text-sm font-medium transition-colors ${
-                      currentPage === totalPages
-                        ? "bg-primaryColor text-white" // Aktif stil
-                        : "bg-white text-primaryColor hover:bg-gray-100" // Aktif olmayan stil
+                      currentPage === totalPages ? "bg-primaryColor text-white" : "bg-white text-primaryColor hover:bg-gray-100"
                     }`}
                   >
                     {totalPages}
@@ -94,7 +118,6 @@ const FaqAccordions = ({ filteredFaqs }) => {
                 </li>
               )}
 
-              {/* Sonraki Butonu */}
               <li>
                 <button
                   type="button"

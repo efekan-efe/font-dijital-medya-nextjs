@@ -1,12 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Breadcrumb from "@/components/shared/Breadcrumb";
 import BlogCard from "@/components/shared/BlogCard";
 import RocketIcon from "@/components/icons/RocketIcon";
 import WebIcon from "@/components/icons/WebIcon";
 import NewIdeaIcon from "@/components/icons/NewIdeaIcon";
 import { SearchCheck, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+
+// GSAP Importları
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // --- YARDIMCI FONKSİYONLAR ---
 const stripHtml = (html) => {
@@ -22,6 +26,8 @@ const calculateReadingTime = (content) => {
 };
 
 export default function Blog() {
+  const container = useRef(null);
+
   // --- STATE YÖNETİMİ ---
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +53,6 @@ export default function Blog() {
     </>
   );
 
-  // Tüm olası kategoriler (Listeyi burada tutuyoruz ama aşağıda filtreleyeceğiz)
   const allCategories = [
     { title: "Tümü", icon: "" },
     { title: "Dijital Pazarlama", icon: <RocketIcon className="fill-none stroke-primaryColor w-[18px] h-[18px]" /> },
@@ -63,9 +68,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Optimize edilmiş sorgu: Sadece gerekli alanları ve son 100 yazıyı çeker.
         const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=100&_fields=id,title,excerpt,slug,date,content,_links,_embedded");
-
         const data = await res.json();
         setPosts(data);
         setLoading(false);
@@ -80,41 +83,32 @@ export default function Blog() {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Arama yapılınca ilk sayfaya dön
+    setCurrentPage(1);
   };
 
   const handleCategoryChange = (categoryTitle) => {
     setSelectedCategory(categoryTitle);
-    setCurrentPage(1); // Kategori değişince ilk sayfaya dön
+    setCurrentPage(1);
   };
 
-  // --- KATEGORİ GÖRÜNÜRLÜK MANTIĞI (YENİ) ---
-  // 1. Gelen postların içindeki tüm kategori isimlerini topla
   const activeCategoryNames = new Set();
   posts.forEach((post) => {
     const terms = post._embedded?.["wp:term"]?.[0] || [];
     terms.forEach((term) => activeCategoryNames.add(term.name));
   });
 
-  // 2. Sabit listeyi sadece içi dolu olanlara göre filtrele
   const visibleCategories = allCategories.filter((category) => {
-    if (category.title === "Tümü") return true; // Tümü her zaman görünsün
+    if (category.title === "Tümü") return true;
     return activeCategoryNames.has(category.title);
   });
 
-  // --- POST FİLTRELEME MANTIĞI ---
   const filteredPosts = posts.filter((post) => {
-    // 1. Kategori Filtresi
     const postCategories = post._embedded?.["wp:term"]?.[0]?.map((cat) => cat.name) || [];
     const matchesCategory = selectedCategory === "Tümü" || postCategories.includes(selectedCategory);
-
-    // 2. Arama Filtresi
     const matchesSearch = post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase());
-
     return matchesCategory && matchesSearch;
   });
 
-  // --- PAGINATION MANTIĞI ---
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
@@ -122,18 +116,63 @@ export default function Blog() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // --- GSAP ANİMASYONLARI ---
+
+  // 1. Statik Animasyonlar (Sayfa ilk yüklendiğinde kategori butonları için)
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ctx = gsap.context(() => {
+      // Kategori butonları sırayla gelsin
+      gsap.from(".category-btn", {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "back.out(1.7)",
+        delay: 0.5, // Breadcrumb geldikten sonra başlasın
+      });
+    }, container);
+    return () => ctx.revert();
+  }, []); // Sadece ilk renderda çalışır
+
+  // 2. Dinamik Animasyonlar (Sayfa değiştiğinde veya kategori değiştiğinde kartlar için)
+  useLayoutEffect(() => {
+    if (loading) return;
+
+    const ctx = gsap.context(() => {
+      // Kartlar her seferinde yeniden animasyonla gelsin
+      gsap.fromTo(
+        ".blog-card-item",
+        {
+          y: 30,
+          opacity: 0,
+          scale: 0.95,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
+    }, container);
+    return () => ctx.revert();
+  }, [currentPosts, loading]); // currentPosts değiştiğinde tetiklenir
+
   return (
-    <div className="font-inter">
+    <div ref={container} className="font-inter">
       <Breadcrumb badgeContent={badgeContent} titleContent={titleContent} search={true} searchTerm={searchTerm} onSearchChange={handleSearchChange} />
 
       <div className="max-w-7xl mx-auto py-5">
         {/* Kategori Butonları */}
         <div className="max-w-7xl p-5 w-full flex justify-between items-center max-sm:flex-col max-sm:gap-5">
           <div className="w-full flex justify-start items-center flex-wrap gap-2">
-            {/* DEĞİŞİKLİK: 'categories' yerine 'visibleCategories' kullanıyoruz */}
             {visibleCategories.map((category, index) => (
               <button
-                className={`flex justify-start items-center gap-1 rounded-full w-fit border border-primaryColor py-2 px-4 cursor-pointer transition-colors duration-200 max-sm:w-full max-sm:text-sm ${
+                // GSAP için 'category-btn' sınıfı eklendi
+                className={`category-btn flex justify-start items-center gap-1 rounded-full w-fit border border-primaryColor py-2 px-4 cursor-pointer transition-colors duration-200 max-sm:w-full max-sm:text-sm ${
                   selectedCategory === category.title ? "bg-primaryColor" : "bg-transparent hover:bg-primaryColor/10"
                 }`}
                 key={index}
@@ -159,10 +198,9 @@ export default function Blog() {
         {/* Blog Kartları Listesi */}
         <div className="flex flex-wrap justify-center items-stretch gap-6 px-1 min-h-[400px]">
           {loading ? (
-            <div className="w-full h-40 flex justify-center items-center text-primaryColor">Yükleniyor...</div>
+            <div className="w-full h-40 flex justify-center items-center text-primaryColor animate-pulse">Yükleniyor...</div>
           ) : currentPosts.length > 0 ? (
             currentPosts.map((post) => {
-              // Veri Mapping (WordPress -> Component)
               const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/placeholder-image.jpg";
               const authorName = post._embedded?.["author"]?.[0]?.name || "Admin";
               const authorAvatar = post._embedded?.["author"]?.[0]?.avatar_urls?.["96"] || "";
@@ -170,18 +208,20 @@ export default function Blog() {
               const description = stripHtml(post.excerpt?.rendered || "");
 
               return (
-                <BlogCard
-                  key={post.id}
-                  slug={post.slug}
-                  image={imageUrl}
-                  categories={categoryName}
-                  title={post.title.rendered}
-                  description={description}
-                  authorName={authorName}
-                  authorImg={authorAvatar}
-                  readingTime={calculateReadingTime(post.content.rendered)}
-                  publishDate={post.date}
-                />
+                // GSAP için Wrapper Div: 'blog-card-item'
+                <div key={post.id} className="blog-card-item h-full">
+                  <BlogCard
+                    slug={post.slug}
+                    image={imageUrl}
+                    categories={categoryName}
+                    title={post.title.rendered}
+                    description={description}
+                    authorName={authorName}
+                    authorImg={authorAvatar}
+                    readingTime={calculateReadingTime(post.content.rendered)}
+                    publishDate={post.date}
+                  />
+                </div>
               );
             })
           ) : (
@@ -192,7 +232,6 @@ export default function Blog() {
         {/* --- PAGINATION ALANI --- */}
         {!loading && totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-10 mb-5">
-            {/* Önceki Sayfa Butonu */}
             <button
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
@@ -201,7 +240,6 @@ export default function Blog() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* Sayfa Numaraları */}
             {[...Array(totalPages)].map((_, index) => (
               <button
                 key={index}
@@ -214,7 +252,6 @@ export default function Blog() {
               </button>
             ))}
 
-            {/* Sonraki Sayfa Butonu */}
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}

@@ -1,17 +1,29 @@
+"use client";
+
+import { useRef, useLayoutEffect } from "react";
 import { Search } from "lucide-react";
 
+// GSAP
+import gsap from "gsap";
+
 const FaqSearch = ({ searchTerm, onSearchChange }) => {
+  const container = useRef(null);
+
+  // Parent (Page.jsx) zaten bunu tetikliyor ama
+  // Component içi focus animasyonları için ref tutmak iyidir.
+  // Şimdilik sadece render'ı bozmamak için ref'i wrapper'a veriyoruz.
+
   return (
-    <div className="max-w-7xl mx-auto w-full h-full flex flex-col gap-3 p-5 border border-primaryColor rounded-t-2xl">
+    <div ref={container} className="max-w-7xl mx-auto w-full h-full flex flex-col gap-3 p-5 border border-primaryColor rounded-t-2xl">
       <h2 className="font-semibold text-xl leading-7 text-primaryColor">Aklınıza Takılan Sorular mı Var? Sorularınızın Cevaplarına Buradan Ulaşabilirsiniz.</h2>
       <div className="flex justify-start items-center gap-3 w-full">
-        <div className="w-9 h-9 bg-primaryColor rounded-full flex justify-center items-center">
+        <div className="w-9 h-9 bg-primaryColor rounded-full flex justify-center items-center shrink-0">
           <Search className="stroke-white w-5 h-5" />
         </div>
         <input
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="border border-primaryColor/20 rounded-t-2xl text-primaryColor w-full py-2 px-4 outline-0"
+          className="border border-primaryColor/20 rounded-t-2xl text-primaryColor w-full py-2 px-4 outline-none focus:border-primaryColor transition-colors"
           placeholder="Soru ara..."
           type="text"
           name="faqSearch"
