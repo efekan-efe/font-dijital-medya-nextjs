@@ -4,11 +4,76 @@ import GoogleReviews from "@/components/views/home/GoogleReviews";
 import HeroSection from "@/components/views/home/HeroSection";
 import OurServices from "@/components/views/home/OurServices";
 
+// --- SEO VERİSİNİ ÇEKEN FONKSİYON ---
+async function getHomePageSeo() {
+  // DİKKAT: WordPress'teki ana sayfanın slug'ı 'anasayfa' ise böyle kalmalı.
+  // Eğer 'home' ise: ...?slug=home&_embed yapmalısın.
+  const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/pages?slug=anasayfa&_embed", {
+    next: { revalidate: 60 }, // 60 saniyede bir önbellek tazele
+  });
+
+  if (!res.ok) return null;
+
+  const pages = await res.json();
+  return pages[0]; // İlk sonucu döndür
+}
+
+// --- METADATA OLUŞTURUCU ---
+export async function generateMetadata() {
+  const pageData = await getHomePageSeo();
+
+  // Eğer veri çekilemezse Layout'taki varsayılanlar devreye girer veya manuel fallback döneriz.
+  if (!pageData) {
+    return {
+      title: "Font Dijital Medya - Dijitalin Yeni Fontu",
+      description: "Profesyonel dijital ajans hizmetleri.",
+    };
+  }
+
+  // Yoast/RankMath verisini al
+  const seo = pageData.yoast_head_json || pageData.head_json;
+
+  if (seo) {
+    return {
+      title: seo.title,
+      description: seo.description || seo.og_description,
+      openGraph: {
+        title: seo.og_title || seo.title,
+        description: seo.og_description || seo.description,
+        url: "https://fontdijitalmedya.com", // Ana sayfa olduğu için sabit
+        siteName: seo.og_site_name || "Font Dijital Medya",
+        locale: "tr_TR",
+        type: "website",
+        images: seo.og_image
+          ? seo.og_image.map((img) => ({
+              url: img.url,
+              width: img.width,
+              height: img.height,
+              alt: img.alt || seo.title,
+            }))
+          : [],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: seo.twitter_title || seo.og_title,
+        description: seo.twitter_description || seo.og_description,
+        images: seo.twitter_image ? [seo.twitter_image] : [],
+      },
+      alternates: {
+        canonical: "https://fontdijitalmedya.com",
+      },
+      robots: {
+        index: seo.robots?.index !== "noindex",
+        follow: seo.robots?.follow !== "nofollow",
+      },
+    };
+  }
+}
+
+// --- ANA SAYFA BİLEŞENİ ---
 export default function HomePage() {
   return (
-    // homepageMain class'ı globals.css'te sectionları hedeflemek için hala gerekli
     <main className="homepageMain flex flex-col">
-      {/* Sectionların CSS'te zaten height: 100vh ve snap-align: start özelliği var */}
       <HeroSection />
       <GoogleReviews />
       <OurServices />

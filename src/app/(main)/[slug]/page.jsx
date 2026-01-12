@@ -34,7 +34,7 @@ async function getContent(slug) {
   return null;
 }
 
-// --- SEO ---
+// --- GÜNCELLENMİŞ SEO ALANI ---
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const contentObj = await getContent(slug);
@@ -42,11 +42,67 @@ export async function generateMetadata({ params }) {
   if (!contentObj) return { title: "Sayfa Bulunamadı - Font Dijital Medya" };
 
   const { data } = contentObj;
-  const description = stripHtml(data.excerpt.rendered).slice(0, 160);
+
+  // 1. Yoast SEO Verisini Yakala
+  // Ekran görüntünde kanıtladığın 'yoast_head_json' anahtarını kullanıyoruz.
+  const seo = data.yoast_head_json;
+
+  // 2. Eğer Yoast verisi varsa onu kullan (Panelden girdiğin veriler)
+  if (seo) {
+    return {
+      title: seo.title, // Yoast paneline yazdığın "SEO Başlığı"
+      description: seo.description || seo.og_description, // "Meta Açıklaması"
+
+      // Google Botları için Kurallar (index, noindex vb.)
+      robots: {
+        index: seo.robots?.index === "index",
+        follow: seo.robots?.follow === "follow",
+        googleBot: {
+          index: seo.robots?.index === "index",
+          follow: seo.robots?.follow === "follow",
+        },
+      },
+
+      // Sosyal Medya Paylaşımları (WhatsApp, LinkedIn, vb.)
+      openGraph: {
+        title: seo.og_title || seo.title,
+        description: seo.og_description || seo.description,
+        url: seo.og_url || `https://fontdijitalmedya.com/${slug}`,
+        siteName: seo.og_site_name || "Font Dijital Medya",
+        locale: seo.og_locale || "tr_TR",
+        type: seo.og_type || "website",
+        images: seo.og_image
+          ? seo.og_image.map((img) => ({
+              url: img.url,
+              width: img.width,
+              height: img.height,
+              alt: img.alt || seo.title,
+            }))
+          : [],
+      },
+
+      // Twitter Kartları
+      twitter: {
+        card: "summary_large_image",
+        title: seo.twitter_title || seo.og_title || seo.title,
+        description: seo.twitter_description || seo.og_description || seo.description,
+        images: seo.twitter_image ? [seo.twitter_image] : seo.og_image ? [seo.og_image[0].url] : [],
+      },
+
+      // Canonical URL (SEO çakışmasını önler)
+      alternates: {
+        canonical: seo.canonical || `https://fontdijitalmedya.com/${slug}`,
+      },
+    };
+  }
+
+  // 3. FALLBACK: Eğer Yoast verisi yoksa eski otomatik yöntemi kullan
+  // (Örneğin Yoast eklentisi devre dışı kalırsa site patlamasın diye)
+  const fallbackDescription = stripHtml(data.excerpt?.rendered || data.content?.rendered || "").slice(0, 160);
 
   return {
     title: `${data.title.rendered} - Font Dijital Medya`,
-    description: description,
+    description: fallbackDescription,
     openGraph: {
       images: [data._embedded?.["wp:featuredmedia"]?.[0]?.source_url],
     },
@@ -89,13 +145,11 @@ export default async function DynamicPage({ params }) {
   // --- SENARYO 2: HİZMET SAYFASI (WordPress Page) ---
   if (type === "page") {
     // 🔥🔥🔥 RESİM ID DÜZELTME YAMASI BAŞLANGIÇ 🔥🔥🔥
-    // Eğer 'hizmet_gorseli' bir SAYI (ID) olarak geliyorsa, gerçek URL'i çekelim.
     if (data?.acf?.hizmet_gorseli && typeof data.acf.hizmet_gorseli === "number") {
       try {
         const mediaRes = await fetch(`https://fontdijitalmedya.com/wp-json/wp/v2/media/${data.acf.hizmet_gorseli}`);
         if (mediaRes.ok) {
           const mediaData = await mediaRes.json();
-          // ID'yi gerçek URL ile değiştiriyoruz
           data.acf.hizmet_gorseli = mediaData.source_url;
         }
       } catch (error) {

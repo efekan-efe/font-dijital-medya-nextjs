@@ -12,8 +12,17 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Font Dijital Medya",
-  description: "Dijitalin Yeni Fontu",
+  title: {
+    default: "Font Dijital Medya", // Alt sayfalarda title yoksa bu görünür
+    template: "%s | Font Dijital Medya", // Alt sayfada title varsa: "Hakkımızda | Font Dijital Medya" olur
+  },
+  description: "Dijitalin Yeni Fontu - Profesyonel Web Tasarım ve Dijital Pazarlama Ajansı",
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://fontdijitalmedya.com",
+    siteName: "Font Dijital Medya",
+  },
 };
 
 export default function RootLayout({ children }) {

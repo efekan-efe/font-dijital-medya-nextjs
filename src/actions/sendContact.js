@@ -2,9 +2,8 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function sendContact(formData) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   const nameSurname = formData.get("nameSurname");
   const phoneNumber = formData.get("phoneNumber");
   const emailAddress = formData.get("emailAddress");
@@ -21,7 +20,7 @@ export async function sendContact(formData) {
   try {
     const data = await resend.emails.send({
       from: "Font İletişim Formu <onboarding@resend.dev>", // Domain onaylıysa: iletisim@fontdijitalmedya.com
-      to: "efekan.efe@fontdijitalmedya.com", // Senin e-posta adresin
+      to: "adanadijitalmedya@gmail.com", // Senin e-posta adresin
       subject: `Yeni İletişim Mesajı: ${nameSurname}`,
       html: `
         <h3>Yeni bir iletişim formu mesajı aldınız!</h3>
