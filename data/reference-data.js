@@ -8,6 +8,13 @@ import lenaPsikolojiMerkeziScreen from "@/assets/references/images/lena_psikoloj
 import psikologAsenaKusmusScreen from "@/assets/references/images/psikolog_asena_kusmus_screen.webp";
 import bilisimdestekmerkeziScreen from "@/assets/references/images/bilisimdestekmerkezi_screen.webp";
 import bebekeviScreen from "@/assets/references/images/bebekevi_screen.webp";
+import cosmosboyaScreen from "@/assets/references/images/cosmosboya_screen.webp";
+import bestpropertiesdubaiScreen from "@/assets/references/images/bestpropertiesdubai_screen.webp";
+import erturksolenScreen from "@/assets/references/images/erturksolen_screen.webp";
+import vermiliondisticaretScreen from "@/assets/references/images/vermiliondisticaret_screen.webp";
+import ecovermilionScreen from "@/assets/references/images/ecovermilion_screen.webp";
+import datatunedScreen from "@/assets/references/images/datatuned_screen.webp";
+import icasguzellikmerkeziScreen from "@/assets/references/images/icasguzellikmerkezi_screen.webp";
 
 export const referenceData = [
   {
@@ -82,10 +89,52 @@ export const referenceData = [
     link: "https://lenapsikolojimerkezi.com/",
   },
   {
-    image: istasyapiScreen,
-    title: "Lena Psikoloji Merkezi",
-    description: "Psikoloji sektöründe faaliyet gösteren Lena Psikoloji Merkezi için markanın güven veren yaklaşımını yansıtan kullanıcı dostu  kurumsal web sitesi tasarlayarak merkezin dijitaldeki erişilebilirliğini artırdık",
-    customerReview: "İsmail T.",
-    link: "https://lenapsikolojimerkezi.com/",
+    image: erturksolenScreen,
+    title: "Ertürk Şölen",
+    description: "Ertürk Şölen’in dijital pazarlama alanındaki uzmanlığını, sektörel tecrübesini ve stratejik bakış açısını yansıtan; güven veren, yüksek performanslı ve modern bir kişisel tanıtım web sitesi inşa ettik.",
+    customerReview: "Ertürk Ş.",
+    link: "https://erturksolen.com/",
+  },
+  {
+    image: bestpropertiesdubaiScreen,
+    title: "Dubai Real Estate",
+    description: "Dubai Real Estate için Dubai emlak sektörüne yön veren vizyonunu, global yatırım gücünü ve prestijli portföyünü dijital dünyaya yansıtan; güven odaklı ve yüksek performanslı bir kurumsal web sitesi inşa ettik.",
+    customerReview: "Emlak M.",
+    link: "https://bestproperties-dubai.com/",
+  },
+  {
+    image: cosmosboyaScreen,
+    title: "Cosmos Boya",
+    description: "Cosmos Boya için boya sektöründeki marka gücünü, ürün kalitesini ve yenilikçi yaklaşımını dijital dünyaya yansıtan; güven odaklı, modern ve yüksek performanslı bir kurumsal web sitesi hayata geçirdik.",
+    customerReview: "Tunçay T.",
+    link: "https://cosmosboya.com/",
+  },
+  {
+    image: vermiliondisticaretScreen,
+    title: "Vermilion Dış Ticaret",
+    description: "Vermilion Dış Ticaret, dış ticaret hizmetlerindeki tecrübesini ve global operasyon kabiliyetini dijitalde güçlü bir kurumsal kimliğe dönüştüren, sade, güven veren ve performans odaklı bir web altyapısıyla yayına alındı.",
+    customerReview: "Ümmiye D.",
+    link: "https://vermilion.com.tr/",
+  },
+  {
+    image: ecovermilionScreen,
+    title: "Ecovermilion",
+    description: "Ecovermilion, sürdürülebilirlik odaklı yaklaşımını ve çevre dostu çözümlerini dijital dünyada net biçimde konumlandıran; modern tasarımı ve güçlü altyapısıyla markanın vizyonunu yansıtan bir web deneyimiyle yayına alındı.",
+    customerReview: "Ümmiye D.",
+    link: "https://ecovermilion.com/",
+  },
+  {
+    image: datatunedScreen,
+    title: "Datatuned Chiptuning",
+    description: "Datatuned Chiptuning, performans odaklı yazılım çözümlerini ve teknik uzmanlığını öne çıkaran; hız, güç ve güven algısını dijitalde net biçimde hissettiren dinamik bir web deneyimiyle yayına alındı.",
+    customerReview: "Önder Ö.",
+    link: "https://datatuned.com.tr/",
+  },
+  {
+    image: icasguzellikmerkeziScreen,
+    title: "Icas Güzellik Merkezi",
+    description: "Icas Güzellik Merkezi, estetik anlayışını ve profesyonel hizmet yaklaşımını ön plana çıkaran; kullanıcı dostu yapısı ve modern tasarımıyla markayı dijital ortamda güçlü şekilde temsil eden bir web sitesiyle yayına alındı.",
+    customerReview: "Kadriye T.",
+    link: "https://icasguzellikmerkezi.com/",
   },
 ];
