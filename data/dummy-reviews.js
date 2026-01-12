@@ -35,6 +35,83 @@ import yusuf_cam from "@/assets/google_reviews/yusuf_cam.png";
 
 export const dummyReviews = [
   {
+    id: 3,
+    author: {
+      name: "Rahmi Kandemir",
+      avatar: rahmi_kandemir,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: '"Profesyonel olarak hızlı ve güvenle kullandığımız e-ticaret siteleri sayesinde kolayca işlerimizi hallediyoruz. Font dijital ekibine teşekkürler."',
+    source: "Google",
+  },
+  {
+    id: 6,
+    author: {
+      name: "Aziz Özyiğit",
+      avatar: aziz_ozyigit,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"Font Dijital Medya'dan reklam hizmeti aldık. İşletmemiz için güzel dönüşler aldık."`,
+    source: "Google",
+  },
+  {
+    id: 9,
+    author: {
+      name: "Burak Bilgetekin",
+      avatar: burak_bilgetekin,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"İşletmemizin web sitesi çok kullanışlı kendilerine teşekkürler"`,
+    source: "Google",
+  },
+  {
+    id: 14,
+    author: {
+      name: "Fevzi Emre Özyeşilbaş",
+      avatar: fevzi_emre_ozyesilbas,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"Sosyal medya yönetimi konusunda çok tecrübeliler . Aldığım destekten ötürü Font Dijital’e çok teşekkür ederim"`,
+    source: "Google",
+  },
+  {
+    id: 26,
+    author: {
+      name: "Ergün Akkurt",
+      avatar: ergun_akkurt,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"İşinde çok başarılı bir dijital medya, oldukça fazla iş yaptırma fırsatımız oldu, gayet profesyonel işler çıkartıldı, Müşterisini iyi dinleyen, Güzel anlayan bir firma."`,
+    source: "Google",
+  },
+  {
+    id: 30,
+    author: {
+      name: "Gülseren Küsmüş",
+      avatar: gulseren_kusmus,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"Eğitim sayesinde dijital pazarlama stratejilerimi geliştirdim ve online varlığımı güçlendirdim. Eğitim çok faydalı ve yol göstericiydi."`,
+    source: "Google",
+  },
+  {
+    id: 33,
+    author: {
+      name: "Yaren Şölen",
+      avatar: yaren_solen,
+    },
+    rating: 5,
+    date: "15 Nisan, 2023",
+    comment: `"Font Dijital Medya'ya Diş Kliniğimizin reklam yönetimi işlerini teslim ettik ve aldığımız dönüşler bizleri memnun etti."`,
+    source: "Google",
+  },
+  {
     id: 1,
     author: {
       name: "Furkan Pak",
@@ -56,17 +133,7 @@ export const dummyReviews = [
     comment: "",
     source: "Google",
   },
-  {
-    id: 3,
-    author: {
-      name: "Rahmi Kandemir",
-      avatar: rahmi_kandemir,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: '"Profesyonel olarak hızlı ve güvenle kullandığımız e-ticaret siteleri sayesinde kolayca işlerimizi hallediyoruz. Font dijital ekibine teşekkürler."',
-    source: "Google",
-  },
+
   {
     id: 4,
     author: {
@@ -89,17 +156,7 @@ export const dummyReviews = [
     comment: "",
     source: "Google",
   },
-  {
-    id: 6,
-    author: {
-      name: "Aziz Özyiğit",
-      avatar: aziz_ozyigit,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"Font Dijital Medya'dan reklam hizmeti aldık. İşletmemiz için güzel dönüşler aldık."`,
-    source: "Google",
-  },
+
   {
     id: 7,
     author: {
@@ -122,17 +179,7 @@ export const dummyReviews = [
     comment: `""`,
     source: "Google",
   },
-  {
-    id: 9,
-    author: {
-      name: "Burak Bilgetekin",
-      avatar: burak_bilgetekin,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"İşletmemizin web sitesi çok kullanışlı kendilerine teşekkürler"`,
-    source: "Google",
-  },
+
   {
     id: 10,
     author: {
@@ -177,17 +224,7 @@ export const dummyReviews = [
     comment: `""`,
     source: "Google",
   },
-  {
-    id: 14,
-    author: {
-      name: "Fevzi Emre Özyeşilbaş",
-      avatar: fevzi_emre_ozyesilbas,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"Sosyal medya yönetimi konusunda çok tecrübeliler . Aldığım destekten ötürü Font Dijital’e çok teşekkür ederim"`,
-    source: "Google",
-  },
+
   {
     id: 15,
     author: {
@@ -309,17 +346,7 @@ export const dummyReviews = [
     comment: `""`,
     source: "Google",
   },
-  {
-    id: 26,
-    author: {
-      name: "Ergün Akkurt",
-      avatar: ergun_akkurt,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"İşinde çok başarılı bir dijital medya, oldukça fazla iş yaptırma fırsatımız oldu, gayet profesyonel işler çıkartıldı, Müşterisini iyi dinleyen, Güzel anlayan bir firma."`,
-    source: "Google",
-  },
+
   {
     id: 27,
     author: {
@@ -354,17 +381,6 @@ export const dummyReviews = [
     source: "Google",
   },
   {
-    id: 30,
-    author: {
-      name: "Gülseren Küsmüş",
-      avatar: gulseren_kusmus,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"Eğitim sayesinde dijital pazarlama stratejilerimi geliştirdim ve online varlığımı güçlendirdim. Eğitim çok faydalı ve yol göstericiydi."`,
-    source: "Google",
-  },
-  {
     id: 31,
     author: {
       name: "Hatice Aybala Ateş",
@@ -386,17 +402,7 @@ export const dummyReviews = [
     comment: `""`,
     source: "Google",
   },
-  {
-    id: 33,
-    author: {
-      name: "Yaren Şölen",
-      avatar: yaren_solen,
-    },
-    rating: 5,
-    date: "15 Nisan, 2023",
-    comment: `"Font Dijital Medya'ya Diş Kliniğimizin reklam yönetimi işlerini teslim ettik ve aldığımız dönüşler bizleri memnun etti."`,
-    source: "Google",
-  },
+
   {
     id: 34,
     author: {

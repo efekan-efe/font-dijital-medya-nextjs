@@ -82,6 +82,20 @@ export const referenceData = [
     link: "https://istasyapimarket.com/",
   },
   {
+    image: vermiliondisticaretScreen,
+    title: "Vermilion Dış Ticaret",
+    description: "Vermilion Dış Ticaret, dış ticaret hizmetlerindeki tecrübesini ve global operasyon kabiliyetini dijitalde güçlü bir kurumsal kimliğe dönüştüren, sade, güven veren ve performans odaklı bir web altyapısıyla yayına alındı.",
+    customerReview: "Ümmiye D.",
+    link: "https://vermilion.com.tr/",
+  },
+  {
+    image: ecovermilionScreen,
+    title: "Ecovermilion",
+    description: "Ecovermilion, sürdürülebilirlik odaklı yaklaşımını ve çevre dostu çözümlerini dijital dünyada net biçimde konumlandıran; modern tasarımı ve güçlü altyapısıyla markanın vizyonunu yansıtan bir web deneyimiyle yayına alındı.",
+    customerReview: "Ümmiye D.",
+    link: "https://ecovermilion.com/",
+  },
+  {
     image: lenaPsikolojiMerkeziScreen,
     title: "Lena Psikoloji Merkezi",
     description: "Lena Psikoloji Merkezi için güven veren bir web sitesi inşa ettik ve profesyonel sosyal medya yönetimiyle markanın dijitaldeki bütünsel imajını ve danışan etkileşimini güçlendirdik.",
@@ -108,20 +122,6 @@ export const referenceData = [
     description: "Cosmos Boya için boya sektöründeki marka gücünü, ürün kalitesini ve yenilikçi yaklaşımını dijital dünyaya yansıtan; güven odaklı, modern ve yüksek performanslı bir kurumsal web sitesi hayata geçirdik.",
     customerReview: "Tunçay T.",
     link: "https://cosmosboya.com/",
-  },
-  {
-    image: vermiliondisticaretScreen,
-    title: "Vermilion Dış Ticaret",
-    description: "Vermilion Dış Ticaret, dış ticaret hizmetlerindeki tecrübesini ve global operasyon kabiliyetini dijitalde güçlü bir kurumsal kimliğe dönüştüren, sade, güven veren ve performans odaklı bir web altyapısıyla yayına alındı.",
-    customerReview: "Ümmiye D.",
-    link: "https://vermilion.com.tr/",
-  },
-  {
-    image: ecovermilionScreen,
-    title: "Ecovermilion",
-    description: "Ecovermilion, sürdürülebilirlik odaklı yaklaşımını ve çevre dostu çözümlerini dijital dünyada net biçimde konumlandıran; modern tasarımı ve güçlü altyapısıyla markanın vizyonunu yansıtan bir web deneyimiyle yayına alındı.",
-    customerReview: "Ümmiye D.",
-    link: "https://ecovermilion.com/",
   },
   {
     image: datatunedScreen,
