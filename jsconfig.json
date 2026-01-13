@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".", // Bu satır önemli olabilir
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"] // Bu satır en önemlisi
+      "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", ".next", "out", "build"]
 }
