@@ -14,7 +14,7 @@ const calculateReadingTime = (content) => {
 };
 
 async function getAllPosts() {
-  const res = await fetch("https://fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=3", {
+  const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=3", {
     next: { revalidate: 3600 },
   });
 
