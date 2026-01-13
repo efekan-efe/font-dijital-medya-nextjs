@@ -1,6 +1,3 @@
-"use client"; // GSAP için zorunlu
-
-import { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import fontLogo from "@/assets/icons/white_font_logo.svg";
@@ -12,10 +9,6 @@ import mail from "@/assets/footerIcons/footer_mail.svg";
 import tiktok from "@/assets/footerIcons/footer_tiktok.svg";
 import FooterLinkColumn from "../ui/FooterLinkColumn";
 import { footerColumns } from "../../../data/footer-data";
-
-// GSAP Importları
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const socialMediaData = [
   {
@@ -52,58 +45,8 @@ const SocialLinks = () => (
 );
 
 const Footer = () => {
-  const container = useRef(null);
-
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 85%", // Footer ekranın %85'ine girince başlasın (biraz daha erken)
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // 1. Sol Ana Sütun (Logo, açıklama, sosyal medya)
-      tl.from(".footer-left-col", {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      })
-        // 2. Link Sütunları (Sırayla gelir - Stagger)
-        .from(
-          ".footer-link-col",
-          {
-            y: 30,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.15, // Sütunlar arası 0.15sn gecikme
-            ease: "power2.out",
-          },
-          "-=0.4"
-        ) // Sol sütun bitmeden başla
-        // 3. En Alt Bar (Copyright kısmı)
-        .from(
-          ".footer-bottom-bar",
-          {
-            y: 20,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.2"
-        ); // Linkler bitmek üzereyken başla
-    }, container);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <footer
-      ref={container} // Ref'i ana etikete verdik
       style={{
         background: "linear-gradient(108deg, #000, #2E2483)",
       }}
@@ -130,16 +73,14 @@ const Footer = () => {
 
           {/* Hizmetlerimiz, Hızlı Erişim ve İletişim (Link Sütunları) */}
           {footerColumns.map((column) => (
-            // GSAP için 'footer-link-col' sınıfını ekledik. Mobilde gizlenme kuralı aynen duruyor.
-            <div key={column.title} className={`footer-link-col ${column.title === "Hizmetlerimiz" ? "max-md:hidden" : ""}`}>
+            <div key={column.title} className={`${column.title === "Hizmetlerimiz" ? "max-md:hidden" : ""}`}>
               <FooterLinkColumn icon={column.icon} color={column.color} title={column.title} items={column.items} />
             </div>
           ))}
         </div>
 
         {/* Copyright ve Hukuki Linkler (Alt Bar) */}
-        {/* GSAP için 'footer-bottom-bar' sınıfını ekledik */}
-        <div className="footer-bottom-bar mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 max-md:mt-4">
+        <div className="mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 max-md:mt-4">
           <p>&copy; {new Date().getFullYear()} Font Dijital Medya. Tüm hakları saklıdır.</p>
           <div className="flex gap-x-4 mt-4 md:mt-0">
             <Link href="/gizlilik-politikasi" className="hover:text-white transition-colors">
