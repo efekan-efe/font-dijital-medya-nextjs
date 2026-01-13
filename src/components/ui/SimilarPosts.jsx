@@ -6,7 +6,7 @@ async function getRecentPosts(excludeId) {
   try {
     // DÜZELTME 1: '_fields' kısmına '_links' eklendi.
     // '_embed' özelliğinin çalışması için '_links' ZORUNLUDUR.
-    const res = await fetch(`https://fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=4&_fields=id,title,slug,featured_media,_embedded,_links`, {
+    const res = await fetch(`https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=4&_fields=id,title,slug,featured_media,_embedded,_links`, {
       next: { revalidate: 3600 },
     });
 
