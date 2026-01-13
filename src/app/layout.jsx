@@ -12,9 +12,10 @@ const inter = Inter({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.fontdijitalmedya.com"),
   title: {
-    default: "Font Dijital Medya", // Alt sayfalarda title yoksa bu görünür
-    template: "%s | Font Dijital Medya", // Alt sayfada title varsa: "Hakkımızda | Font Dijital Medya" olur
+    default: "Font Dijital Medya",
+    template: "%s | Font Dijital Medya",
   },
   description: "Dijitalin Yeni Fontu - Profesyonel Web Tasarım ve Dijital Pazarlama Ajansı",
   openGraph: {
