@@ -104,7 +104,7 @@ const Header = () => {
           </div>
 
           <div className="hidden md:flex">
-            <Link href="/ucretsiz-analiz">
+            <Link href="/#analysisForm">
               <CustomButton variant="header" size="md" iconLeft={Search}>
                 Ücretsiz Analiz
               </CustomButton>

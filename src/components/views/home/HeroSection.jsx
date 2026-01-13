@@ -211,7 +211,7 @@ const HeroSection = () => {
           <div className="max-sm:hidden w-full h-full ">
             <Image src={hero_image_pattern} alt="Arkaplan Efekti" fill className="hero-bg-images flex w-full h-full object-contain" />
           </div>
-          <form onSubmit={handleSubmit} className="hero-form absolute top-0 right-0 flex flex-col z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-sm:w-full max-sm:relative">
+          <form id="analysisForm" onSubmit={handleSubmit} className="hero-form absolute top-0 right-0 flex flex-col z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-sm:w-full max-sm:relative">
             {formStatus === "success" ? (
               <div className="flex flex-col items-center justify-center h-64 text-center gap-3 animate-in fade-in zoom-in">
                 <CheckCircle2 className="w-16 h-16 text-green-500" />
