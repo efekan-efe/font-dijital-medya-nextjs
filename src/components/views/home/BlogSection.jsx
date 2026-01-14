@@ -25,7 +25,7 @@ async function getAllPosts() {
   return res.json();
 }
 
-export default async function BlogSection() {
+export default async function BlogSection({ data }) {
   const rawPosts = await getAllPosts();
 
   const formattedPosts = rawPosts.map((post) => {
@@ -50,5 +50,5 @@ export default async function BlogSection() {
 
   // Section ve Başlık yapılarını BlogSlider'a taşıdığımız için
   // Burası sadece Component'i döndürüyor.
-  return <BlogSlider posts={formattedPosts} />;
+  return <BlogSlider data={data} posts={formattedPosts} />;
 }

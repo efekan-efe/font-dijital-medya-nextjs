@@ -13,7 +13,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const HeroSection = ({ data }) => {
-  console.log(data);
   const hero_kucuk_baslik_1 = data?.hero_kucuk_baslik_1;
   const hero_kucuk_baslik_2 = data?.hero_kucuk_baslik_2;
   const hero_kucuk_baslik_3 = data?.hero_kucuk_baslik_3;

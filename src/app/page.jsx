@@ -79,10 +79,9 @@ export default async function HomePage() {
     <main className="homepageMain flex flex-col">
       <HeroSection data={acf} />
       <GoogleReviews data={acf} />
-      <OurServices />
-      {/* Özellikler alanına da veri gönderelim */}
+      <OurServices data={acf} />
       <FeaturesSection data={acf} />
-      <BlogSection />
+      <BlogSection data={acf} />
     </main>
   );
 }

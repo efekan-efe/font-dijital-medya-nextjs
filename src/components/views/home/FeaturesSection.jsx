@@ -4,34 +4,45 @@ import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import TitleBadge from "@/components/ui/TitleBadge";
 import videoFallbackImage from "@/assets/homepage/images/video_fallback_image.png";
-import { FileText, Code, Sparkle } from "lucide-react";
 import FeatureItem from "@/components/ui/FeatureItem";
 import { CustomButton } from "@/components/ui/CustomButton";
 import SparkleIcon from "@/components/icons/SparkleIcon";
-
-// GSAP Importları
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const FeaturesSection = () => {
+const FeaturesSection = ({ data }) => {
+  const neden_biz_kucuk_baslik = data?.neden_biz_kucuk_baslik;
+  const neden_biz_buyuk_baslik = data?.neden_biz_buyuk_baslik;
+  const neden_biz_aciklama = data?.neden_biz_aciklama;
+
+  const neden_biz_madde_baslik_1 = data?.neden_biz_madde_baslik_1;
+  const neden_biz_madde_baslik_2 = data?.neden_biz_madde_baslik_2;
+  const neden_biz_madde_baslik_3 = data?.neden_biz_madde_baslik_3;
+  const neden_biz_madde_baslik_4 = data?.neden_biz_madde_baslik_4;
+
+  const neden_biz_madde_aciklama_1 = data?.neden_biz_madde_aciklama_1;
+  const neden_biz_madde_aciklama_2 = data?.neden_biz_madde_aciklama_2;
+  const neden_biz_madde_aciklama_3 = data?.neden_biz_madde_aciklama_3;
+  const neden_biz_madde_aciklama_4 = data?.neden_biz_madde_aciklama_4;
+
   const container = useRef(null);
 
   const featureItemData = [
     {
-      title: "Stratejik Yaklaşım",
-      description: "Her projeye hazır kalıplarla değil, markanın hedeflerine özel geliştirilen stratejik planlamayla başlıyoruz.",
+      title: neden_biz_madde_baslik_1,
+      description: neden_biz_madde_aciklama_1,
     },
     {
-      title: "Sonuç Odaklı Çözümler",
-      description: "Görünürlükten ziyade ölçülebilir performans ve gerçek ticari sonuçlara odaklanıyoruz.",
+      title: neden_biz_madde_baslik_2,
+      description: neden_biz_madde_aciklama_2,
     },
     {
-      title: "Şeffaf Süreç Yönetimi",
-      description: "Tüm çalışmaları açık, anlaşılır ve raporlanabilir bir süreçle yönetiyoruz.",
+      title: neden_biz_madde_baslik_3,
+      description: neden_biz_madde_aciklama_3,
     },
     {
-      title: "Sürdürülebilir Yapılar",
-      description: "Kısa vadeli kazanımlar yerine, markanın uzun vadeli dijital başarısını destekleyen altyapılar oluşturuyoruz.",
+      title: neden_biz_madde_baslik_4,
+      description: neden_biz_madde_aciklama_4,
     },
   ];
 
@@ -119,7 +130,7 @@ const FeaturesSection = () => {
     // Ref'i ekledik
     <section ref={container} className="max-w-7xl w-full mx-auto flex justify-center items-center gap-2 md:gap-8 font-inter px-2 max-lg:flex-col h-full">
       {/* Sol Resim Alanı */}
-      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-lg:items-start max-lg:max-w-[300px] max-lg:max-h-[300px] max-lg:mr-auto max-lg:overflow-hidden max-lg:rounded-full">
+      <div className="feature-image flex justify-center items-center w-full max-w-xl h-full max-lg:items-start max-lg:max-w-[300px] max-lg:max-h-[300px] max-lg:mr-auto max-lg:overflow-hidden max-lg:rounded-full max-sm:hidden">
         <Image className="w-full h-fit" src={videoFallbackImage} alt="Video" />
       </div>
 
@@ -128,21 +139,14 @@ const FeaturesSection = () => {
         <div className="w-full flex flex-col gap-1">
           <div className="feature-badge">
             <TitleBadge>
-              <p className="text-primaryBlack w-full font-medium text-sm md:text-base">
-                <span className="text-primaryColor pr-1">Neden</span>
-                Bizi Tercih Etmelisiniz
-              </p>
+              <p className="text-primaryBlack w-full font-medium text-sm md:text-base" dangerouslySetInnerHTML={{ __html: neden_biz_kucuk_baslik }}></p>
             </TitleBadge>
           </div>
 
-          <h1 className="feature-title text-2xl md:text-4xl font-bold text-primaryBlack">
-            Dijitalde <span className="text-primaryColor">Müşteri Kazanmaya</span> Bugün Başlayın
-          </h1>
+          <h1 className="feature-title text-2xl md:text-4xl font-bold text-primaryBlack" dangerouslySetInnerHTML={{ __html: neden_biz_buyuk_baslik }}></h1>
         </div>
 
-        <p className="feature-desc text-primaryBlack text-sm md:text-base">
-          Dijitalde kalıcı başarı, <strong>doğru planlama ve güçlü uygulama</strong> ile mümkündür. Markalar için <strong>müşteri kazandıran</strong>, ölçülebilir ve sürdürülebilir dijital yapılar oluşturuyoruz.
-        </p>
+        <p className="feature-desc text-primaryBlack text-sm md:text-base" dangerouslySetInnerHTML={{ __html: neden_biz_aciklama }}></p>
 
         {/* Liste Elemanları */}
         <div className="flex flex-col gap-2 md:gap-4">

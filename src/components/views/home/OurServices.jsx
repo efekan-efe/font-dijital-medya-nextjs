@@ -20,61 +20,81 @@ import "@splidejs/react-splide/css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const OurServices = () => {
+const OurServices = ({ data }) => {
+  const dijital_cozumler_kucuk_baslik = data?.dijital_cozumler_kucuk_baslik;
+  const dijital_cozumler_buyuk_baslik = data?.dijital_cozumler_buyuk_baslik;
+
+  const hizmet_baslik_1 = data?.hizmet_baslik_1;
+  const hizmet_baslik_2 = data?.hizmet_baslik_2;
+  const hizmet_baslik_3 = data?.hizmet_baslik_3;
+  const hizmet_baslik_4 = data?.hizmet_baslik_4;
+  const hizmet_baslik_5 = data?.hizmet_baslik_5;
+  const hizmet_baslik_6 = data?.hizmet_baslik_6;
+  const hizmet_baslik_7 = data?.hizmet_baslik_7;
+  const hizmet_baslik_8 = data?.hizmet_baslik_8;
+
+  const hizmet_aciklama_1 = data?.hizmet_aciklama_1;
+  const hizmet_aciklama_2 = data?.hizmet_aciklama_2;
+  const hizmet_aciklama_3 = data?.hizmet_aciklama_3;
+  const hizmet_aciklama_4 = data?.hizmet_aciklama_4;
+  const hizmet_aciklama_5 = data?.hizmet_aciklama_5;
+  const hizmet_aciklama_6 = data?.hizmet_aciklama_6;
+  const hizmet_aciklama_7 = data?.hizmet_aciklama_7;
+  const hizmet_aciklama_8 = data?.hizmet_aciklama_8;
+
   const container = useRef(null);
 
   const serviceData = [
     {
       icon: EcommerceIcon,
-      title: "E-Ticaret Sitesi Kurulumu",
-      description: "Satışa hazır, yönetilebilir ve performans odaklı e-ticaret çözümleriyle iş süreçlerinizi dijitalde güçlendiriyoruz.",
+      title: hizmet_baslik_1,
+      description: hizmet_aciklama_1,
       link: "/e-ticaret-web-sitesi-kurulumu/",
     },
     {
       icon: LandingpageIcon,
-      title: "Kurumsal Web Sitesi",
-      description: "Markanızın dijital dünyadaki kurumsal kimliğini güçlendiren, güven veren ve profesyonel bir web sitesi deneyimi tasarlıyoruz.",
+      title: hizmet_baslik_2,
+      description: hizmet_aciklama_2,
       link: "/kurumsal-web-sitesi/",
     },
     {
       icon: SocialMediaManagementIcon,
-      title: "Sosyal Medya Yönetimi",
-      description: "Markanızı planlı içerik, marka dili ve performans odaklı yaklaşımla sosyal medyayı etkili bir iletişim kanalına dönüştürüyoruz.",
+      title: hizmet_baslik_3,
+      description: hizmet_aciklama_3,
       link: "/sosyal-medya-yonetimi/",
     },
     {
       icon: SocialMediaAdsIcon,
-      title: "Sosyal Medya Reklamları",
-      description: "Markanızı, bütçe verimliliği ve performans odaklı yönetim anlayışıyla reklam yatırımlarından maksimum fayda sağlayacak şekilde yönetiyoruz.",
+      title: hizmet_baslik_4,
+      description: hizmet_aciklama_4,
       link: "/sosyal-medya-reklamlari/",
     },
     {
       icon: SearchEngineOptIcon,
-      title: "Arama Motoru Opt.",
-      description: "Web sitenizin arama motorlarındaki görünürlüğünü artırmak için teknik altyapı, içerik ve kullanıcı deneyimi odaklı SEO çalışmaları yürütüyoruz.",
+      title: hizmet_baslik_5,
+      description: hizmet_aciklama_5,
       link: "/arama-motoru-optimizasyonu-seo/",
     },
     {
       icon: AppointmentSystemIcon,
-      title: "Randevu Sistemi",
-      description: "İş süreçlerinizi kolaylaştıran, zaman yönetimini optimize eden ve kullanıcı dostu bir randevu altyapısı sunuyoruz.",
+      title: hizmet_baslik_6,
+      description: hizmet_aciklama_6,
       link: "/randevu-ve-rezervasyon-sistemi/",
     },
     {
       icon: QrMenuSystemIcon,
-      title: "QR Menü",
-      description: "Kolay yönetilebilir altyapı ve mobil uyumlu tasarımla menülerinizi anlık olarak güncelleyebilmenizi sağlıyoruz.",
+      title: hizmet_baslik_7,
+      description: hizmet_aciklama_7,
       link: "/qr-menu/",
     },
     {
       icon: BrandIdentityIcon,
-      title: "Kurumsal Kimlik",
-      description: "Tüm kurumsal materyallerle markanızı rakiplerinden ayıran, profesyonel ve sürdürülebilir bir görsel dil sunuyoruz.",
+      title: hizmet_baslik_8,
+      description: hizmet_aciklama_8,
       link: "/kurumsal-kimlik/",
     },
   ];
 
-  // Helper fonksiyon: Array'i belirtilen boyutta parçalara böler (Burada 2'şerli)
   const chunkArray = (arr, size) => {
     const chunkedArr = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -82,8 +102,6 @@ const OurServices = () => {
     }
     return chunkedArr;
   };
-
-  // Mobilde her slaytta 2 kart göstermek için veriyi işliyoruz
   const mobileServicePairs = useMemo(() => chunkArray(serviceData, 2), [serviceData]);
 
   useLayoutEffect(() => {
@@ -135,11 +153,9 @@ const OurServices = () => {
       {/* Başlık Alanı */}
       <div className="services-header w-full flex flex-col justify-center items-center gap-1">
         <TitleBadge>
-          <p className="text-primaryBlack w-full font-medium pl-1.5">Neler Yapıyoruz?</p>
+          <p className="text-primaryBlack w-full font-medium pl-1.5">{dijital_cozumler_kucuk_baslik}</p>
         </TitleBadge>
-        <h1 className="text-3xl md:text-4xl font-bold text-primaryBlack max-md:text-center">
-          İşinizi Büyüten <span className="text-primaryColor">Dijital Çözümler</span>
-        </h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-primaryBlack max-md:text-center" dangerouslySetInnerHTML={{ __html: dijital_cozumler_buyuk_baslik }}></h1>
       </div>
 
       {/* --- MOBİL SLIDER (LG Altı - Splide - 2'li Gösterim) --- */}

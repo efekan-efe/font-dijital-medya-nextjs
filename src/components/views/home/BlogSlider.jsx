@@ -10,7 +10,10 @@ import TitleBadge from "@/components/ui/TitleBadge"; // TitleBadge'i buraya taş
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function BlogSlider({ posts }) {
+export default function BlogSlider({ posts, data }) {
+  const blog_kucuk_baslik = data?.blog_kucuk_baslik;
+  const blog_buyuk_baslik = data?.blog_buyuk_baslik;
+
   const container = useRef(null);
 
   useLayoutEffect(() => {
@@ -78,16 +81,11 @@ export default function BlogSlider({ posts }) {
       <div className="w-full flex flex-col justify-center items-center gap-1 shrink-0">
         <div className="blog-badge">
           <TitleBadge>
-            <p className="text-primaryBlack w-full font-medium">
-              <span className="text-primaryColor px-1">Dijital Dünya</span>
-              Trendlerini Kaçırmayın
-            </p>
+            <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: blog_kucuk_baslik }}></p>
           </TitleBadge>
         </div>
 
-        <h1 className="blog-title text-3xl md:text-4xl font-bold text-primaryBlack text-center">
-          <span className="text-primaryColor">Dijital Pazarlama</span> Rehberleri
-        </h1>
+        <h1 className="blog-title text-3xl md:text-4xl font-bold text-primaryBlack text-center" dangerouslySetInnerHTML={{ __html: blog_buyuk_baslik }}></h1>
       </div>
 
       {/* İçerik Alanı */}

@@ -15,6 +15,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const GoogleReviews = ({ data }) => {
+  const google_yorumlari_kucuk_baslik = data?.google_yorumlari_kucuk_baslik;
+  const google_yorumlari_buyuk_baslik = data?.google_yorumlari_buyuk_baslik;
+
   const container = useRef(null);
 
   useLayoutEffect(() => {
@@ -68,14 +71,9 @@ const GoogleReviews = ({ data }) => {
       {/* Başlık Alanı */}
       <div className="reviews-header w-full flex flex-col justify-center items-center gap-1">
         <TitleBadge>
-          <p className="text-primaryBlack w-full font-medium">
-            <span className="text-primaryColor px-1">Müşterilerimiz</span>
-            Neler Söylüyor?
-          </p>
+          <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: google_yorumlari_kucuk_baslik }}></p>
         </TitleBadge>
-        <h1 className="text-4xl font-bold text-primaryBlack max-md:text-center">
-          <span className="text-primaryColor">Google</span> Yorumları
-        </h1>
+        <h1 className="text-4xl font-bold text-primaryBlack max-md:text-center" dangerouslySetInnerHTML={{ __html: google_yorumlari_buyuk_baslik }}></h1>
       </div>
 
       {/* Slider Alanı - Animasyon için sarmalayıcı div ekledik */}
