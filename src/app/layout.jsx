@@ -12,8 +12,11 @@ const inter = Inter({
 });
 
 export const metadata = {
-  // Base URL kesinlikle kalsın
   metadataBase: new URL("https://www.fontdijitalmedya.com"),
+
+  verification: {
+    google: "B3uHCX_poeHLPrlFj_T8rfh6ollSe50qRA_Kxu5GQK0",
+  },
 
   title: {
     default: "Font Dijital Medya",
