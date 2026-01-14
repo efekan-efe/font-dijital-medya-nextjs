@@ -11,21 +11,31 @@ import WebIcon from "@/components/icons/WebIcon";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const aboutData = [
-  {
-    icon: RocketIcon,
-    title: "Vizyonumuz",
-    description: "Markaların dijital dünyada güvenilir, güçlü ve sürdürülebilir bir konuma ulaşmasını sağlamak; dijital çözümlerle uzun vadeli değer üretmek.",
-  },
-  {
-    icon: WebIcon,
-    title: "Misyonumuz",
-    description: "Her markaya özel stratejiler geliştirerek, dijital kanalları ölçülebilir performans ve müşteri kazanımı sağlayan yapılara dönüştürmek.",
-  },
-];
+const InfoSection = ({ data }) => {
+  const hakkimizda_kucuk_baslik = data?.hakkimizda_kucuk_baslik;
+  const hakkimizda_buyuk_baslik = data?.hakkimizda_buyuk_baslik;
+  const hakkimizda_aciklama = data?.hakkimizda_aciklama;
+  const wpResim = data?.hakkimizda_gorseli;
+  const hakkimizdaGorsel = wpResim && isNaN(wpResim) ? wpResim : hakkimizdaGorseli;
+  const vizyonumuz_baslik = data?.vizyonumuz_baslik;
+  const vizyonumuz_aciklama = data?.vizyonumuz_aciklama;
+  const misyonumuz_baslik = data?.misyonumuz_baslik;
+  const misyonumuz_aciklama = data?.misyonumuz_aciklama;
 
-const InfoSection = () => {
   const container = useRef(null);
+
+  const aboutData = [
+    {
+      icon: RocketIcon,
+      title: vizyonumuz_baslik,
+      description: vizyonumuz_aciklama,
+    },
+    {
+      icon: WebIcon,
+      title: misyonumuz_baslik,
+      description: misyonumuz_aciklama,
+    },
+  ];
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -77,28 +87,20 @@ const InfoSection = () => {
   return (
     <div ref={container} className="flex justify-between items-center gap-6 px-2 max-w-7xl mx-auto font-inter max-[960px]:flex-col">
       <div className="w-full max-w-lg max-[960px]:order-2">
-        <Image className="info-img w-full h-full" src={hakkimizdaGorseli} alt="Hakkımızda" />
+        <Image className="info-img w-full h-full" src={hakkimizdaGorsel} alt="Hakkımızda" />
       </div>
       <div className="w-full flex flex-col gap-4">
         {/* Metin Grubu Wrapper */}
         <div className="info-text-content w-full flex flex-col justify-center items-start gap-1 max-[960px]:items-center">
           <TitleBadge>
-            <p className="text-primaryBlack w-full font-medium">
-              <span className="text-primaryColor px-1">Neden</span>
-              Bizi Tercih Etmelisiniz
-            </p>
+            <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: hakkimizda_kucuk_baslik }}></p>
           </TitleBadge>
-          <h1 className="w-full text-4xl font-bold text-primaryBlack max-md:text-center">
-            Dijitalde
-            <span className="text-primaryColor mx-1">Müşteri Kazanmaya</span> Başlayın
-          </h1>
+          <h1 className="w-full text-4xl font-bold text-primaryBlack max-md:text-center" dangerouslySetInnerHTML={{ __html: hakkimizda_buyuk_baslik }}></h1>
         </div>
 
-        <p className="info-text-content text-[#12141D]/70">Dijital kanallarda kalıcı başarı, stratejik planlama ve profesyonel yönetim anlayışıyla mümkündür.</p>
-        <p className="info-text-content text-[#12141D]/70">Markaların dijital varlıklarını; kurumsal hedeflerle uyumlu, performansı ölçülebilir ve uzun vadede sürdürülebilir müşteri kazanımı sağlayan bütüncül dijital yapılara dönüştürüyoruz.</p>
+        <p className="info-text-content text-[#12141D]/70" dangerouslySetInnerHTML={{ __html: hakkimizda_aciklama }}></p>
 
         {aboutData.map((about, index) => (
-          // GSAP için 'mission-item' sınıfı eklendi
           <div key={index} className="mission-item flex justify-start items-start gap-2">
             <div className="border border-black/20 rounded-full">
               <div className="bg-softPink p-3 rounded-full border-[6px] border-white shadow">

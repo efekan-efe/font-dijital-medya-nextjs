@@ -2,43 +2,46 @@ import ReferenceSlider from "@/components/shared/ReferenceSlider";
 import InfoSection from "@/components/views/about/InfoSection";
 import WorkRules from "@/components/views/about/WorkRules";
 import GoogleReviews from "@/components/views/home/GoogleReviews";
+import { notFound } from "next/navigation";
 
-// 1. WordPress'ten "Hakkımızda" sayfasının verisini çeken fonksiyon
-async function getPageSeo() {
-  // Slug'ın 'hakkimizda' olduğundan emin ol (WordPress panelinde "Kalıcı Bağlantı" kısmı)
+// 1. TEK MERKEZLİ VERİ ÇEKME FONKSİYONU
+// Hem SEO hem de Sayfa İçeriği bunu kullanacak.
+async function getAboutPageData() {
   const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/pages?slug=hakkimizda&_embed", {
-    next: { revalidate: 60 }, // 60 saniyede bir güncellenir
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) return null;
 
-  const pages = await res.json();
-  return pages[0];
+  const data = await res.json();
+
+  // Eğer dizi boşsa (Sayfa yoksa) null dön
+  if (data.length === 0) return null;
+
+  return data[0];
 }
 
-// 2. Metadata Oluşturucu
+// 2. METADATA (Google İçin)
 export async function generateMetadata() {
-  const pageData = await getPageSeo();
+  const pageData = await getAboutPageData();
 
-  // WordPress'te sayfa yoksa varsayılan değerler
   if (!pageData) {
     return {
       title: "Hakkımızda - Font Dijital Medya",
-      description: "Adana'nın dijital çözüm ortağı. Vizyonumuz, misyonumuz ve çalışma prensiplerimiz hakkında bilgi alın.",
     };
   }
 
-  // Yoast SEO / Rank Math verisini al
   const seo = pageData.yoast_head_json || pageData.head_json;
 
   if (seo) {
     return {
       title: seo.title,
       description: seo.description || seo.og_description,
+      metadataBase: new URL("https://fontdijitalmedya.com"),
       openGraph: {
         title: seo.og_title || seo.title,
         description: seo.og_description || seo.description,
-        url: "https://fontdijitalmedya.com/hakkimizda",
+        url: "https://fontdijitalmedya.com/hakkimizda", // URL'i özelleştirdik
         siteName: seo.og_site_name || "Font Dijital Medya",
         locale: "tr_TR",
         type: "website",
@@ -51,15 +54,6 @@ export async function generateMetadata() {
             }))
           : [],
       },
-      twitter: {
-        card: "summary_large_image",
-        title: seo.twitter_title || seo.og_title,
-        description: seo.twitter_description || seo.og_description,
-        images: seo.twitter_image ? [seo.twitter_image] : [],
-      },
-      alternates: {
-        canonical: "https://fontdijitalmedya.com/hakkimizda",
-      },
       robots: {
         index: seo.robots?.index !== "noindex",
         follow: seo.robots?.follow !== "nofollow",
@@ -68,13 +62,24 @@ export async function generateMetadata() {
   }
 }
 
-// 3. Sayfa Bileşeni (Mevcut yapıyı koruyoruz)
-export default function Hakkimizda() {
+// 3. SAYFA BİLEŞENİ (Kullanıcı İçin)
+export default async function Hakkimizda() {
+  // Veriyi burada da çekiyoruz (Next.js cache sayesinde sunucuya ekstra yük binmez)
+  const pageData = await getAboutPageData();
+
+  // Eğer sayfa WP'de yoksa 404 sayfasına yönlendir
+  if (!pageData) {
+    notFound();
+  }
+
+  // ACF Verilerini Ayıkla (Yoksa boş obje ver ki hata patlamasın)
+  const acf = pageData.acf || {};
+
   return (
     <main className="flex flex-col items-center justify-center gap-10 mt-5">
-      <InfoSection />
-      <WorkRules />
-      <GoogleReviews />
+      <InfoSection data={acf} />
+      <WorkRules data={acf} />
+      <GoogleReviews data={acf} />
       <ReferenceSlider />
     </main>
   );

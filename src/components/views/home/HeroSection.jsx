@@ -30,10 +30,7 @@ const HeroSection = ({ data }) => {
 
   const form_basligi = data?.form_basligi;
   const form_aciklamasi = data?.form_aciklamasi;
-  // Gelen veri sayı (ID) ise veya boşsa yedeği kullan, URL ise onu kullan
   const wpResim = data?.form_arka_plan_gorseli;
-
-  // isNaN(wpResim) kontrolü yapıyoruz. Eğer wpResim bir sayı değilse (yani URL ise) true döner.
   const arkaPlanGorseli = wpResim && isNaN(wpResim) ? wpResim : hero_image_pattern;
 
   const heroSlides = [
