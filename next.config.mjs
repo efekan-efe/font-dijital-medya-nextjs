@@ -30,6 +30,11 @@ const nextConfig = {
         hostname: "localhost",
         // Port ve pathname sildik ki her portta çalışabilsin
       },
+      {
+        protocol: "https",
+        hostname: "portal.fontdijitalmedya.com", // Senin WP adresin
+        pathname: "/wp-content/uploads/**",
+      },
     ],
   },
 };

@@ -6,92 +6,68 @@ import { CustomButton } from "@/components/ui/CustomButton";
 import Badge from "@/components/ui/Badge";
 import hero_image_pattern from "@/assets/homepage/images/hero_image_pattern.png";
 import { Search, Phone, Rocket, StarIcon, Loader2, CheckCircle2, Zap, TrendingUp, ThumbsUp } from "lucide-react";
-
-// Splide Importları
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-// İstersen farklı temalar da kullanabilirsin: import '@splidejs/react-splide/css/skyblue';
-
-// Server Action
 import { sendAnalysis } from "@/actions/sendAnalysis";
-
-// GSAP Importları
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// SLIDER VERİSİ (İçerikleri buradan yönetebilirsin)
-const heroSlides = [
-  {
-    id: 1,
-    badgeText: "50+ İşletme Bizi Tercih Etti",
-    badgeIcon: Rocket,
-    title: (
-      <>
-        Ziyaretçileriniz Neden <span className="text-primaryColor">Müşteriye</span> Dönüşmüyor?
-      </>
-    ),
-    desc: (
-      <>
-        Bölgenin en çok tercih edilen dijital ajanslarından biri olarak, <strong>markalar için dönüşüm odaklı dijital stratejiler geliştiriyor, kalıcı başarılar inşa ediyoruz.</strong>
-      </>
-    ),
-    btn1: "Ücretsiz Analiz",
-    btn2: "Hemen Görüş",
-  },
-  {
-    id: 2,
-    badgeText: "Dönüşüm Odaklı Dijital Stratejiler",
-    badgeIcon: TrendingUp,
-    title: (
-      <>
-        Takipçileriniz <span className="text-primaryColor">Müşteriniz</span> Olmuyor mu?
-      </>
-    ),
-    desc: (
-      <>
-        Sosyal medyadaki etkileşimi, <strong>doğru strateji ve veriye dayalı optimizasyonlarla</strong> sürdürülebilir müşteri kazanımına dönüştürüyoruz.
-      </>
-    ),
-    btn1: "SEO Teklifi Al",
-    btn2: "Referanslar",
-  },
-  {
-    id: 3,
-    badgeText: "Ticari Değer Üreten Dijital Sistemler",
-    badgeIcon: Zap,
-    title: (
-      <>
-        Siteniz Var Ama <span className="text-primaryColor">Sipariş</span> Gelmiyor mu?
-      </>
-    ),
-    desc: (
-      <>
-        Sitenizi sadece yayında tutmakla kalmıyor, <strong>dönüşüm odaklı optimizasyonlarla</strong> satış üreten bir yapıya dönüştürüyoruz.
-      </>
-    ),
-    btn1: "Hız Testi Yap",
-    btn2: "Detaylı Bilgi",
-  },
-  {
-    id: 4,
-    badgeText: "Dijitalde Güçlü İlk İzlenim",
-    badgeIcon: ThumbsUp,
-    title: (
-      <>
-        Web Siteniz <span className="text-primaryColor">Prestij</span> Kaybettiriyor Olabilir mi?
-      </>
-    ),
-    desc: (
-      <>
-        Kurumsal imajınızı destekleyen, <strong>kullanıcıya güven veren ve markanızı doğru temsil eden</strong> web deneyimleri oluşturuyoruz.
-      </>
-    ),
-    btn1: "Hız Testi Yap",
-    btn2: "Detaylı Bilgi",
-  },
-];
+const HeroSection = ({ data }) => {
+  console.log(data);
+  const hero_kucuk_baslik_1 = data?.hero_kucuk_baslik_1;
+  const hero_kucuk_baslik_2 = data?.hero_kucuk_baslik_2;
+  const hero_kucuk_baslik_3 = data?.hero_kucuk_baslik_3;
+  const hero_kucuk_baslik_4 = data?.hero_kucuk_baslik_4;
 
-const HeroSection = () => {
+  const hero_buyuk_baslik_1 = data?.hero_buyuk_baslik_1;
+  const hero_buyuk_baslik_2 = data?.hero_buyuk_baslik_2;
+  const hero_buyuk_baslik_3 = data?.hero_buyuk_baslik_3;
+  const hero_buyuk_baslik_4 = data?.hero_buyuk_baslik_4;
+
+  const hero_aciklama_1 = data?.hero_aciklama_1;
+  const hero_aciklama_2 = data?.hero_aciklama_2;
+  const hero_aciklama_3 = data?.hero_aciklama_3;
+  const hero_aciklama_4 = data?.hero_aciklama_4;
+
+  const form_basligi = data?.form_basligi;
+  const form_aciklamasi = data?.form_aciklamasi;
+  // Gelen veri sayı (ID) ise veya boşsa yedeği kullan, URL ise onu kullan
+  const wpResim = data?.form_arka_plan_gorseli;
+
+  // isNaN(wpResim) kontrolü yapıyoruz. Eğer wpResim bir sayı değilse (yani URL ise) true döner.
+  const arkaPlanGorseli = wpResim && isNaN(wpResim) ? wpResim : hero_image_pattern;
+
+  const heroSlides = [
+    {
+      id: 1,
+      badgeText: hero_kucuk_baslik_1,
+      badgeIcon: Rocket,
+      title: hero_buyuk_baslik_1,
+      desc: hero_aciklama_1,
+    },
+    {
+      id: 2,
+      badgeText: hero_kucuk_baslik_2,
+      badgeIcon: TrendingUp,
+      title: hero_buyuk_baslik_2,
+      desc: hero_aciklama_2,
+    },
+    {
+      id: 3,
+      badgeText: hero_kucuk_baslik_3,
+      badgeIcon: Zap,
+      title: hero_buyuk_baslik_3,
+      desc: hero_aciklama_3,
+    },
+    {
+      id: 4,
+      badgeText: hero_kucuk_baslik_4,
+      badgeIcon: ThumbsUp,
+      title: hero_buyuk_baslik_4,
+      desc: hero_aciklama_4,
+    },
+  ];
+
   const container = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState(null);
@@ -107,16 +83,10 @@ const HeroSection = () => {
           toggleActions: "play none none reverse",
         },
       });
-
-      // SOL SÜTUN (Slider) ANİMASYONLARI
-      // Not: Slider içindeki elemanları seçmek için class'ları kullanıyoruz.
-      // İlk render'da GSAP bu elemanları yakalayıp giriş animasyonu yapacak.
       tl.from(".hero-badge", { y: -20, opacity: 0, duration: 0.6, ease: "power3.out" })
         .from(".hero-title", { y: 50, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
         .from(".hero-desc", { y: 30, opacity: 0, duration: 0.6, ease: "power2.out" }, "-=0.6")
         .from(".hero-btns", { y: 20, opacity: 0, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4");
-
-      // SAĞ SÜTUN ANİMASYONLARI
       tl.from(".hero-bg-images", { x: 50, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8").from(
         ".hero-form",
         {
@@ -154,13 +124,12 @@ const HeroSection = () => {
   // Splide Ayarları
   const splideOptions = {
     type: "loop",
-    arrows: false, // Oklu geçişi kapattım, daha temiz görünmesi için
-    pagination: true, // Alt kısımdaki noktalar açık
+    arrows: false,
+    pagination: true,
     autoplay: true,
     interval: 5000,
     pauseOnHover: true,
-    direction: "ttb", // 'ttb' (top-to-bottom) dikey kaydırma veya 'ltr' yatay. Hero için genelde 'ltr' iyidir ama dikey istersen burayı aç.
-    // Ben yatay (varsayılan) bırakıyorum, height: 'auto' ile.
+    direction: "ttb",
     direction: "ltr",
     gap: "1rem",
   };
@@ -178,25 +147,24 @@ const HeroSection = () => {
                   <div className="hero-badge">
                     <Badge icon={slide.badgeIcon}>{slide.badgeText}</Badge>
                   </div>
-
                   {/* Title */}
-                  <h1 className="hero-title mt-2 text-[40px] max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl">{slide.title}</h1>
-
+                  <h1
+                    className="hero-title mt-2 text-[40px] max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl"
+                    dangerouslySetInnerHTML={{ __html: slide.title }}
+                  ></h1>
                   {/* Description */}
-                  <p className="hero-desc mt-2 text-primaryBlack max-md:text-center max-sm:text-sm text-lg leading-relaxed">{slide.desc}</p>
-
+                  <p className="hero-desc mt-2 text-primaryBlack max-md:text-center max-sm:text-sm text-lg leading-relaxed" dangerouslySetInnerHTML={{ __html: slide.desc }}></p>
                   {/* Buttons */}
                   <div className="hero-btns flex items-center mt-2 gap-4 max-sm:gap-2">
                     <div className="relative">
                       <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-3">
-                        {slide.btn1}
+                        Ücretsiz Analiz
                       </CustomButton>
-                      {/* Sadece ilk slaytta veya hepsinde bu etiketi göstermek isteyebilirsin */}
                       <div className="w-fit whitespace-nowrap text-xs absolute -bottom-4 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1 px-2 max-sm:hidden">2 dakika • Ücret yok</div>
                     </div>
                     <div className="relative">
                       <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-3">
-                        {slide.btn2}
+                        Hemen Görüş
                       </CustomButton>
                     </div>
                   </div>
@@ -205,11 +173,9 @@ const HeroSection = () => {
             ))}
           </Splide>
         </div>
-
-        {/* SAĞ SÜTUN (Değişiklik yapılmadı, aynı kaldı) */}
         <div className="col-span-3 h-full max-h-[570px] relative flex items-center justify-center lg:justify-end max-xl:max-h-[500px] max-lg:col-span-full max-lg:w-full max-lg:max-w-[600px] max-sm:max-h-fit">
           <div className="max-sm:hidden w-full h-full ">
-            <Image src={hero_image_pattern} alt="Arkaplan Efekti" fill className="hero-bg-images flex w-full h-full object-contain" />
+            <Image src={arkaPlanGorseli} alt="Arkaplan Efekti" fill className="hero-bg-images flex w-full h-full object-contain" />
           </div>
           <form id="analysisForm" onSubmit={handleSubmit} className="hero-form absolute top-0 right-0 flex flex-col z-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs w-full max-sm:w-full max-sm:relative">
             {formStatus === "success" ? (
@@ -222,13 +188,10 @@ const HeroSection = () => {
               <>
                 <div className="flex justify-center items-center gap-2 mb-2">
                   <StarIcon className="fill-yellow-300 stroke-1 text-2xl text-yellow-400" />
-                  <h3 className="text-2xl font-bold text-gray-800">Ücretsiz Analiz</h3>
+                  <h3 className="text-2xl font-bold text-gray-800">{form_basligi}</h3>
                   <StarIcon className="fill-yellow-300 stroke-1 text-2xl text-yellow-400" />
                 </div>
-                <p className="text-sm text-gray-600 leading-5 text-center mb-4">
-                  Web Sitenizi 2 Dakikada Analiz Edin! <br />
-                  Müşteri kaybeden noktaları keşfedin.
-                </p>
+                <p className="text-sm text-gray-600 leading-5 text-center mb-4" dangerouslySetInnerHTML={{ __html: form_aciklamasi }}></p>
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-1">
                     <label className="text-gray-700 text-sm font-medium" htmlFor="websitesi">

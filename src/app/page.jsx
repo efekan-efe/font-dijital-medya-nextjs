@@ -4,43 +4,44 @@ import GoogleReviews from "@/components/views/home/GoogleReviews";
 import HeroSection from "@/components/views/home/HeroSection";
 import OurServices from "@/components/views/home/OurServices";
 
-// --- SEO VERİSİNİ ÇEKEN FONKSİYON ---
-async function getHomePageSeo() {
-  // DİKKAT: WordPress'teki ana sayfanın slug'ı 'anasayfa' ise böyle kalmalı.
-  // Eğer 'home' ise: ...?slug=home&_embed yapmalısın.
+// --- ORTAK VERİ ÇEKME FONKSİYONU ---
+// Bu fonksiyon hem Metadata hem de Sayfa içeriği için çalışır.
+// Next.js "Request Memoization" sayesinde bu isteği 2 kere yazsak da sunucuya 1 kere gider.
+async function getHomePageData() {
   const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/pages?slug=anasayfa&_embed", {
-    next: { revalidate: 60 }, // 60 saniyede bir önbellek tazele
+    next: { revalidate: 60 }, // 60 saniyede bir veriyi tazele (ISR)
   });
 
   if (!res.ok) return null;
 
-  const pages = await res.json();
-  return pages[0]; // İlk sonucu döndür
+  const data = await res.json();
+  return data[0]; // Sayfa verisi + ACF + Yoast hepsi burada
 }
 
-// --- METADATA OLUŞTURUCU ---
+// --- 1. SEO METADATA OLUŞTURUCU (Google İçin) ---
 export async function generateMetadata() {
-  const pageData = await getHomePageSeo();
+  const pageData = await getHomePageData();
 
-  // Eğer veri çekilemezse Layout'taki varsayılanlar devreye girer veya manuel fallback döneriz.
+  // Veri yoksa varsayılanı dön
   if (!pageData) {
     return {
-      title: "Font Dijital Medya - Dijitalin Yeni Fontu",
-      description: "Profesyonel dijital ajans hizmetleri.",
+      title: "Font Dijital Medya",
+      description: "Dijital Çözüm Ortağınız",
     };
   }
 
-  // Yoast/RankMath verisini al
+  // Yoast SEO Verilerini İşle
   const seo = pageData.yoast_head_json || pageData.head_json;
 
   if (seo) {
     return {
-      title: seo.title,
-      description: seo.description || seo.og_description,
+      title: seo.title, // WP'den gelen başlık
+      description: seo.description || seo.og_description, // WP'den gelen açıklama
+      metadataBase: new URL("https://fontdijitalmedya.com"),
       openGraph: {
         title: seo.og_title || seo.title,
         description: seo.og_description || seo.description,
-        url: "https://fontdijitalmedya.com", // Ana sayfa olduğu için sabit
+        url: "https://fontdijitalmedya.com",
         siteName: seo.og_site_name || "Font Dijital Medya",
         locale: "tr_TR",
         type: "website",
@@ -59,9 +60,6 @@ export async function generateMetadata() {
         description: seo.twitter_description || seo.og_description,
         images: seo.twitter_image ? [seo.twitter_image] : [],
       },
-      alternates: {
-        canonical: "https://fontdijitalmedya.com",
-      },
       robots: {
         index: seo.robots?.index !== "noindex",
         follow: seo.robots?.follow !== "nofollow",
@@ -70,14 +68,20 @@ export async function generateMetadata() {
   }
 }
 
-// --- ANA SAYFA BİLEŞENİ ---
-export default function HomePage() {
+// --- 2. SAYFA İÇERİĞİ (Kullanıcı İçin) ---
+export default async function HomePage() {
+  const pageData = await getHomePageData();
+
+  // ACF Verilerini Ayıkla (Eğer ACF yoksa boş obje olsun hata vermesin)
+  const acf = pageData?.acf || {};
+
   return (
     <main className="homepageMain flex flex-col">
-      <HeroSection />
-      <GoogleReviews />
+      <HeroSection data={acf} />
+      <GoogleReviews data={acf} />
       <OurServices />
-      <FeaturesSection />
+      {/* Özellikler alanına da veri gönderelim */}
+      <FeaturesSection data={acf} />
       <BlogSection />
     </main>
   );

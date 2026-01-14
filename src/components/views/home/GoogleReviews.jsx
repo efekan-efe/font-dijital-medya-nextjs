@@ -14,7 +14,7 @@ import "@splidejs/react-splide/css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const GoogleReviews = () => {
+const GoogleReviews = ({ data }) => {
   const container = useRef(null);
 
   useLayoutEffect(() => {
