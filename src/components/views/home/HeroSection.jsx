@@ -153,13 +153,13 @@ const HeroSection = ({ data }) => {
                   {/* Buttons */}
                   <div className="hero-btns flex items-center mt-2 gap-4 max-sm:gap-2">
                     <div className="relative">
-                      <CustomButton size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-3">
+                      <CustomButton href="https://wa.me/905323891658" size="lg" variant="filledButton" iconLeft={Search} className="max-sm:text-sm max-sm:p-3">
                         Ücretsiz Analiz
                       </CustomButton>
                       <div className="w-fit whitespace-nowrap text-xs absolute -bottom-4 left-1/2 translate-x-[-50%] bg-white border border-primaryColor text-primaryColor font-semibold rounded-full py-1 px-2 max-sm:hidden">2 dakika • Ücret yok</div>
                     </div>
                     <div className="relative">
-                      <CustomButton size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-3">
+                      <CustomButton href="https://wa.me/905323891658" size="lg" variant="emptyButton" iconLeft={Phone} className="max-sm:text-sm max-sm:p-3">
                         Hemen Görüş
                       </CustomButton>
                     </div>

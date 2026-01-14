@@ -3,7 +3,9 @@ import UpperHeader from "@/components/layout/UpperHeader";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import MobileHeader from "@/components/layout/MobileHeader"; // Import edilmiş, süper.
+import MobileHeader from "@/components/layout/MobileHeader";
+import Link from "next/link";
+import Image from "next/image";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +47,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${inter.variable}`}>
       <body className="overflow-x-hidden">
+        <Link className="fixed bottom-5 left-5 max-w-20 z-50" href="https://wa.me/905323891658">
+          <Image width={128} height={128} className="w-full h-full" src="https://portal.fontdijitalmedya.com/wp-content/uploads/2026/01/whatsapp.webp" alt="WhatsApp" />
+        </Link>
         {/* --- DESKTOP HEADER GRUBU --- */}
         {/* max-lg:hidden ekledik. Böylece mobilde bu alan tamamen yok olur, çakışma yapmaz. */}
         <div className="absolute top-0 w-full z-50">

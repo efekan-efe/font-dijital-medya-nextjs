@@ -7,8 +7,6 @@ import RocketIcon from "@/components/icons/RocketIcon";
 import WebIcon from "@/components/icons/WebIcon";
 import NewIdeaIcon from "@/components/icons/NewIdeaIcon";
 import { SearchCheck, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-
-// GSAP Importları
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

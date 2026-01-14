@@ -160,7 +160,7 @@ const FeaturesSection = ({ data }) => {
 
         {/* Buton */}
         <div className="feature-btn mt-2 md:mt-4 w-full md:w-auto">
-          <CustomButton className="w-full md:w-auto max-lg:text-base max-lg:w-fit" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
+          <CustomButton href="/referanslar" className="w-fit text-base" variant="filledButton" rightComponent={<SparkleIcon className="fill-white" />} leftComponent={<SparkleIcon className="fill-white" />}>
             Bizimle Yükselenler
           </CustomButton>
         </div>

@@ -1,14 +1,10 @@
 import BlogPageContent from "@/components/views/blog/BlogPageContent";
 
-// 1. WordPress'ten "Blog" sayfasının verisini çeken fonksiyon
 async function getPageSeo() {
-  // Slug'ın 'blog' olduğundan emin ol (WordPress panelinde "Kalıcı Bağlantı" kısmı)
   const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/pages?slug=blog&_embed", {
     next: { revalidate: 60 }, // 60 saniyede bir güncellenir
   });
-
   if (!res.ok) return null;
-
   const pages = await res.json();
   return pages[0];
 }

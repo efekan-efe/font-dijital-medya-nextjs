@@ -2,17 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import ContactItem from "@/components/ui/ContactItem";
 import Facebook from "@/assets/headerIcons/facebook.svg";
-import Twitter from "@/assets/headerIcons/twitter.svg";
+import Linkedin from "@/assets/headerIcons/linkedin.webp";
 import Instagram from "@/assets/headerIcons/instagram.svg";
 import Youtube from "@/assets/headerIcons/youtube.svg";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const UpperHeader = () => {
   const socialLinks = [
-    { href: "#", icon: Facebook, alt: "Facebook ikonu" },
-    { href: "#", icon: Twitter, alt: "Twitter ikonu" },
-    { href: "#", icon: Instagram, alt: "Instagram ikonu" },
-    { href: "#", icon: Youtube, alt: "Youtube ikonu" },
+    { href: "https://www.facebook.com/people/Font-Dijital-Medya-Hizmetleri/61573947961660/", icon: Facebook, alt: "Facebook ikonu" },
+    { href: "https://www.linkedin.com/company/font-dijital-medya", icon: Linkedin, alt: "Linkedin ikonu" },
+    { href: "https://www.instagram.com/fontdijitalmedya/", icon: Instagram, alt: "Instagram ikonu" },
+    { href: "https://www.youtube.com/@fontdijitalmedya", icon: Youtube, alt: "Youtube ikonu" },
   ];
 
   return (
@@ -34,7 +34,7 @@ const UpperHeader = () => {
         {/* Sağ Taraf: Sosyal Medya İkonları */}
         <div className="flex items-center gap-x-2.5">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="w-8 h-8 flex justify-center items-center text-white border border-white p-2 rounded-full hover:opacity-80 transition-opacity">
+            <Link key={index} href={link.href} target="_blank" className="w-8 h-8 flex justify-center items-center text-white border border-white p-2 rounded-full hover:opacity-80 transition-opacity">
               <Image className="w-auto h-auto" src={link.icon} alt={link.alt} />
             </Link>
           ))}
