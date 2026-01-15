@@ -52,7 +52,7 @@ const Breadcrumb = ({ badgeContent, titleContent, search, searchTerm, onSearchCh
       )}
 
       <div className="crumb-btns flex justify-center items-center gap-4 mt-8 max-sm:flex-col max-sm:gap-2">
-        <CustomButton href="/ucretsiz-analiz" size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
+        <CustomButton href="/#analysisForm" size="lg" variant="filledButton" iconLeft={Search} className={"max-md:text-sm py-2"}>
           Ücretsiz Analiz
         </CustomButton>
         <CustomButton href="https://wa.me/+905323891658" size="lg" variant="emptyButton" iconLeft={Phone} className="bg-white max-md:text-sm py-2">

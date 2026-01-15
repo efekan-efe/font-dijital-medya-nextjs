@@ -2,11 +2,11 @@ import Breadcrumb from "@/components/shared/Breadcrumb";
 import ReferenceSlider from "@/components/shared/ReferenceSlider";
 import OurServices from "@/components/views/home/OurServices";
 
-// 1. WordPress'ten "Hizmetler" sayfasının verisini çeken fonksiyon
+// 1. VERİ ÇEKME FONKSİYONU
+// (Hem Metadata hem de Sayfa İçeriği tarafından kullanılır)
 async function getPageSeo() {
-  // Slug'ın 'hizmetler' olduğundan emin ol (WordPress panelinde "Kalıcı Bağlantı" kısmı)
   const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/pages?slug=hizmetler&_embed", {
-    next: { revalidate: 60 }, // 60 saniyede bir güncellenir
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) return null;
@@ -15,19 +15,17 @@ async function getPageSeo() {
   return pages[0];
 }
 
-// 2. Metadata Oluşturucu
+// 2. METADATA (Aynen Kalıyor)
 export async function generateMetadata() {
   const pageData = await getPageSeo();
 
-  // WordPress'te sayfa yoksa varsayılan değerler
   if (!pageData) {
     return {
       title: "Hizmetlerimiz - Font Dijital Medya",
-      description: "Web tasarım, SEO, Sosyal Medya Yönetimi ve daha fazlası. İşinizi büyütmek için sunduğumuz profesyonel dijital çözümleri keşfedin.",
+      description: "Profesyonel dijital çözümler.",
     };
   }
 
-  // Yoast SEO / Rank Math verisini al
   const seo = pageData.yoast_head_json || pageData.head_json;
 
   if (seo) {
@@ -50,15 +48,6 @@ export async function generateMetadata() {
             }))
           : [],
       },
-      twitter: {
-        card: "summary_large_image",
-        title: seo.twitter_title || seo.og_title,
-        description: seo.twitter_description || seo.og_description,
-        images: seo.twitter_image ? [seo.twitter_image] : [],
-      },
-      alternates: {
-        canonical: "https://fontdijitalmedya.com/hizmetler",
-      },
       robots: {
         index: seo.robots?.index !== "noindex",
         follow: seo.robots?.follow !== "nofollow",
@@ -67,25 +56,28 @@ export async function generateMetadata() {
   }
 }
 
-// 3. Sayfa Bileşeni (Mevcut yapıyı koruyoruz)
-export default function Hizmetler() {
-  const badgeContent = (
-    <p className="text-primaryBlack w-full font-medium">
-      <span className="text-primaryColor px-1">Dijital Dünya’daki</span>
-      İlk Adımınız
-    </p>
-  );
-  const titleContent = (
-    <>
-      <span className="text-primaryColor px-1">Dijital Başarınız</span> için <br /> Performans Odaklı
-      <span className="text-primaryColor px-1">Web Çözümleri</span>
-    </>
-  );
+// 3. SAYFA BİLEŞENİ (GÜNCELLENEN KISIM)
+export default async function Hizmetler() {
+  // Veriyi burada da çekiyoruz
+  const pageData = await getPageSeo();
+  const acf = pageData?.acf || {};
+  const hizmetler_kucuk_baslik = acf.hizmetler_kucuk_baslik || '<span class="text-primaryColor px-1">Dijital Dünya’daki</span> İlk Adımınız';
+
+  const hizmetler_buyuk_baslik = acf.hizmetler_buyuk_baslik || '<span class="text-primaryColor px-1">Dijital Başarınız</span> için <br /> Performans Odaklı <span class="text-primaryColor px-1">Web Çözümleri</span>';
+
+  // 2. HTML Olarak İşle (Breadcrumb için)
+  const badgeContent = <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: hizmetler_kucuk_baslik }} />;
+
+  const titleContent = <div dangerouslySetInnerHTML={{ __html: hizmetler_buyuk_baslik }} />;
 
   return (
     <main className="flex flex-col items-center justify-center gap-10 w-full font-inter">
+      {/* Dinamik başlıkları gönderiyoruz */}
       <Breadcrumb badgeContent={badgeContent} titleContent={titleContent} />
-      <OurServices />
+
+      {/* İstersen OurServices'e de data gönderip oradaki hizmet listesini de dinamik yapabilirsin */}
+      <OurServices data={acf} />
+
       <ReferenceSlider />
     </main>
   );
