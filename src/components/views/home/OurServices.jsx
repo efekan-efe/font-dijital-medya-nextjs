@@ -111,7 +111,7 @@ const OurServices = ({ data }) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: "top 60%",
+          start: "top 70%",
           toggleActions: "play none none reverse",
         },
       });
