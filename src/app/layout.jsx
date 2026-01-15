@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${inter.variable}`}>
       <body className="overflow-x-hidden">
-        <Link className="fixed bottom-5 left-5 max-w-20 z-50" href="https://wa.me/905323891658">
+        <Link className="fixed bottom-5 left-5 max-w-20 z-50 max-sm:max-w-16 max-sm:bottom-14" href="https://wa.me/905323891658">
           <Image width={128} height={128} className="w-full h-full" src="https://portal.fontdijitalmedya.com/wp-content/uploads/2026/01/whatsapp.webp" alt="WhatsApp" />
         </Link>
         {/* --- DESKTOP HEADER GRUBU --- */}

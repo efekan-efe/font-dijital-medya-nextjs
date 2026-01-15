@@ -82,14 +82,17 @@ const Footer = () => {
         {/* Copyright ve Hukuki Linkler (Alt Bar) */}
         <div className="mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 max-md:mt-4">
           <p>&copy; {new Date().getFullYear()} Font Dijital Medya. Tüm hakları saklıdır.</p>
-          <div className="flex gap-x-4 mt-4 md:mt-0">
+          <div className="flex gap-x-4 mt-4 md:mt-0 max-sm:text-center max-sm:gap-1">
             <Link href="/gizlilik-politikasi" className="hover:text-white transition-colors">
               Gizlilik Politikası
             </Link>
-            <Link href="/kullanim-kosullari" className="hover:text-white transition-colors">
-              Kullanım Koşulları
+            <Link href="/kvkk" className="hover:text-white transition-colors">
+              KVKK
             </Link>
-            <Link href="/cerez-politikasi" className="hover:text-white transition-colors">
+            <Link href="/mesafeli-satis-sozlesmesi" className="hover:text-white transition-colors">
+              Mesafeli Satış Sözleşmesi
+            </Link>
+            <Link href="/cerez-cookie-politikasi" className="hover:text-white transition-colors">
               Çerez Politikası
             </Link>
           </div>
