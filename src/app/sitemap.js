@@ -16,7 +16,7 @@ export default async function sitemap() {
   const posts = await getBlogPosts();
 
   const blogUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: `${baseUrl}/${post.slug}`,
     lastModified: new Date(post.modified),
     changeFrequency: "weekly",
     priority: 0.8,
