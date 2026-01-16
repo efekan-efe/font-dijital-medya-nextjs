@@ -8,15 +8,15 @@ const PostSubscribeWindow = () => {
   const socialMediaData = [
     {
       icon: whatsapp,
-      link: "/",
+      link: "https://wa.me/905323891658",
     },
     {
       icon: instagram,
-      link: "/",
+      link: "https://www.instagram.com/fontdijitalmedya/",
     },
     {
       icon: facebook,
-      link: "/",
+      link: "https://www.facebook.com/people/Font-Dijital-Medya-Hizmetleri/61573947961660/",
     },
   ];
 

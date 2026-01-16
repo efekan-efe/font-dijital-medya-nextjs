@@ -25,7 +25,7 @@ const socialMediaData = [
   },
   {
     icon: tiktok,
-    link: "/",
+    link: "https://www.tiktok.com/@fontdijitalmedya",
   },
   {
     icon: mail,
