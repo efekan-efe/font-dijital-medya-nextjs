@@ -15,6 +15,7 @@ const Header = () => {
 
   const navLinks = [
     { href: "/hizmetler", label: "Hizmetler", hasDropdown: true },
+    { href: "/sektorel-cozumler", label: "Çözümlerimiz" },
     { href: "/referanslar", label: "Referanslar" },
     { href: "/blog", label: "Dijital Rehber" },
     { href: "/hakkimizda", label: "Kurumsal" },
@@ -40,7 +41,7 @@ const Header = () => {
           y: 0,
           duration: 0.4,
           ease: "power3.out",
-        }
+        },
       );
     } else {
       // Hide dropdown with animation
@@ -99,7 +100,7 @@ const Header = () => {
                 <Link key={link.href} href={link.href} className="text-black font-medium hover:text-primaryColor transition-colors">
                   {link.label}
                 </Link>
-              )
+              ),
             )}
           </div>
 

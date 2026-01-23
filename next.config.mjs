@@ -2,6 +2,9 @@
 const nextConfig = {
   output: "standalone",
   images: {
+    // --- SVG AYARLARI (YENİ) ---
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       // 1. Canlı WordPress Siteniz (Ana Kaynak)
       {
@@ -34,6 +37,13 @@ const nextConfig = {
         protocol: "https",
         hostname: "portal.fontdijitalmedya.com", // Senin WP adresin
         pathname: "/wp-content/uploads/**",
+      },
+      // 5. Placeholder görselleri için izin
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: "",
+        pathname: "/**", // Tüm yollara izin ver
       },
     ],
   },
