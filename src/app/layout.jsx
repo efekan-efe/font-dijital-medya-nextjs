@@ -16,6 +16,18 @@ const inter = Inter({
 export const metadata = {
   metadataBase: new URL("https://www.fontdijitalmedya.com"),
 
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+
   verification: {
     google: "B3uHCX_poeHLPrlFj_T8rfh6ollSe50qRA_Kxu5GQK0",
   },
