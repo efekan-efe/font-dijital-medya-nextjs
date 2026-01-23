@@ -56,8 +56,12 @@ export async function generateMetadata() {
         canonical: "https://fontdijitalmedya.com/sikca-sorulan-sorular",
       },
       robots: {
-        index: seo.robots?.index !== "noindex",
-        follow: seo.robots?.follow !== "nofollow",
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+        },
       },
     };
   }

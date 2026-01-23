@@ -61,8 +61,12 @@ export async function generateMetadata() {
         images: seo.twitter_image ? [seo.twitter_image] : [],
       },
       robots: {
-        index: seo.robots?.index !== "noindex",
-        follow: seo.robots?.follow !== "nofollow",
+        index: true, // Patron benim, API ne derse desin İNDEKSLE!
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+        },
       },
     };
   }

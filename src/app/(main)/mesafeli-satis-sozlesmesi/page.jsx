@@ -38,8 +38,12 @@ export async function generateMetadata() {
       type: "website",
     },
     robots: {
-      index: seo?.robots?.index !== "noindex",
-      follow: seo?.robots?.follow !== "nofollow",
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
     },
   };
 }

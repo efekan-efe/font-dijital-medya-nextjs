@@ -49,8 +49,12 @@ export async function generateMetadata() {
           : [],
       },
       robots: {
-        index: seo.robots?.index !== "noindex",
-        follow: seo.robots?.follow !== "nofollow",
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+        },
       },
     };
   }
