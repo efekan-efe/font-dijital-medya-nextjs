@@ -26,10 +26,6 @@ const PriceCard = ({ icon: Icon, colors, title, description, features, bestSelle
           </li>
         ))}
       </ul>
-
-      <CustomButton size="lg" variant="filledButton" className={"py-1.5 text-center text-sm w-full rounded-lg mt-5"}>
-        Teklif Alın
-      </CustomButton>
     </div>
   );
 };
