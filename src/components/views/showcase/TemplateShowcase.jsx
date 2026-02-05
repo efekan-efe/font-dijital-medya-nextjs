@@ -3,26 +3,24 @@
 
 import { useState, useRef, useLayoutEffect } from "react";
 import TemplateCard from "./TemplateCard";
+import LivePreviewModal from "./LivePreviewModal"; // Yeni modalı import ettik
 import { categories, templates } from "../../../../data/template-data";
-import TitleBadge from "@/components/ui/TitleBadge";
-
-// GSAP
+// ... (diğer importlar aynı kalabilir: TitleBadge, gsap vs.)
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { LayoutGrid } from "lucide-react";
 
 const TemplateShowcase = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const container = useRef(null);
 
-  // Kategoriye göre filtreleme
+  // Modal Yönetimi için State
+  const [previewData, setPreviewData] = useState({ isOpen: false, url: "", title: "" });
+
+  const container = useRef(null);
   const filteredTemplates = activeCategory === "all" ? templates : templates.filter((t) => t.categoryId === activeCategory);
 
-  // Animasyonlar
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      // Başlık animasyonu
       gsap.from(".header-anim", {
         y: 30,
         opacity: 0,
@@ -30,19 +28,29 @@ const TemplateShowcase = () => {
         stagger: 0.2,
         ease: "power3.out",
       });
-
-      // Kartların animasyonu (Kategori değiştiğinde tetiklenmesi için key prop kullanılacak)
     }, container);
     return () => ctx.revert();
   }, []);
 
+  // Önizleme Fonksiyonu
+  const handlePreview = (url, title) => {
+    // Demo linki '#' ise uyarı verelim veya açmayalım
+    if (!url || url === "#") {
+      alert("Bu temanın demosu yakında eklenecektir.");
+      return;
+    }
+    setPreviewData({ isOpen: true, url, title });
+  };
+
   return (
     <div ref={container} className="w-full max-w-[1400px] mx-auto px-4 py-10 font-inter min-h-screen">
+      {/* MODAL BİLEŞENİ - Eğer açıksa render et */}
+      {previewData.isOpen && <LivePreviewModal url={previewData.url} title={previewData.title} onClose={() => setPreviewData({ ...previewData, isOpen: false })} />}
+
       <div className="flex flex-col lg:flex-row gap-8 items-start">
-        {/* SOL SIDEBAR (Kategoriler) */}
+        {/* SOL SIDEBAR (Kategoriler) - Aynen kalıyor */}
         <aside className="w-full lg:w-[280px] lg:sticky lg:top-2 flex-shrink-0 z-10">
           <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm">
-            {/* Mobilde Yatay Scroll, Desktopta Dikey Liste */}
             <div className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
               {categories.map((cat) => {
                 const Icon = cat.icon;
@@ -70,7 +78,15 @@ const TemplateShowcase = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredTemplates.map((item) => (
                 <div key={item.id} className="animate-fadeIn">
-                  <TemplateCard image={item.image} title={item.title} description={item.description} features={item.features} link={item.demoLink} price={item.price} />
+                  <TemplateCard
+                    image={item.image}
+                    title={item.title}
+                    description={item.description}
+                    features={item.features}
+                    link={item.demoLink}
+                    price={item.price}
+                    onPreview={handlePreview} // Fonksiyonu prop olarak geçtik
+                  />
                 </div>
               ))}
             </div>
@@ -85,7 +101,7 @@ const TemplateShowcase = () => {
         </main>
       </div>
 
-      {/* Style for fade animation when switching categories */}
+      {/* Style blocks... */}
       <style jsx global>{`
         @keyframes fadeIn {
           from {

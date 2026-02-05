@@ -66,9 +66,36 @@ export default function BlogPageContent() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=100&_fields=id,title,excerpt,slug,date,content,_links,_embedded");
+        // 1. Önce yazı listesini çekiyoruz
+        const res = await fetch("https://portal.fontdijitalmedya.com/wp-json/wp/v2/posts?_embed&per_page=100&_fields=id,title,excerpt,slug,date,content,acf,_links,_embedded", { cache: "no-store" });
         const data = await res.json();
-        setPosts(data);
+
+        // 2. ID GELEN GÖRSELLERİ URL'YE ÇEVİRME İŞLEMİ
+        // Gelen veriyi tarayıp, ACF alanı "sayı" (ID) olanları bulup düzeltiyoruz.
+        const updatedPosts = await Promise.all(
+          data.map(async (post) => {
+            const acfValue = post.acf?.blog_kart_gorseli;
+
+            // Eğer veri bir SAYI ise (Örn: 8853), bu bir ID'dir.
+            if (typeof acfValue === "number") {
+              try {
+                // ID'den URL'yi bulmak için ekstra bir fetch atıyoruz
+                const mediaRes = await fetch(`https://portal.fontdijitalmedya.com/wp-json/wp/v2/media/${acfValue}`);
+                if (mediaRes.ok) {
+                  const mediaData = await mediaRes.json();
+                  // Artık post.acf.blog_kart_gorseli bir sayı değil, URL oldu.
+                  post.acf.blog_kart_gorseli = mediaData.source_url;
+                }
+              } catch (err) {
+                console.error(`Görsel ID (${acfValue}) çözülemedi:`, err);
+              }
+            }
+            return post;
+          }),
+        );
+
+        // 3. Güncellenmiş (URL'leri düzeltilmiş) veriyi state'e atıyoruz
+        setPosts(updatedPosts);
         setLoading(false);
       } catch (error) {
         console.error("Blog yazıları alınamadı:", error);
@@ -115,49 +142,29 @@ export default function BlogPageContent() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // --- GSAP ANİMASYONLARI ---
-
-  // 1. Statik Animasyonlar (Sayfa ilk yüklendiğinde kategori butonları için)
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
-      // Kategori butonları sırayla gelsin
       gsap.from(".category-btn", {
         y: 20,
         opacity: 0,
         duration: 0.5,
         stagger: 0.05,
         ease: "back.out(1.7)",
-        delay: 0.5, // Breadcrumb geldikten sonra başlasın
+        delay: 0.5,
       });
     }, container);
     return () => ctx.revert();
-  }, []); // Sadece ilk renderda çalışır
+  }, []);
 
-  // 2. Dinamik Animasyonlar (Sayfa değiştiğinde veya kategori değiştiğinde kartlar için)
   useLayoutEffect(() => {
     if (loading) return;
 
     const ctx = gsap.context(() => {
-      // Kartlar her seferinde yeniden animasyonla gelsin
-      gsap.fromTo(
-        ".blog-card-item",
-        {
-          y: 30,
-          opacity: 0,
-          scale: 0.95,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "power2.out",
-        }
-      );
+      gsap.fromTo(".blog-card-item", { y: 30, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" });
     }, container);
     return () => ctx.revert();
-  }, [currentPosts, loading]); // currentPosts değiştiğinde tetiklenir
+  }, [currentPosts, loading]);
 
   return (
     <div ref={container} className="font-inter">
@@ -184,12 +191,6 @@ export default function BlogPageContent() {
               </button>
             ))}
           </div>
-          <div className="w-fit hidden">
-            <button className="text-primaryBlack whitespace-nowrap border border-primaryColor rounded-full py-2 px-4 flex justify-between items-center gap-5">
-              En Yeni
-              <ChevronDown className="stroke-primaryColor stroke-[1.5]" />
-            </button>
-          </div>
         </div>
 
         {/* Blog Kartları Listesi */}
@@ -198,9 +199,36 @@ export default function BlogPageContent() {
             <div className="w-full h-40 flex justify-center items-center text-primaryColor animate-pulse">Yükleniyor...</div>
           ) : currentPosts.length > 0 ? (
             currentPosts.map((post) => {
-              const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/placeholder-image.jpg";
+              if (post.acf) {
+                console.log("Blog Başlığı:", post.title.rendered);
+                console.log("Gelen ACF Verisi:", post.acf.blog_kart_gorseli);
+                console.log("Veri Tipi:", typeof post.acf.blog_kart_gorseli);
+              }
+              // 1. Önce ACF verisini ham olarak alalım
+              let rawAcfImage = post.acf?.blog_kart_gorseli;
+
+              let finalAcfUrl = null;
+
+              // 2. Veri kontrolü yapalım:
+              if (rawAcfImage) {
+                // Eğer veri bir "String" ise (doğrudan URL ise)
+                if (typeof rawAcfImage === "string") {
+                  finalAcfUrl = rawAcfImage;
+                }
+                // Eğer veri bir "Obje" ise (ACF bazen böyle döndürür) ve içinde 'url' varsa
+                else if (typeof rawAcfImage === "object" && rawAcfImage.url) {
+                  finalAcfUrl = rawAcfImage.url;
+                }
+              }
+
+              // 3. Öncelik sırasını belirleyelim (Artık elimizde temiz bir URL var)
+              const imageUrl = finalAcfUrl || post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://placehold.co/362x242?text=Gorsel+Yok";
+
               const authorName = post._embedded?.["author"]?.[0]?.name || "Admin";
-              const authorAvatar = post._embedded?.["author"]?.[0]?.avatar_urls?.["96"] || "";
+
+              // DÜZELTME: Eğer avatar yoksa boş string yerine varsayılan bir görsel URL'si veriyoruz.
+              const authorAvatar = post._embedded?.["author"]?.[0]?.avatar_urls?.["96"] || "https://placehold.co/96x96?text=Yazar";
+
               const categoryName = post._embedded?.["wp:term"]?.[0]?.[0]?.name || "Genel";
               const description = stripHtml(post.excerpt?.rendered || "");
 
@@ -225,7 +253,7 @@ export default function BlogPageContent() {
           )}
         </div>
 
-        {/* --- PAGINATION ALANI --- */}
+        {/* PAGINATION (Değişmedi, aynı kaldı) */}
         {!loading && totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-10 mb-5">
             <button
@@ -235,7 +263,6 @@ export default function BlogPageContent() {
             >
               <ChevronLeft size={20} />
             </button>
-
             {[...Array(totalPages)].map((_, index) => (
               <button
                 key={index}
@@ -247,7 +274,6 @@ export default function BlogPageContent() {
                 {index + 1}
               </button>
             ))}
-
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}

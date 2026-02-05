@@ -9,7 +9,7 @@ const BlogCard = ({ slug, image, categories, title, description, authorImg, auth
   return (
     <Link href={`/${slug}`} className="w-full max-w-[372px] h-full flex flex-col justify-around gap-2 p-1 rounded-2xl border border-[#E9E9E9] font-inter hover:shadow-lg transition-shadow duration-300 bg-white">
       <div className="w-full rounded-t-2xl overflow-hidden relative h-[242px]">
-        <Image width={362} height={242} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src={image || "/placeholder-image.jpg"} alt={title} />
+        <Image width={362} height={242} className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" src={image || "/placeholder-image.jpg"} alt={title} />
       </div>
 
       <div className="p-3 pt-2 flex flex-col gap-3">

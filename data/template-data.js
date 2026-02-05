@@ -20,6 +20,8 @@ import {
   Gem, // Düğün & Organizasyon
   LayoutGrid, // Tümü
 } from "lucide-react";
+import dis_1_kart_gorseli from "@/assets/showcase/dis_1_kart_gorseli.webp";
+import hukuk from "@/assets/showcase/hukuk.png";
 
 export const categories = [
   { id: "all", name: "Tüm Sektörler", icon: LayoutGrid },
@@ -52,8 +54,8 @@ export const templates = [
     title: "Dentist Pro V1",
     description: "Diş klinikleri için özel tasarlanmış, online randevu modüllü ve ferah arayüz.",
     features: ["Online Randevu", "Tedavi Öncesi/Sonrası", "WhatsApp İletişim"],
-    image: "https://placehold.co/600x400/e2e8f0/1e293b?text=Dis+Hekimi+Demo+1",
-    demoLink: "https://disci.fontdijitalmedya.com",
+    image: dis_1_kart_gorseli,
+    demoLink: "https://demo.fontdijitalmedya.com/dis1",
     price: "Kurumsal Paket",
   },
   // 2. DİYETİSYEN
@@ -63,8 +65,8 @@ export const templates = [
     title: "Fit Life Diyetisyen",
     description: "Diyetisyenler için blog odaklı, danışan formu içeren modern tasarım.",
     features: ["Vücut Kitle İndeksi Hesapla", "Blog Yönetimi", "Randevu Formu"],
-    image: "https://placehold.co/600x400/dcfce7/166534?text=Diyetisyen+Demo",
-    demoLink: "#",
+    image: hukuk,
+    demoLink: "https://demo.fontdijitalmedya.com/dis2",
     price: "Ekonomik Paket",
   },
   // 3. İNŞAAT
@@ -75,7 +77,7 @@ export const templates = [
     description: "Tamamlanan projelerinizi sergileyebileceğiniz güçlü ve prestijli yapı.",
     features: ["Proje Galerisi", "Teklif Formu", "Katalog İndirme"],
     image: "https://placehold.co/600x400/f1f5f9/0f172a?text=Insaat+Demo",
-    demoLink: "#",
+    demoLink: "https://demo.fontdijitalmedya.com/dis3",
     price: "Kurumsal Paket",
   },
   // 4. EMLAK

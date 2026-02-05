@@ -1,31 +1,37 @@
 // components/showcase/TemplateCard.jsx
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ExternalLink } from "lucide-react";
-import { CustomButton } from "@/components/ui/CustomButton"; // Senin mevcut butonun
+import { CheckCircle2, ExternalLink, Eye } from "lucide-react";
+import { CustomButton } from "@/components/ui/CustomButton";
 
-const TemplateCard = ({ image, title, description, features, link, price }) => {
+const TemplateCard = ({ image, title, description, features, link, price, onPreview }) => {
   return (
     <div className="group flex flex-col gap-4 border border-primaryColor/20 hover:border-primaryColor/80 transition-all duration-300 rounded-t-[20px] rounded-b-xl p-3 font-inter bg-white shadow-sm hover:shadow-md h-full">
-      {/* Görsel Alanı - Scrollbar gizlendi */}
-      <div style={{ scrollbarWidth: "none" }} className="relative border border-gray-100 rounded-t-[18px] w-full h-[250px] overflow-hidden group-hover:opacity-90 transition-opacity">
-        {/* Resim olmadığı durumlar için placeholder eklenebilir */}
-        <Image
-          src={image || "/placeholder.jpg"}
-          alt={title}
-          fill
-          className="object-cover object-top hover:object-bottom transition-all duration-[3s] ease-in-out" // Hover'da aşağı kayan efekt
-        />
+      {/* GÖRSEL ALANI - Tıklanabilir Yapı */}
+      <div
+        onClick={() => onPreview(link, title)} // Tıklanınca Modalı Tetikle
+        style={{ scrollbarWidth: "none" }}
+        className="relative border border-gray-100 rounded-t-[18px] w-full h-[250px] overflow-hidden group-hover:opacity-90 transition-opacity cursor-pointer"
+      >
+        <Image src={image || "/placeholder.jpg"} alt={title} fill className="object-cover object-top hover:object-bottom transition-all duration-[3s] ease-in-out" />
 
         {/* Fiyat veya Paket Rozeti */}
-        <div className="absolute top-3 right-3 bg-primaryColor text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm">{price}</div>
+        <div className="absolute top-3 right-3 bg-primaryColor text-white text-xs font-semibold px-2 py-1 rounded-full shadow-sm z-10">{price}</div>
+
+        {/* Hover Efekti: Göz İkonu Çıksın */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
+          <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full flex items-center gap-2 border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform">
+            <Eye className="w-4 h-4" />
+            <span className="text-sm font-medium">Önizle</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col gap-3 flex-grow">
         <h3 className="text-primaryBlack text-lg leading-[120%] font-bold group-hover:text-primaryColor transition-colors">{title}</h3>
         <p className="text-[#555] text-sm leading-[140%]">{description}</p>
 
-        {/* Özellikler Alanı (Müşteri Yorumu yerine) */}
+        {/* Özellikler Alanı */}
         <div className="flex flex-col gap-2 bg-gray-50 rounded-lg p-2.5 border border-gray-100 mt-auto">
           <h4 className="text-xs font-semibold text-primaryColor flex items-center gap-1">Öne Çıkan Özellikler</h4>
           <ul className="flex flex-col gap-1">
@@ -40,6 +46,7 @@ const TemplateCard = ({ image, title, description, features, link, price }) => {
       </div>
 
       <div className="pt-2">
+        {/* Buton yine direkt linke gider */}
         <Link href={link} target="_blank" className="w-full block">
           <CustomButton rightComponent={<ExternalLink className="w-4 h-4" />} size="lg" variant="filledButton" className="w-full py-3 px-4 text-sm text-center rounded-xl flex justify-center items-center gap-2">
             Canlı Demoyu İncele
