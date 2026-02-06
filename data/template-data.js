@@ -283,6 +283,6 @@ export const templates = [
     features: ["Salon 360 Tur", "Tarih Sorgulama", "Paket Fiyatları"],
     image: "https://portal.fontdijitalmedya.com/wp-content/uploads/2026/01/dugun_salonu_web_sitesi_kucuk.webp",
     demoLink: "https://demo.fontdijitalmedya.com/dugun1/",
-    price: "Kurumsal Paket",
+    price: "Kurumsal",
   },
 ];
