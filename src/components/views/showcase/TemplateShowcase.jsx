@@ -47,10 +47,10 @@ const TemplateShowcase = () => {
       {/* MODAL BİLEŞENİ - Eğer açıksa render et */}
       {previewData.isOpen && <LivePreviewModal url={previewData.url} title={previewData.title} onClose={() => setPreviewData({ ...previewData, isOpen: false })} />}
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-2 items-start">
         {/* SOL SIDEBAR (Kategoriler) - Aynen kalıyor */}
-        <aside className="w-full lg:w-[280px] lg:sticky lg:top-2 flex-shrink-0 z-10">
-          <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm">
+        <aside className="w-full lg:w-[230px] lg:sticky lg:top-2 flex-shrink-0 z-10">
+          <div className="bg-white border border-gray-100 rounded-2xl p-4 px-1 shadow-sm">
             <div className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide">
               {categories.map((cat) => {
                 const Icon = cat.icon;
@@ -75,7 +75,7 @@ const TemplateShowcase = () => {
         {/* SAĞ TARAF (Kartlar Grid) */}
         <main className="flex-1 w-full">
           {filteredTemplates.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
               {filteredTemplates.map((item) => (
                 <div key={item.id} className="animate-fadeIn">
                   <TemplateCard
