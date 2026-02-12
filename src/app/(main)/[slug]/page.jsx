@@ -55,11 +55,11 @@ export async function generateMetadata({ params }) {
 
       // Google Botları için Kurallar (index, noindex vb.)
       robots: {
-        index: seo.robots?.index === "index",
-        follow: seo.robots?.follow === "follow",
+        index: seo.robots?.index !== "noindex", // "noindex" değilse her zaman TRUE (indexle)
+        follow: seo.robots?.follow !== "nofollow",
         googleBot: {
-          index: seo.robots?.index === "index",
-          follow: seo.robots?.follow === "follow",
+          index: seo.robots?.index !== "noindex",
+          follow: seo.robots?.follow !== "nofollow",
         },
       },
 
@@ -98,7 +98,8 @@ export async function generateMetadata({ params }) {
 
   // 3. FALLBACK: Eğer Yoast verisi yoksa eski otomatik yöntemi kullan
   // (Örneğin Yoast eklentisi devre dışı kalırsa site patlamasın diye)
-  const fallbackDescription = stripHtml(data.excerpt?.rendered || data.content?.rendered || "").slice(0, 160);
+  const rawContent = stripHtml(data.excerpt?.rendered || data.content?.rendered || "");
+  const fallbackDescription = rawContent.length > 160 ? rawContent.slice(0, 157) + "..." : rawContent;
 
   return {
     title: `${data.title.rendered} - Font Dijital Medya`,
@@ -150,10 +151,14 @@ export default async function DynamicPage({ params }) {
         const mediaRes = await fetch(`https://fontdijitalmedya.com/wp-json/wp/v2/media/${data.acf.hizmet_gorseli}`);
         if (mediaRes.ok) {
           const mediaData = await mediaRes.json();
-          data.acf.hizmet_gorseli = mediaData.source_url;
+          // Sadece URL değil, obje olarak ata:
+          data.acf.hizmet_gorseli = {
+            url: mediaData.source_url,
+            alt: mediaData.alt_text || data.title.rendered, // Alt yoksa sayfa başlığını yedek yap
+          };
         }
       } catch (error) {
-        console.error("Resim ID'den URL'e dönüştürülemedi:", error);
+        console.error("Resim verisi alınamadı:", error);
       }
     }
     // 🔥🔥🔥 RESİM ID DÜZELTME YAMASI BİTİŞ 🔥🔥🔥

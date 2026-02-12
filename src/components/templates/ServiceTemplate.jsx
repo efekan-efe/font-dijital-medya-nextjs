@@ -11,6 +11,7 @@ import ServiceInfo from "@/components/ui/ServiceInfo";
 import ServiceSolutions from "@/components/views/service/ServiceSolutions";
 import PriceCards from "@/components/views/service/PriceCards";
 import ReferenceSlider from "@/components/shared/ReferenceSlider";
+import hizmetYanGorsel from "@/assets/images/hizmet_detay_yan_gorsel.webp";
 
 // Bu bileşen 'data' adında bir prop alır (WordPress'ten gelen page verisi)
 const ServiceTemplate = ({ data }) => {
@@ -20,6 +21,21 @@ const ServiceTemplate = ({ data }) => {
   const pageTitle = data?.title?.rendered || "Hizmetlerimiz";
   // ACF'den gelen özel başlık varsa onu kullan, yoksa sayfa adını al.
   const displayTitle = acf.hizmet_basligi || pageTitle;
+
+  // Görsel ve Alt Metni Ayrıştır
+  let heroImage = hizmetYanGorsel; // Varsayılan resim
+  let heroAlt = displayTitle; // Varsayılan alt etiketi
+
+  if (acf.hizmet_gorseli) {
+    if (typeof acf.hizmet_gorseli === "string") {
+      // Eğer string gelirse (eski yapı veya patch çalışmazsa)
+      heroImage = acf.hizmet_gorseli;
+    } else if (acf.hizmet_gorseli.url) {
+      // Yeni obje yapısı gelirse
+      heroImage = acf.hizmet_gorseli.url;
+      heroAlt = acf.hizmet_gorseli.alt || displayTitle;
+    }
+  }
 
   // Breadcrumb için Badge İçeriği (Sabit veya ACF ile dinamik yapılabilir)
   const badgeContent = (
@@ -89,7 +105,7 @@ const ServiceTemplate = ({ data }) => {
       {/* Breadcrumb başlığı artık WordPress'ten geliyor */}
       <Breadcrumb badgeContent={badgeContent} titleContent={titleContent} />
 
-      <ServiceInfo title={displayTitle} description={acf.hizmet_aciklamasi} image={acf.hizmet_gorseli} listItems={serviceListItems} />
+      <ServiceInfo title={displayTitle} description={acf.hizmet_aciklamasi} image={heroImage} altText={heroAlt} listItems={serviceListItems} />
 
       {/* Eğer çözüm listesi girilmişse göster, girilmemişse bileşeni gizle */}
       {solutionData.length > 0 && <ServiceSolutions solutionData={solutionData} />}
