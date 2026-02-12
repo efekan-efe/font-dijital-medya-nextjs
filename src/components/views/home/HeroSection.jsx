@@ -92,7 +92,7 @@ const HeroSection = ({ data }) => {
           duration: 0.7,
           ease: "elastic.out(1, 0.5)",
         },
-        "-=0.6"
+        "-=0.6",
       );
     }, container);
 
@@ -144,10 +144,10 @@ const HeroSection = ({ data }) => {
                     <Badge icon={slide.badgeIcon}>{slide.badgeText}</Badge>
                   </div>
                   {/* Title */}
-                  <h1
+                  <h2
                     className="hero-title mt-2 text-[40px] max-w-xl leading-[120%] font-bold tracking-tighter text-primaryBlack max-xl:text-5xl max-md:text-center max-md:text-3xl max-sm:text-2xl"
                     dangerouslySetInnerHTML={{ __html: slide.title }}
-                  ></h1>
+                  ></h2>
                   {/* Description */}
                   <p className="hero-desc mt-2 text-primaryBlack max-md:text-center max-sm:text-sm text-lg leading-relaxed" dangerouslySetInnerHTML={{ __html: slide.desc }}></p>
                   {/* Buttons */}

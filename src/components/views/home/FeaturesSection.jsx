@@ -74,7 +74,7 @@ const FeaturesSection = ({ data }) => {
             duration: 0.5,
             ease: "power2.out",
           },
-          "-=0.6"
+          "-=0.6",
         ) // Resim bitmeden başla
         // 3. Başlık (Aşağıdan yukarı)
         .from(
@@ -85,7 +85,7 @@ const FeaturesSection = ({ data }) => {
             duration: 0.6,
             ease: "power2.out",
           },
-          "-=0.4"
+          "-=0.4",
         )
         // 4. Açıklama Yazısı
         .from(
@@ -96,7 +96,7 @@ const FeaturesSection = ({ data }) => {
             duration: 0.5,
             ease: "power2.out",
           },
-          "-=0.4"
+          "-=0.4",
         )
         // 5. Liste Elemanları (STAGGER ÖZELLİĞİ)
         .from(
@@ -108,7 +108,7 @@ const FeaturesSection = ({ data }) => {
             stagger: 0.1, // Her bir eleman arasında 0.1sn gecikme bırak (tık-tık-tık etkisi)
             ease: "power2.out",
           },
-          "-=0.2"
+          "-=0.2",
         )
         // 6. Buton (En son "ben buradayım" diye gelir)
         .from(
@@ -119,7 +119,7 @@ const FeaturesSection = ({ data }) => {
             duration: 0.5,
             ease: "back.out(1.7)",
           },
-          "-=0.2"
+          "-=0.2",
         );
     }, container);
 
@@ -143,7 +143,7 @@ const FeaturesSection = ({ data }) => {
             </TitleBadge>
           </div>
 
-          <h1 className="feature-title text-2xl md:text-4xl font-bold text-primaryBlack" dangerouslySetInnerHTML={{ __html: neden_biz_buyuk_baslik }}></h1>
+          <h2 className="feature-title text-2xl md:text-4xl font-bold text-primaryBlack" dangerouslySetInnerHTML={{ __html: neden_biz_buyuk_baslik }}></h2>
         </div>
 
         <p className="feature-desc text-primaryBlack text-sm md:text-base" dangerouslySetInnerHTML={{ __html: neden_biz_aciklama }}></p>

@@ -44,7 +44,7 @@ export default function BlogSlider({ posts, data }) {
             duration: 0.6,
             ease: "power2.out",
           },
-          "-=0.4"
+          "-=0.4",
         )
         // 3. Desktop Kartları (Stagger - Sırayla)
         .from(
@@ -56,7 +56,7 @@ export default function BlogSlider({ posts, data }) {
             stagger: 0.2, // Kartlar arası 0.2sn gecikme
             ease: "back.out(1.7)",
           },
-          "-=0.2"
+          "-=0.2",
         )
         // 4. Mobil Slider (Bütün olarak)
         .from(
@@ -67,7 +67,7 @@ export default function BlogSlider({ posts, data }) {
             duration: 0.8,
             ease: "power2.out",
           },
-          "<"
+          "<",
         ); // Desktop ile aynı anda başlasın (zaten biri gizli)
     }, container);
 
@@ -85,7 +85,7 @@ export default function BlogSlider({ posts, data }) {
           </TitleBadge>
         </div>
 
-        <h1 className="blog-title text-3xl md:text-4xl font-bold text-primaryBlack text-center" dangerouslySetInnerHTML={{ __html: blog_buyuk_baslik }}></h1>
+        <h2 className="blog-title text-3xl md:text-4xl font-bold text-primaryBlack text-center" dangerouslySetInnerHTML={{ __html: blog_buyuk_baslik }}></h2>
       </div>
 
       {/* İçerik Alanı */}

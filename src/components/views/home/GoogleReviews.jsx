@@ -48,7 +48,7 @@ const GoogleReviews = ({ data }) => {
             duration: 1, // Biraz daha ağır/oturaklı gelsin
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.4",
         )
         // 3. Buton (Alttan zıplayarak belirir)
         .from(
@@ -59,7 +59,7 @@ const GoogleReviews = ({ data }) => {
             duration: 0.6,
             ease: "back.out(1.7)",
           },
-          "-=0.6"
+          "-=0.6",
         );
     }, container);
 
@@ -73,7 +73,7 @@ const GoogleReviews = ({ data }) => {
         <TitleBadge>
           <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: google_yorumlari_kucuk_baslik }}></p>
         </TitleBadge>
-        <h1 className="text-4xl font-bold text-primaryBlack max-md:text-center" dangerouslySetInnerHTML={{ __html: google_yorumlari_buyuk_baslik }}></h1>
+        <h2 className="text-4xl font-bold text-primaryBlack max-md:text-center" dangerouslySetInnerHTML={{ __html: google_yorumlari_buyuk_baslik }}></h2>
       </div>
 
       {/* Slider Alanı - Animasyon için sarmalayıcı div ekledik */}
