@@ -65,7 +65,7 @@ const InfoSection = ({ data }) => {
             stagger: 0.1,
             ease: "power2.out",
           },
-          "-=0.6"
+          "-=0.6",
         )
         // 3. Vizyon/Misyon Maddeleri (Stagger ile sırayla)
         .from(
@@ -77,7 +77,7 @@ const InfoSection = ({ data }) => {
             stagger: 0.2,
             ease: "back.out(1.5)",
           },
-          "-=0.4"
+          "-=0.4",
         );
     }, container);
 

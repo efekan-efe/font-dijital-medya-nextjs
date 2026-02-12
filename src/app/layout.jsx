@@ -1,3 +1,4 @@
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import UpperHeader from "@/components/layout/UpperHeader";
 import Footer from "@/components/layout/Footer";
@@ -82,6 +83,16 @@ export default function RootLayout({ children }) {
         <div className="snap-footer-wrapper">
           <Footer />
         </div>
+
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-D38PTJ791Z" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-D38PTJ791Z');
+          `}
+        </Script>
       </body>
     </html>
   );

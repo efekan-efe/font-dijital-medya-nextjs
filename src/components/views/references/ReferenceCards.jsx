@@ -34,7 +34,7 @@ const ReferenceCards = () => {
           stagger: 0.15,
           ease: "back.out(1.2)",
         },
-        "-=0.4"
+        "-=0.4",
       );
     }, container);
 
@@ -52,10 +52,10 @@ const ReferenceCards = () => {
             </p>
           </TitleBadge>
         </div>
-        <h1 className="ref-title w-full text-4xl font-bold text-primaryBlack text-center max-md:text-3xl">
+        <h2 className="ref-title w-full text-4xl font-bold text-primaryBlack text-center max-md:text-3xl">
           Dijitalde
           <span className="text-primaryColor mx-1">Müşteri Kazanmaya</span> Bugün Başlayın
-        </h1>
+        </h2>
       </div>
 
       <div className="flex justify-center items-stretch flex-wrap gap-4">

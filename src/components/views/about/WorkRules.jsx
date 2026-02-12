@@ -62,7 +62,7 @@ const WorkRules = ({ data }) => {
           stagger: 0.2,
           ease: "back.out(1.7)",
         },
-        "-=0.4"
+        "-=0.4",
       );
     }, container);
 
@@ -77,7 +77,7 @@ const WorkRules = ({ data }) => {
             <p className="text-primaryBlack w-full font-medium" dangerouslySetInnerHTML={{ __html: ilkelerimiz_kucuk_baslik }}></p>
           </TitleBadge>
         </div>
-        <h1 className="rules-header w-full text-4xl font-bold text-primaryBlack text-center max-w-xl" dangerouslySetInnerHTML={{ __html: ilkelerimiz_buyuk_baslik }}></h1>
+        <h2 className="rules-header w-full text-4xl font-bold text-primaryBlack text-center max-w-xl" dangerouslySetInnerHTML={{ __html: ilkelerimiz_buyuk_baslik }}></h2>
       </div>
 
       <div className="flex justify-center items-start flex-wrap gap-8">
