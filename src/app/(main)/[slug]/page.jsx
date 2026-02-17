@@ -55,11 +55,14 @@ export async function generateMetadata({ params }) {
 
       // Google Botları için Kurallar (index, noindex vb.)
       robots: {
-        index: seo.robots?.index !== "noindex", // "noindex" değilse her zaman TRUE (indexle)
-        follow: seo.robots?.follow !== "nofollow",
+        index: true,
+        follow: true,
         googleBot: {
-          index: seo.robots?.index !== "noindex",
-          follow: seo.robots?.follow !== "nofollow",
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
         },
       },
 
