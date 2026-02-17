@@ -67,7 +67,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: seo.og_title || seo.title,
         description: seo.og_description || seo.description,
-        url: seo.og_url || `https://fontdijitalmedya.com/${slug}`,
+        url: `https://www.fontdijitalmedya.com/${slug}`,
         siteName: seo.og_site_name || "Font Dijital Medya",
         locale: seo.og_locale || "tr_TR",
         type: seo.og_type || "website",
@@ -91,7 +91,7 @@ export async function generateMetadata({ params }) {
 
       // Canonical URL (SEO çakışmasını önler)
       alternates: {
-        canonical: seo.canonical || `https://fontdijitalmedya.com/${slug}`,
+        canonical: `https://www.fontdijitalmedya.com/${slug}`,
       },
     };
   }
